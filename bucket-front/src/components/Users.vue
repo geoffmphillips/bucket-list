@@ -13,18 +13,16 @@ export default {
   data() {
     return {
       users: [],
-      first_name: [],
-      email: [],
       errors: [],
     };
   },
   created() {
-    axios.get('localhost:3000/users')
+    axios.get('http://localhost:3000/users')
       .then((response) => {
         this.users = response.data;
       })
       .catch((e) => {
-        this.error.push(e);
+        this.errors.push(e);
       });
   },
 };
