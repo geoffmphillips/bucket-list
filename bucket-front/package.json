@@ -5,7 +5,8 @@
   "author": "Geoff Phillips <geoffreymartinphillips@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "sam": "cowsay 'Jazz Hands'",
+    "dev": "webpack-dev-server --host 0.0.0.0 --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
@@ -14,8 +15,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.2",
+    "vue-instant": "^1.0.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-search": "^2.2.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

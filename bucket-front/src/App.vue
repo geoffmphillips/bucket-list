@@ -1,6 +1,25 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <nav>
+      <img src="./assets/bucket-logo.png" alt="BucketList logo" class="logo">
+      <template>
+        <div id="app">
+        </div>
+      </template>
+      <h1> hey buddy</h1>
+      <input type="text" v-model="search" placeholder="Search through some buckets..." class="search-field">
+      <ul v-for="bucket in filteredBuckets">
+        <li>{{bucket.title || to-uppercase}}</li>
+        <li>{{bucket.body || snippet}}</li>
+      </ul>
+      <ul class="nav-list">
+        <li class="nav-list-item">Categories</li>
+        <li class="nav-list-item">Locations</li>
+        <li class="nav-list-item">Boards</li>
+      </ul>
+    </nav>
+
+
     <router-view/>
   </div>
 </template>
@@ -8,6 +27,27 @@
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+      buckets: [],
+      search: ''
+    }
+  },
+  methods: {
+
+  },
+  created() {
+    this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data) {
+      this.buckets = data.body.slice(0,10);
+    });
+  },
+  computed: {
+    filteredBuckets: function() {
+      return this.buckets.filter((bucket) => {
+        return bucket.title.match(this.search)
+      });
+    }
+  }
 };
 </script>
 
@@ -16,8 +56,47 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  box-sizing: border-box;
+}
+nav {
+  background: #39B885;
+  height: 90px;
+  display: block;
+
+}
+.logo {
+  height: 70px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+.search-field {
+  height: 40px;
+  width: 500px;
+  position: relative;
+  top: 50%;
+  font-size: 1.3em;
+  margin-left: 20px;
+  border-radius: 15px;
+
+}
+.nav-list {
+  float: right;
+  margin-top: initial;
+  font-size: 1.7em;
+}
+.nav-list-item {
+  display: inline-block;
+  list-style: none;
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.nav-list-item:hover {
+  background: lightgrey;
+  border-radius: 5%;
+  padding: 10px;
 }
 </style>
