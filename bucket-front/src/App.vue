@@ -6,12 +6,6 @@
         <div id="app">
         </div>
       </template>
-      <h1> hey buddy</h1>
-      <input type="text" v-model="search" placeholder="Search through some buckets..." class="search-field">
-      <ul v-for="bucket in filteredBuckets">
-        <li>{{bucket.title || to-uppercase}}</li>
-        <li>{{bucket.body || snippet}}</li>
-      </ul>
       <ul class="nav-list">
         <li class="nav-list-item">Categories</li>
         <li class="nav-list-item">Locations</li>
@@ -19,17 +13,29 @@
       </ul>
     </nav>
 
+    <template>
+      <div id="show-blogs">
+        <h1>All Blog Articles</h1>
+        <input type="text" v-model="search" placeholder="Search through some blogs..." class="search-field">
+        <div v-for="blog in filteredBlogs">
+          <h2>{{blog.title || to-uppercase}}</h2>
+          <article>{{blog.body || snippet}}</article>
+        </div>
+      </div>
+    </template>
+
 
     <router-view/>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'App',
   data() {
     return {
-      buckets: [],
+      blogs: [],
       search: ''
     }
   },
@@ -37,14 +43,20 @@ export default {
 
   },
   created() {
-    this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data) {
-      this.buckets = data.body.slice(0,10);
-    });
+    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    .then(response => {
+      this.blogs = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    // this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data) {
+    //   this.blogs = data.body;
   },
   computed: {
-    filteredBuckets: function() {
-      return this.buckets.filter((bucket) => {
-        return bucket.title.match(this.search)
+    filteredBlogs: function() {
+      return this.blogs.filter((blog) => {
+        return blog.title.match(this.search)
       });
     }
   }
