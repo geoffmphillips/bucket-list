@@ -2,10 +2,6 @@
   <div id="app">
     <nav>
       <img src="./assets/bucket-logo.png" alt="BucketList logo" class="logo">
-      <template>
-        <div id="app">
-        </div>
-      </template>
       <ul class="nav-list">
         <li class="nav-list-item">Categories</li>
         <li class="nav-list-item">Locations</li>
@@ -13,16 +9,35 @@
       </ul>
     </nav>
 
-    <template>
-      <div id="show-posts">
-        <h1>hey buddy</h1>
-        <input type="text" v-model="search" placeholder="Search through some posts..." class="search-field">
-        <div v-for="post in filteredPosts">
-          <h2>{{post.title || to-uppercase}}</h2>
-          <article>{{post.body || snippet}}</article>
-        </div>
-      </div>
-    </template>
+    <v-app id="inspire">
+      <v-card>
+        <v-card-title class="headline font-weight-regular blue-grey white--text">Profile</v-card-title>
+        <v-card-text>
+          <v-subheader class="pa-0">Where is your next inspiration?</v-subheader>
+          <v-autocomplete
+            v-model="model"
+            :items="stuff"
+            :label="`Search some buckets...`"
+            persistent-hint
+            prepend-icon="mdi-city"
+            return-object
+            item-text="name"
+          >
+            <v-slide-x-reverse-transition
+              slot="append-outer"
+              mode="out-in"
+            >
+            <v-icon
+              :color="isEditing ? 'success' : 'info'"
+              :key="`icon-${isEditing}`"
+              @click="isEditing = !isEditing"
+              v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
+            ></v-icon>
+            </v-slide-x-reverse-transition>
+          </v-autocomplete>
+        </v-card-text>
+      </v-card>
+    </v-app>
 
 
     <router-view/>
@@ -38,8 +53,20 @@ export default {
   name: 'App',
   data() {
     return {
-      posts: [],
-      search: ''
+      autoUpdate: true,
+      friends: [],
+      isUpdating: false,
+      name: 'Midnight Crew',
+      stuff: [
+        {
+          name: "kyle",
+          group: "tycholiz"
+        },
+        {
+          name: "Eli",
+          group: "Arias"
+        }
+      ],
     }
   },
   methods: {
@@ -59,6 +86,13 @@ export default {
       return this.posts.filter((post) => {
         return post.title.match(this.search)
       });
+    }
+  },
+  watch: {
+    isUpdating (val) {
+      if (val) {
+        setTimeout(() => (this.isUpdating = false), 3000)
+      }
     }
   }
 };
