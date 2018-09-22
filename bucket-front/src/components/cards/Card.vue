@@ -1,7 +1,8 @@
 <template>
-<div id="users">
-  <p>{{post.title}}</p>
-  <img :src="post.photo_url" alt="">
+<div class="card">
+  <div class="image-container">
+    <p>{{post.title}}</p>
+  </div>
 </div>
 </template>
 
@@ -16,5 +17,12 @@ export default {
 </script>
 
 <style scoped>
+div.card {
+  border-radius: 0.75em;
+  width: 300px;
+  height: 600px;
+  background-position: center;
+  margin: 0 10px 20px
+}
 
 </style>

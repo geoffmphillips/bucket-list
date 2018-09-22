@@ -1,8 +1,9 @@
 <template>
-<div id="users">
+<div id="card-container">
   <card
     v-for="post in posts"
     :key="post.id"
+    :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
     :post="post"
   ></card>
 </div>
@@ -35,5 +36,10 @@ export default {
 </script>
 
 <style scoped>
-
+#card-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
 </style>
