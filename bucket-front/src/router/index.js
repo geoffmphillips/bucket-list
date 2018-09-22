@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import Users from '@/components/Users';
-import User from '@/components/UserProfile';
+import UserProfile from '@/components/UserProfile';
 
 Vue.use(Router);
 
@@ -20,8 +20,8 @@ export default new Router({
     },
     {
       path: '/users/:id',
-      name: 'User',
-      component: User,
+      name: 'UserProfile',
+      component: UserProfile,
     },
   ],
 });

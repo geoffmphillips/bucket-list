@@ -18,16 +18,18 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      id: this.$route.params.id,
       user: {
       },
       errors: [],
     };
   },
   created() {
-    axios.get('http://localhost:3000/users/', {
+    axios.get('http://localhost:3000/users/2', {
+      responseType: 'json',
       params: {
-        id: 1,
-      }
+        id: 2,
+      },
     })
       .then((response) => {
         this.user = response.data;
