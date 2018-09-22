@@ -10,6 +10,7 @@ class Post < ApplicationRecord
 
   has_many :comments
   has_many :categories
+  has_many :post_categories
   has_many :boards, through: :board_items
   has_many :categories, through: :post_categories
 end
