@@ -1,29 +1,16 @@
 <template>
 <div id="users">
-  <div v-for="user in users" :key="user.id">
-    <p>{{ user.first_name }} is my {{ user.email }}</p>
-  </div>
+  <p>{{post.title}}</p>
+  <img :src="post.photo_url" alt="">
 </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  data() {
-    return {
-      users: [],
-      errors: [],
-    };
-  },
-  created() {
-    axios.get('http://localhost:3000/users')
-      .then((response) => {
-        this.users = response.data;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+  props: {
+    post: {
+      type: Object,
+    },
   },
 };
 </script>

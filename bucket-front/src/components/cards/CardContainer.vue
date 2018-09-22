@@ -1,15 +1,21 @@
 <template>
 <div id="users">
-  <div v-for="post in posts" :key="post.id">
-    <p>{{ post.title }} is my {{ post.description }}</p>
-  </div>
+  <card
+    v-for="post in posts"
+    :key="post.id"
+    :post="post"
+  ></card>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Card from './Card';
 
 export default {
+  components: {
+    Card,
+  },
   data() {
     return {
       posts: [],
