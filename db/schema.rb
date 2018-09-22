@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 2018_09_21_222534) do
   create_table "posts", force: :cascade do |t|
     t.string "note"
     t.string "location"
+    t.string "city"
     t.string "photo_url"
     t.string "title"
     t.integer "lat"
