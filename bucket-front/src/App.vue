@@ -14,12 +14,12 @@
     </nav>
 
     <template>
-      <div id="show-blogs">
-        <h1>All Blog Articles</h1>
-        <input type="text" v-model="search" placeholder="Search through some blogs..." class="search-field">
-        <div v-for="blog in filteredBlogs">
-          <h2>{{blog.title || to-uppercase}}</h2>
-          <article>{{blog.body || snippet}}</article>
+      <div id="show-posts">
+        <h1>hey buddy</h1>
+        <input type="text" v-model="search" placeholder="Search through some posts..." class="search-field">
+        <div v-for="post in filteredPosts">
+          <h2>{{post.title || to-uppercase}}</h2>
+          <article>{{post.body || snippet}}</article>
         </div>
       </div>
     </template>
@@ -35,7 +35,7 @@ export default {
   name: 'App',
   data() {
     return {
-      blogs: [],
+      posts: [],
       search: ''
     }
   },
@@ -43,20 +43,19 @@ export default {
 
   },
   created() {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    // axios.get(`https://jsonplaceholder.typicode.com/posts`)
+    axios.get(`http://localhost:3000/posts`)
     .then(response => {
-      this.blogs = response.data
+      this.posts = response.data
       })
       .catch(e => {
         this.errors.push(e)
       })
-    // this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data) {
-    //   this.blogs = data.body;
   },
   computed: {
-    filteredBlogs: function() {
-      return this.blogs.filter((blog) => {
-        return blog.title.match(this.search)
+    filteredPosts: function() {
+      return this.posts.filter((post) => {
+        return post.title.match(this.search)
       });
     }
   }

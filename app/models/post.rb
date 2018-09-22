@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   validates :lat, presence: true
   validates :long, presence: true
 
+  has_many :post_categories
   has_many :comments
   has_many :categories
   has_many :boards, through: :board_items
