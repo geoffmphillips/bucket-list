@@ -1,9 +1,9 @@
 <template>
-<a :href="'#/post/' + post.id">
+<router-link :to="{ path: '/post/' + post.id, params: {post} }">
   <div class="card">
     <p>{{post.title}}</p>
   </div>
-</a>
+</router-link>
 </template>
 
 <script>
