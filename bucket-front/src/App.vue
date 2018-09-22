@@ -31,6 +31,9 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+
 export default {
   name: 'App',
   data() {
@@ -43,7 +46,6 @@ export default {
 
   },
   created() {
-    // axios.get(`https://jsonplaceholder.typicode.com/posts`)
     axios.get(`http://localhost:3000/posts`)
     .then(response => {
       this.posts = response.data
