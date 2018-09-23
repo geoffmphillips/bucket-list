@@ -2,6 +2,18 @@
   <div id="app">
     <nav>
       <img src="./assets/bucket-logo.png" alt="BucketList logo" class="logo">
+
+      <v-app id="search">
+        <v-autocomplete
+        v-model="model"
+        :items="stuff"
+        item-text="name"
+        :label="`Search some buckets...`"
+        return-object
+        >
+        </v-autocomplete>
+      </v-app>
+
       <ul class="nav-list">
         <li class="nav-list-item">Categories</li>
         <li class="nav-list-item">Locations</li>
@@ -9,35 +21,6 @@
       </ul>
     </nav>
 
-    <v-app id="inspire">
-      <v-card>
-        <v-card-title class="headline font-weight-regular blue-grey white--text">Profile</v-card-title>
-        <v-card-text>
-          <v-subheader class="pa-0">Where is your next inspiration?</v-subheader>
-          <v-autocomplete
-            v-model="model"
-            :items="stuff"
-            :label="`Search some buckets...`"
-            persistent-hint
-            prepend-icon="mdi-city"
-            return-object
-            item-text="name"
-          >
-            <v-slide-x-reverse-transition
-              slot="append-outer"
-              mode="out-in"
-            >
-            <v-icon
-              :color="isEditing ? 'success' : 'info'"
-              :key="`icon-${isEditing}`"
-              @click="isEditing = !isEditing"
-              v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
-            ></v-icon>
-            </v-slide-x-reverse-transition>
-          </v-autocomplete>
-        </v-card-text>
-      </v-card>
-    </v-app>
 
 
     <router-view/>
