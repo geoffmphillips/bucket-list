@@ -1,18 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloWorld from '@/components/HelloWorld';
 import Users from '@/components/Users';
 import UserProfile from '@/components/UserProfile';
+import Login from '@/components/Login';
+// import Registration from '@/components/Registration';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
-    },
     {
       path: '/users',
       name: 'Users',
@@ -23,5 +19,18 @@ export default new Router({
       name: 'UserProfile',
       component: UserProfile,
     },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    // {
+    //   path: '/register',
+    //   name: 'Registration',
+    //   component: Registration,
+    // },
+    // otherwise redirect to home
+    { path: '*', redirect: '/' },
   ],
 });
+

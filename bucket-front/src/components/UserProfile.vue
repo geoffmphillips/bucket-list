@@ -4,9 +4,9 @@
 
   <div id="boards">
     <h2>Boards</h2>
-    <div v-for="board in boards" :key="board.id">
+    <!-- <div v-for="board in boards" :key="board.id">
       <p>{{ board.name }}</p>
-    </div>
+    </div> -->
   </div>
 
 </div>
