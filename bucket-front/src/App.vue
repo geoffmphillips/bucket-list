@@ -1,7 +1,8 @@
 <template lang="pug">
   #app
+
     v-app#search
-      v-toolbar.my-appbar(flat='flat', fixed='fixed', app='app', dense='dense')
+      v-toolbar.my-appbar(flat fixed app dense)
         img.logo(src='./assets/bucket-logo.png', alt='BucketList logo')
         v-autocomplete.search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
         v-spacer
@@ -9,6 +10,24 @@
           v-btn.nav-list-item(flat='') Categories
           v-btn.nav-list-item(flat='') Locations
           v-btn.nav-list-item(flat='') Boards
+        v-toolbar-side-icon(v-show="!backButton" @click.stop="toggleSidebar()")
+        v-btn(icon v-show="backButton" @click.stop="$router.back()")
+          v-icon arrow_back
+
+    v-app#jumbotron
+      v-jumbotron
+        v-container(max-height)
+          v-layout(align-center)
+            v-flex
+              .jumbotron-wrapper
+                video.jumbotron(type='video/mp4', autoplay='', loop='', muted='')
+                  source(src='./assets/pexels.mp4', type='video/mp4')
+                .video-overlay
+                .page-width
+                  .video-hero--content
+                    h2(style='background: red') Background Video Dem
+                    p Full width video hero
+
     router-view
 </template>
 
@@ -19,6 +38,12 @@ import Vuetify from 'vuetify'
 
 export default {
   name: 'App',
+  props: {
+    backButton: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       autoUpdate: true,
@@ -38,7 +63,9 @@ export default {
     }
   },
   methods: {
-
+    // toggleSidebar () {
+    //   this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
+    // }
   },
   created() {
     axios.get(`http://localhost:3000/posts`)
@@ -67,6 +94,9 @@ export default {
 </script>
 
 <style lang="stylus">
+  .container
+    padding: 0 !important
+
   #app
     font-family: 'Avenir', Helvetica, Arial, sans-serif
     -webkit-font-smoothing: antialiased
