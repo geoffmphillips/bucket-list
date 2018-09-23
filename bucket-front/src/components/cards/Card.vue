@@ -1,5 +1,5 @@
 <template>
-<router-link :to="{ path: '/post/' + post.id, params: {post} }">
+<router-link :to="'/posts/' + post.id">
   <div class="card">
     <p>{{post.title}}</p>
   </div>
