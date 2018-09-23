@@ -16,8 +16,13 @@ export default {
 
 <style scoped>
 div.card {
+  display: flex;
+  align-items: center;
   background-color: #8BD6FD;
   border-radius: 1em;
   border: 0px;
+}
+p {
+  margin: 0.5em
 }
 </style>

@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 2018_09_21_222534) do
     t.string "title"
     t.integer "lat"
     t.integer "long"
-    t.string "categories"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
