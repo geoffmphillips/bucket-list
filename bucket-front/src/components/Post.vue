@@ -13,9 +13,13 @@
     <p>{{this.post.note}}</p>
   </div>
   <GmapMap
-    :center="{lat:this.post.lat, lng:this.post.long}"
-    :zoom="7"
-    map-type-id="terrain"
+    :center="{
+      lat: 49.2827,
+      lng: -123.1207,
+      }"
+    :zoom="12"
+    :options="{styles: this.$store.state.mapStyle}"
+    map-type-id="roadmap"
     style="width: 500px; height: 300px"
   >
   <GmapMarker
@@ -45,8 +49,8 @@ export default {
       categories: [],
       markers: [{
         position: {
-          lat: -25.363,
-          lng: 131.044,
+          lat: 49.2827,
+          lng: -123.1207,
         },
       },
       ],
@@ -62,6 +66,8 @@ export default {
       .then((response) => {
         this.post = response.data;
         this.categories = this.post.categories;
+        this.markers.position.lat = this.post.lat;
+        this.markers.position.lng = this.post.long;
       })
       .catch((e) => {
         this.errors.push(e);
