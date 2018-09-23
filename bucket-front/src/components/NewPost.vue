@@ -18,7 +18,7 @@
 
                   <vuetify-google-autocomplete
                     label="Location"
-                    v-model="newpost.addressObject"
+                    v-model="newpost.location"
                     id="map"
                     ref="address"
                     types=""
@@ -32,12 +32,13 @@
                 </v-stepper-content>
                 <v-stepper-content step="2">
 
-                    <v-textarea label="Description" v-model="newpost.description">
+                    <v-text-field label="Title" v-model="newpost.title"></v-text-field>
+                    <v-textarea label="Note" v-model="newpost.note">
                       <div slot="label">
                         Description <small>(Optional)</small>
                       </div>
                     </v-textarea>
-                    <v-text-field label="Image URL (Optional)" v-model="newpost.imageurl"></v-text-field>
+                    <v-text-field label="Image URL (Optional)" v-model="newpost.photo_url"></v-text-field>
 
                   <v-btn flat @click.native="step = 1">Previous</v-btn>
                   <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
@@ -101,8 +102,10 @@ export default {
   data: () => ({
     step:1,
     newpost:{
-      description:null,
-      imageurl:null,
+      title:null,
+      note:null,
+      location:null,
+      photo_url:null,
       categories: null,
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
@@ -121,7 +124,15 @@ export default {
         this.address = {};
     },
     submit() {
-      alert('This is the post. Blah');
+      alert(`This is the post ${this.newpost.title}. Blah`);
+      axios.post('http://localhost:3000/posts/', { newpost
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   },
 };
