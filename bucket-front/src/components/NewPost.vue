@@ -125,8 +125,7 @@ export default {
     },
     submit() {
       alert(`This is the post ${this.newpost.title}. Blah`);
-      axios.post('http://localhost:3000/posts/', { newpost
-      })
+      axios.post('http://localhost:3000/posts/', this.newpost)
       .then(function (response) {
         console.log(response);
       })
