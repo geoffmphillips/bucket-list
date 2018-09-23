@@ -1,6 +1,14 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <v-app id="inspire">
+  <div>
+    <v-btn color="success">Success</v-btn>
+    <v-btn color="error">Error</v-btn>
+    <v-btn color="warning">Warning</v-btn>
+    <v-btn color="info">Info</v-btn>
+  </div>
+</v-app>
     <h2>Essential Links</h2>
     <ul>
       <li>
