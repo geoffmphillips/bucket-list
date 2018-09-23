@@ -1,28 +1,15 @@
-<template>
-  <div id="app">
-    <v-app id="search">
-      <v-toolbar class="my-appbar" flat="flat" fixed="fixed" app="app" dense="dense">
-        <img src="./assets/bucket-logo.png" alt="BucketList logo" class="logo">
-
-          <v-autocomplete
-          class="search-field"
-          v-model="model"
-          :items="stuff"
-          item-text="name"
-          :label="`Search some buckets...`"
-          return-object
-          >
-          </v-autocomplete>
-          <v-spacer></v-spacer>
-          <v-toolbar-items class="nav-list">
-            <v-btn class="nav-list-item" flat="">Categories</v-btn>
-            <v-btn class="nav-list-item" flat="">Locations</v-btn>
-            <v-btn class="nav-list-item" flat="">Boards</v-btn>
-          </v-toolbar-items>
-      </v-toolbar>
-    </v-app>
-    <router-view/>
-  </div>
+<template lang="pug">
+  #app
+    v-app#search
+      v-toolbar.my-appbar(flat='flat', fixed='fixed', app='app', dense='dense')
+        img.logo(src='./assets/bucket-logo.png', alt='BucketList logo')
+        v-autocomplete.search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
+        v-spacer
+        v-toolbar-items.nav-list
+          v-btn.nav-list-item(flat='') Categories
+          v-btn.nav-list-item(flat='') Locations
+          v-btn.nav-list-item(flat='') Boards
+    router-view
 </template>
 
 <script>
@@ -118,5 +105,4 @@ export default {
         float: left
         margin-left: 20px
         margin-right: 20px
-        cursor: pointer
 </style>
