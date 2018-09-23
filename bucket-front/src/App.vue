@@ -5,6 +5,7 @@
         <img src="./assets/bucket-logo.png" alt="BucketList logo" class="logo">
 
           <v-autocomplete
+          class="search-field"
           v-model="model"
           :items="stuff"
           item-text="name"
@@ -78,47 +79,44 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  box-sizing: border-box;
-}
-nav {
-  background: #39B885;
-  height: 90px;
-  display: block;
+<style lang="stylus">
+  #app
+    font-family: 'Avenir', Helvetica, Arial, sans-serif
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    color: #2c3e50
+    box-sizing: border-box
 
-}
-.logo {
-  height: 70px;
-  float: left;
-  margin-left: 15px;
-  margin-top: 10px;
-}
-.search-field {
-  height: 40px;
-  width: 500px;
-  position: relative;
-  top: 50%;
-  font-size: 1.3em;
-  margin-left: 20px;
-  border-radius: 15px;
+    nav
+      background: #39B885
+      height: 90px
+      display: block
 
-}
-.nav-list {
-  float: right;
-  margin-top: initial;
-  font-size: 1.7em;
-}
-.nav-list-item {
-  display: inline-block;
-  list-style: none;
-  float: left;
-  margin-left: 20px;
-  margin-right: 20px;
-  cursor: pointer;
-}
+      .logo
+        height: 70px
+        float: left
+        margin-left: 15px
+        margin-top: 10px
+
+      .search-field
+        height: 40px
+        width: 500px
+        position: relative
+        top: 50%
+        font-size: 1.3em
+        margin-left: 20px
+        border-radius: 15px
+
+      .nav-list
+        float: right
+        margin-top: 3%
+        font-size: 1.7em
+
+      .nav-list-item
+        display: inline-block
+        list-style: none
+        float: left
+        margin-left: 20px
+        margin-right: 20px
+        cursor: pointer
 </style>
