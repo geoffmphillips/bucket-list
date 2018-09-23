@@ -10,7 +10,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+<<<<<<< HEAD
 const HOST = process.env.HOST || '0.0.0.0';
+=======
+const HOST = process.env.HOST || '0.0.0.0'
+>>>>>>> upstream/master
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
