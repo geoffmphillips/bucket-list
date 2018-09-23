@@ -1,36 +1,40 @@
 <template>
-<div class="post-container">
-  <div class="card">
-    <p>{{this.post.title}}</p>
-    <img :src="this.post.photo_url" :alt="this.post.note">
-    <div class="categories-container">
-      <category
-        v-for="category in categories"
-        :key="category.id"
-        :category="category"
-      ></category>
+<div>
+  <div class="post-container">
+    <div class="card">
+      <p>{{this.post.title}}</p>
+      <img :src="this.post.photo_url" :alt="this.post.note">
+      <div class="categories-container">
+        <category
+          v-for="category in categories"
+          :key="category.id"
+          :category="category"
+        ></category>
+      </div>
+      <p>{{this.post.note}}</p>
     </div>
-    <p>{{this.post.note}}</p>
   </div>
-  <GmapMap
-    :center="{
-      lat: 49.2827,
-      lng: -123.1207,
-      }"
-    :zoom="12"
-    :options="{styles: this.$store.state.mapStyle}"
-    map-type-id="roadmap"
-    style="width: 500px; height: 300px"
-  >
-  <GmapMarker
-    :key="index"
-    v-for="(m, index) in this.markers"
-    :position="m.position"
-    :clickable="true"
-    :draggable="true"
-    @click="center=m.position"
-  />
-  </GmapMap>
+  <div class="map-container">
+    <GmapMap
+      :center="{
+        lat: 49.2827,
+        lng: -123.1207,
+        }"
+      :zoom="12"
+      :options="{styles: this.$store.state.mapStyle}"
+      map-type-id="roadmap"
+      style="width: 500px; height: 300px"
+    >
+    <GmapMarker
+      :key="index"
+      v-for="(m, index) in this.markers"
+      :position="m.position"
+      :clickable="true"
+      :draggable="true"
+      @click="center=m.position"
+    />
+    </GmapMap>
+  </div>
 </div>
 </template>
 
@@ -64,8 +68,8 @@ export default {
       },
     })
       .then((response) => {
-        this.post = response.data;
-        this.categories = this.post.categories;
+        this.post = response.data.post;
+        this.categories = response.data.categories;
         this.markers.position.lat = this.post.lat;
         this.markers.position.lng = this.post.long;
       })
@@ -77,6 +81,10 @@ export default {
 </script>
 
 <style scoped>
+.post-container {
+  display: flex;
+  justify-content: center;
+}
 div.card {
   width: max-content;
   height: auto;
@@ -84,6 +92,10 @@ div.card {
 }
 div.categories-container {
   display:flex;
+  justify-content: center;
+}
+div.map-container {
+  display: flex;
   justify-content: center;
 }
 
