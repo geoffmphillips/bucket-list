@@ -20,13 +20,13 @@
   >
   <GmapMarker
     :key="index"
-    v-for="(m, index) in markers"
+    v-for="(m, index) in this.markers"
     :position="m.position"
     :clickable="true"
     :draggable="true"
     @click="center=m.position"
   />
-</GmapMap>
+  </GmapMap>
 </div>
 </template>
 
@@ -43,6 +43,13 @@ export default {
     return {
       post: [],
       categories: [],
+      markers: [{
+        position: {
+          lat: -25.363,
+          lng: 131.044,
+        },
+      },
+      ],
       errors: [],
     };
   },
