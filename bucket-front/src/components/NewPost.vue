@@ -106,7 +106,8 @@ export default {
       note:null,
       location:null,
       photo_url:null,
-      categories: null,
+      board:null,
+      categories:null
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
     categories: ['Beach', 'Romantic', 'Backpacking', 'Roadtrip', 'Foodie', 'Cultural'],
@@ -125,7 +126,15 @@ export default {
     },
     submit() {
       alert(`This is the post ${this.newpost.title}. Blah`);
-      axios.post('http://localhost:3000/posts/', this.newpost)
+      axios.post('http://localhost:3000/posts/', {
+        title: this.newpost.title,
+        note: this.newpost.note,
+        location: this.newpost.location,
+        photo_url: this.newpost.photo_url,
+        lat: 1.5,
+        long: 1.00,
+        user_id: 2
+      })
       .then(function (response) {
         console.log(response);
       })
