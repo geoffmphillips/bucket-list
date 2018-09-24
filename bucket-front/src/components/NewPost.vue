@@ -111,9 +111,8 @@ export default {
       categories:null
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
-    categories: ['Beach', 'Romantic', 'Backpacking', 'Roadtrip', 'Foodie', 'Cultural'],
     categories: this.categories,
-    search: null
+    search: null,
   }),
 
   created() {
@@ -135,7 +134,7 @@ export default {
     * @param {String} id Input container ID
     */
     getAddressData: function (addressData, placeResultData, id) {
-        this.address = {placeResultData};
+        this.address = placeResultData;
     },
     submit() {
       alert(`This is the post ${this.newpost.title}. Blah`);
