@@ -1,12 +1,12 @@
 <template>
-<div id="card-container">
-  <card
-    v-for="post in posts"
-    :key="post.id"
-    :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-    :post="post"
-  ></card>
-</div>
+  <div id="card-container">
+    <card
+      v-for="post in posts"
+      :key="post.id"
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
+      :post="post"
+    ></card>
+  </div>
 </template>
 
 <script>

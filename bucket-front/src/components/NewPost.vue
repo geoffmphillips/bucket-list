@@ -4,7 +4,7 @@
 
       <v-content>
 
-                  <v-container>
+          <v-container>
             <v-stepper v-model="step" vertical>
               <v-stepper-header>
                 <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
@@ -38,7 +38,10 @@
                         Description <small>(Optional)</small>
                       </div>
                     </v-textarea>
-                    <v-text-field label="Image URL (Optional)" v-model="newpost.photo_url"></v-text-field>
+                    <v-text-field
+                      label="Image URL (Optional)"
+                      v-model="newpost.photo_url"
+                    ></v-text-field>
 
                   <v-btn flat @click.native="step = 1">Previous</v-btn>
                   <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
@@ -95,20 +98,20 @@
 import axios from 'axios';
 
 export default {
-
   mounted() {
     this.$refs.address.focus();
   },
 
   data: () => ({
-    step:1,
-    newpost:{
-      title:null,
-      note:null,
-      location:null,
-      photo_url:null,
-      board:null,
-      categories:null
+    errors: [],
+    step: 1,
+    newpost: {
+      title: null,
+      note: null,
+      location: null,
+      photo_url: null,
+      board: null,
+      categories: null,
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
     categories: this.categories,
@@ -137,7 +140,6 @@ export default {
         this.address = placeResultData;
     },
     submit() {
-      alert(`This is the post ${this.newpost.title}. Blah`);
       axios.post('http://localhost:3000/posts/', {
         title: this.newpost.title,
         note: this.newpost.note,
@@ -145,15 +147,15 @@ export default {
         photo_url: this.newpost.photo_url,
         lat: 1.5,
         long: 1.00,
-        user_id: 2
+        user_id: 2,
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
+        .then((response) => {
+          this.newpost = response.data;
+        })
+        .catch((error) => {
+          this.errors.push(error);
+        });
+    },
   },
 };
 </script>
