@@ -25,8 +25,8 @@ user1.posts.create!({
   note: "the poopiest water in town",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Kits beach",
-  lat: 10,
-  long: 10,
+  lat: 49.2827,
+  long: -123.1207,
 })
 
 user1.posts.create!({
