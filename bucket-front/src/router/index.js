@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Vuetify from 'vuetify';
-import HelloWorld from '@/components/HelloWorld';
 import CardContainer from '@/components/cards/CardContainer';
 import Users from '@/components/Users';
 import Post from '@/components/Post';

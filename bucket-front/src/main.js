@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import App from './App';
-import router from './router';
 import Vuetify from 'vuetify';
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
+import App from './App';
+import router from './router';
 import store from '../store/index';
 
 
