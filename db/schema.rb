@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_09_21_222534) do
     t.string "city"
     t.string "photo_url"
     t.string "title"
+    t.string "categories"
     t.integer "lat"
     t.integer "long"
     t.bigint "user_id"
