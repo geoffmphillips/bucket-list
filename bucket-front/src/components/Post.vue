@@ -17,8 +17,8 @@
   <div class="map-container">
     <GmapMap
       :center="{
-        lat: 49.2827,
-        lng: -123.1207,
+        lat: this.markers[0].position.lat,
+        lng: this.markers[0].position.lng,
         }"
       :zoom="12"
       :options="{styles: this.$store.state.mapStyle}"
@@ -53,8 +53,8 @@ export default {
       categories: [],
       markers: [{
         position: {
-          lat: 49.2827,
-          lng: -123.1207,
+          lat: 0,
+          lng: 0,
         },
       },
       ],
@@ -62,16 +62,12 @@ export default {
     };
   },
   created() {
-    axios.get(`http://localhost:3000/posts/${this.$route.params.id}`, {
-      params: {
-        id: 1,
-      },
-    })
+    axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
       .then((response) => {
         this.post = response.data.post;
         this.categories = response.data.categories;
-        this.markers.position.lat = this.post.lat;
-        this.markers.position.lng = this.post.long;
+        this.markers[0].position.lat = (this.post.lat * (10 ** -4));
+        this.markers[0].position.lng = (this.post.long * (10 ** -4));
       })
       .catch((e) => {
         this.errors.push(e);
