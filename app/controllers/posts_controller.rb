@@ -4,8 +4,9 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
+    @categories = Category.all
 
-    render json: @posts
+    render json: { post: @post, categories: @categories }
   end
 
   # GET /posts/1
@@ -15,7 +16,6 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    pp post_params
     @post = Post.new(post_params)
 
     if @post.save

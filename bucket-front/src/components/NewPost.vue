@@ -66,8 +66,9 @@
                     </template>
                   </v-combobox>
                   <v-select
-                    :items="categories"
+                    :items= categories
                     v-model="newpost.categories"
+                    item-text="name"
                     label="Choose your categories"
                     multiple
                     chips
@@ -111,8 +112,20 @@ export default {
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
     categories: ['Beach', 'Romantic', 'Backpacking', 'Roadtrip', 'Foodie', 'Cultural'],
+    categories: this.categories,
     search: null
   }),
+
+  created() {
+    axios.get(`http://localhost:3000/posts/`, {
+    })
+      .then((response) => {
+        this.categories = response.data.categories;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+  },
 
   methods:{
     /**
@@ -122,7 +135,7 @@ export default {
     * @param {String} id Input container ID
     */
     getAddressData: function (addressData, placeResultData, id) {
-        this.address = {};
+        this.address = {placeResultData};
     },
     submit() {
       alert(`This is the post ${this.newpost.title}. Blah`);
