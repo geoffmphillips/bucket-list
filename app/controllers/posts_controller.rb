@@ -11,7 +11,10 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    render json: @post
+
+    categories = @post.categories.order(:name)
+    location = @post.location
+    render json: { post: @post, categories: categories, location: location }
   end
 
   # POST /posts
