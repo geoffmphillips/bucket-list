@@ -140,6 +140,8 @@ export default {
     */
     getAddressData: function (addressData, placeResultData, id) {
         this.address = placeResultData;
+        // this.lat = this.address.geometry.location.lat()
+        // this.lng = this.address.geometry.location.lng()
     },
     submit() {
       axios.post('http://localhost:3000/posts/', {
@@ -148,8 +150,8 @@ export default {
         city: null,
         location: this.address.name,
         photo_url: this.newpost.photo_url,
-        lat: this.address.geometry.location.lat(),
-        long: this.address.geometry.location.lng(),
+        lat: (this.address.geometry.location.lat() * (10 ** 4)),
+        long: (this.address.geometry.location.lng() * (10 ** 4)),
         user_id: 2,
       })
         .then((response) => {
