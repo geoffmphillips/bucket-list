@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <router-link :to="'/categories/' + category.id" class="card">
     <p>{{category.name}}</p>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -15,12 +15,14 @@ export default {
 </script>
 
 <style scoped>
-div.card {
+a.card {
+  text-decoration: none;
   display: flex;
   align-items: center;
   background-color: #8BD6FD;
   border-radius: 1em;
   border: 0px;
+  color: black;
 }
 p {
   margin: 0.5em

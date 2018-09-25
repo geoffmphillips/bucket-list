@@ -1,9 +1,9 @@
 <template>
-<router-link :to="'/posts/' + post.id">
+<a>
   <!-- <p>{{post.title}}</p> -->
   <div class="card">
   </div>
-</router-link>
+</a>
 </template>
 
 <script>
