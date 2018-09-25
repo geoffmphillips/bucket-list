@@ -1,8 +1,8 @@
 const defaults = {
   sidebar: {
-    visible: true
+    visible: false,
   },
-};  
+};
 
 export default {
   namespaced: true,
@@ -10,20 +10,20 @@ export default {
   state: Object.assign({}, defaults),
 
   mutations: {
-    updateSidebar (state, options) {
-      state.sidebar = Object.assign({}, defaults.sidebar, options)
+    updateSidebar(state, options) {
+      state.sidebar = Object.assign({}, defaults.sidebar, options);
     },
-    error (state, options) {
-      state.error = Object.assign({}, defaults.error, options)
+    error(state, options) {
+      state.error = Object.assign({}, defaults.error, options);
     },
-    clear (state) {
-      state = Object.assign({}, defaults)
+    clear(state) {
+      state = Object.assign({}, defaults);
     },
   },
   actions: {
 
-    updateSidebar ({ commit }, options) {
-      commit('updateSidebar', options)
-    }
-  }
-}
+    updateSidebar({ commit }, options) {
+      commit('updateSidebar', options);
+    },
+  },
+};

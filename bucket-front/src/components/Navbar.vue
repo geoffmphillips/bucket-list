@@ -1,14 +1,19 @@
 <template lang="pug">
-  v-toolbar.my-appbar(fixed app dense)
-    img.logo(src='../assets/bucket-logo.png', alt='BucketList logo')
-    v-autocomplete.search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
+  v-toolbar.navbar(
+    :color="$vuetify.breakpoint.smAndDown ? 'primary' : 'default'"
+    :dark="$vuetify.breakpoint.smAndDown"
+    fixed
+    app
+    dense
+  )
+    img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
+    v-autocomplete.navbar__search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
     v-spacer
-    v-toolbar-items.nav-list
-      v-btn.nav-list-item(flat='') Categories
-      v-btn.nav-list-item(flat='') Locations {{ model }}
-      v-btn.nav-list-item(flat='') Boards
+    v-toolbar-items.navbar__list
+      v-btn.navbar__list-item(flat='') Categories
+      v-btn.navbar__list-item(flat='') Locations
 
-    v-toolbar-side-icon(v-show="!backButton" @click.stop="toggleSidebar()")
+    v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
     v-btn(icon v-show="backButton" @click.stop="$router.back()")
       v-icon arrow_back
       
@@ -84,18 +89,17 @@
   color: #2c3e50
   box-sizing: border-box
 
-  nav
+  .navbar
     background: #39B885
     height: 90px
     display: block
 
-    .logo
+    &__logo
       height: 70px
       float: left
-      margin-left: 15px
-      margin-top: 10px
+      margin-top: 40px; margin-right: 10px; margin-left: 10px
 
-    .search-field
+    &__search-field
       height: 40px
       width: 500px
       position: relative
@@ -104,15 +108,19 @@
       margin-left: 20px
       border-radius: 15px
 
-    .nav-list
+    &__list
       float: right
       margin-top: 3%
-      font-size: 1.7em
 
-    .nav-list-item
-      display: inline-block
-      list-style: none
-      float: left
-      margin-left: 20px
-      margin-right: 20px
+      &-item
+        display: inline-block
+        list-style: none
+        float: left
+        font-size: 1.2em
+        margin-left: 30px
+        margin-right: 30px
+
+    &__sidebar-btn
+      font-size: 4em
+      margin-top: .9em
 </style>

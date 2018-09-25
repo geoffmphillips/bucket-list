@@ -1,13 +1,12 @@
 <template lang="pug">
-  v-app#jumbotron
-    v-jumbotron
-      v-layout(align-center)
-        .jumbotron-wrapper
-          video.jumbotron(type='video/mp4', autoplay loop muted)
-            source(src='../assets/pexels.mp4', type='video/mp4')
-          .overlay-desc
-            h2 Welcome to the Future
-            h2 of Discovery
+  v-jumbotron
+    v-layout(align-center)
+      .jumbotron-wrapper
+        video.jumbotron(type='video/mp4', autoplay loop muted)
+          source(src='../assets/pexels.mp4', type='video/mp4')
+        .overlay-desc
+          h2 Welcome to the Future
+          h2 of Discovery
 </template>
 
 <script>
@@ -25,6 +24,7 @@ export default {
 <style lang="stylus">
 .jumbotron-wrapper
   margin: 0 auto
+  min-height: 450px
 
   .overlay-desc
     background: rgba(0,0,0,0)
