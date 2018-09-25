@@ -90,6 +90,7 @@
 
     </v-app>
     <br><br>Debug: {{newpost}}
+    <br><br>Seebug: {{ address }}
     </div>
 </template>
 
@@ -115,7 +116,8 @@ export default {
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
     categories: this.categories,
-    search: null
+    search: null,
+    address: this.address,
   }),
 
   created() {
@@ -143,10 +145,11 @@ export default {
       axios.post('http://localhost:3000/posts/', {
         title: this.newpost.title,
         note: this.newpost.note,
-        location: this.newpost.location,
+        city: null,
+        location: this.address.name,
         photo_url: this.newpost.photo_url,
-        lat: 1.5,
-        long: 1.00,
+        lat: this.address.geometry.location.lat(),
+        long: this.address.geometry.location.lng(),
         user_id: 2,
       })
         .then((response) => {
