@@ -20,7 +20,7 @@ puts "Creating locations ----------"
 location1 = Location.create(city: "Vancouver", location: "Kits Beach", lat: 492827, long: -1231207)
 location2 = Location.create(city: "Paris", location: "Eiffel Tower", lat: 488566, long: 23522)
 location3 = Location.create(city: "Beijing", location: "Tiananmen Square", lat: 399042, long: 1164074)
-location4 = Location.create(city: "Sydney", location: "Opera House", lat: -338688, long: -1512093)
+location4 = Location.create(city: "Sydney", location: "Opera House", lat: -338688, long: 1512093)
 
 # POSTS
 

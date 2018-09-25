@@ -5,6 +5,7 @@ import CardContainer from '@/components/cards/CardContainer';
 import Users from '@/components/Users';
 import Post from '@/components/Post';
 import TheLocations from '@/components/TheLocations';
+import TheLocation from '@/components/TheLocation';
 import TheCategories from '@/components/TheCategories';
 import TheCategory from '@/components/TheCategory';
 import NewPost from '@/components/NewPost';
@@ -33,6 +34,11 @@ export default new Router({
       path: '/locations',
       name: 'TheLocations',
       component: TheLocations,
+    },
+    {
+      path: '/locations/:id',
+      name: 'TheLocation',
+      component: TheLocation,
     },
     {
       path: '/categories',
