@@ -1,13 +1,20 @@
 <template>
-  <div id="app">
-    <img src="./assets/bucket-small.png" height="40">
+  <div id='app'>
+    <router-link to='/'>
+      <img src="./assets/bucket-small.png" height="40">
+    </router-link>
     <router-view/>
   </div>
 </template>
 
 <script>
+import Jumbotron from './components/Jumbotron';
+
 export default {
   name: 'App',
+  components: {
+    Jumbotron,
+  },
 };
 </script>
 

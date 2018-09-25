@@ -6,7 +6,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :city
       t.string :photo_url
       t.string :title
-      t.string :categories
       t.integer :lat
       t.integer :long
       t.references :user, foreign_key: true

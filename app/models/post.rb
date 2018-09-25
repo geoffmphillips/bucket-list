@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   validates :long, presence: true
 
   has_many :comments
+  has_many :post_categories
   has_many :board_items
   has_many :boards, through: :board_items
   has_many :post_categories
