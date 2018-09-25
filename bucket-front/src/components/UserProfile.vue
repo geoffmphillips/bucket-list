@@ -2,13 +2,6 @@
 <div id="profile">
   <h1>{{ user.first_name }} {{ user.last_name }}</h1>
 
-  <div id="boards">
-    <h2>Boards</h2>
-    <!-- <div v-for="board in boards" :key="board.id">
-      <p>{{ board.name }}</p>
-    </div> -->
-  </div>
-
 </div>
 </template>
 

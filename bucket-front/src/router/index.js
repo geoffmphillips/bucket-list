@@ -3,7 +3,8 @@ import Router from 'vue-router';
 import Users from '@/components/Users';
 import UserProfile from '@/components/UserProfile';
 import Login from '@/components/Login';
-// import Registration from '@/components/Registration';
+import Boards from '@/components/Boards';
+
 
 Vue.use(Router);
 
@@ -24,11 +25,11 @@ export default new Router({
       name: 'Login',
       component: Login,
     },
-    // {
-    //   path: '/register',
-    //   name: 'Registration',
-    //   component: Registration,
-    // },
+    {
+      path: '/boards',
+      name: 'Boards',
+      component: Boards,
+    },
     // otherwise redirect to home
     { path: '*', redirect: '/' },
   ],

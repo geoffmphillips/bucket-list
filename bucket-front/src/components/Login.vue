@@ -33,12 +33,20 @@ export default {
   },
   methods: {
     login() {
-      axios.post('http://localhost:3000/sessions', {
+      const self = this;
+      event.preventDefault();
+      axios.post('http://localhost:3000/user_token', { auth: {
         email: this.email,
         password: this.password,
-      })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+      } })
+        .then((response) => {
+          console.log('Response: ', response);
+          // redirect logic
+          self.$router.push('/users');
+        })
+        .catch((err) => {
+          console.log('Error: ', err);
+        });
     },
   },
   // created() {
@@ -53,7 +61,7 @@ export default {
 
 <style lang="css">
 body {
-  background: #605B56;
+  background: rgb(196, 189, 189);
 }
 
 .login-wrapper {

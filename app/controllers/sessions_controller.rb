@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
     # If the user exists AND the password entered is correct.
     if user && user.authenticate(params[:password])
       # Save the user id inside the browser cookie.
-      return session[:user_id] = user.id
+      session[:user_id] = user.id
+      @user = user
+      render json: @user
     else
-      return false
+      return error
     end
   end
 
