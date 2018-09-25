@@ -1,16 +1,17 @@
 <template lang="pug">
-  v-app#search
-    v-toolbar.my-appbar(fixed app dense)
-      img.logo(src='../assets/bucket-logo.png', alt='BucketList logo')
-      v-autocomplete.search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
-      v-spacer
-      v-toolbar-items.nav-list
-        v-btn.nav-list-item(flat='') Categories
-        v-btn.nav-list-item(flat='') Locations {{ model }}
-        v-btn.nav-list-item(flat='') Boards
-      v-toolbar-side-icon(v-show="!backButton" @click.stop="toggleSidebar()")
-      v-btn(icon v-show="backButton" @click.stop="$router.back()")
-        v-icon arrow_back
+  v-toolbar.my-appbar(fixed app dense)
+    img.logo(src='../assets/bucket-logo.png', alt='BucketList logo')
+    v-autocomplete.search-field(v-model='model', :items='stuff', item-text='name', :label='`Search some buckets...`', return-object='')
+    v-spacer
+    v-toolbar-items.nav-list
+      v-btn.nav-list-item(flat='') Categories
+      v-btn.nav-list-item(flat='') Locations {{ model }}
+      v-btn.nav-list-item(flat='') Boards
+
+    v-toolbar-side-icon(v-show="!backButton" @click.stop="toggleSidebar()")
+    v-btn(icon v-show="backButton" @click.stop="$router.back()")
+      v-icon arrow_back
+      
 </template>
 
 <script>
@@ -45,12 +46,11 @@
       }
     },
     methods: {
-      // toggleSidebar () {
-      //   this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
-      // }
+      toggleSidebar () {
+        this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
+      }
     },
     created() {
-      console.log('navbar created')
       axios.get(`http://localhost:3000/posts`)
       .then(response => {
         this.posts = response.data
