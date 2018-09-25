@@ -17,7 +17,7 @@ Vue.use(VueGoogleMaps, {
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
 Vue.use(VuetifyGoogleAutocomplete, {
-  apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs', // Can also be an object. E.g, for Google Maps Premium API, pass `{ client: <YOUR-CLIENT-ID> }`
+  apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });
 
 /* eslint-disable no-new */
