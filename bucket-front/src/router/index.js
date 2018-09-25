@@ -4,6 +4,8 @@ import Vuetify from 'vuetify';
 import CardContainer from '@/components/cards/CardContainer';
 import Users from '@/components/Users';
 import Post from '@/components/Post';
+import TheLocations from '@/components/TheLocations';
+import TheCategories from '@/components/TheCategories';
 import NewPost from '@/components/NewPost';
 
 Vue.use(Router);
@@ -25,6 +27,16 @@ export default new Router({
       path: '/posts/:id',
       name: 'Post',
       component: Post,
+    },
+    {
+      path: '/locations',
+      name: 'TheLocations',
+      component: TheLocations,
+    },
+    {
+      path: '/categories',
+      name: 'TheCategories',
+      component: TheCategories,
     },
     {
       path: '/newpost',
