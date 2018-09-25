@@ -25,6 +25,8 @@ export default {
 .jumbotron
   margin: 0 auto
   min-height: 550px
+  width: 90%
+  margin: 0 auto
 
   &__video
     width: 100%
