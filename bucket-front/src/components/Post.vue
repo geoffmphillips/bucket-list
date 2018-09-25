@@ -64,10 +64,12 @@ export default {
   created() {
     axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
       .then((response) => {
-        this.post = response.data.post;
-        this.categories = response.data.categories;
-        this.markers[0].position.lat = (this.post.lat * (10 ** -4));
-        this.markers[0].position.lng = (this.post.long * (10 ** -4));
+        const { post, categories, location } = response.data;
+        this.post = post;
+        this.categories = categories;
+        this.location = location;
+        this.markers[0].position.lat = (this.location.lat * (10 ** -4));
+        this.markers[0].position.lng = (this.location.long * (10 ** -4));
       })
       .catch((e) => {
         this.errors.push(e);
