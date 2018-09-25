@@ -1,12 +1,12 @@
 <template lang="pug">
   v-jumbotron
     v-layout(align-center)
-      .jumbotron-wrapper
-        video.jumbotron(type='video/mp4', autoplay loop muted)
+      .jumbotron
+        video.jumbotron__video(type='video/mp4', autoplay loop muted)
           source(src='../assets/pexels.mp4', type='video/mp4')
-        .overlay-desc
-          h2 Welcome to the Future
-          h2 of Discovery
+        .jumbotron__overlay
+          h2.-text1 Welcome to the Future
+          h2.-text2 of Discovery
 </template>
 
 <script>
@@ -22,11 +22,14 @@ export default {
 </script>
 
 <style lang="stylus">
-.jumbotron-wrapper
+.jumbotron
   margin: 0 auto
-  min-height: 450px
+  min-height: 550px
 
-  .overlay-desc
+  &__video
+    width: 100%
+
+  &__overlay
     background: rgba(0,0,0,0)
     color: white;
     position: absolute
@@ -36,15 +39,14 @@ export default {
     font-size: 3em
     display: inline-block
     margin-top: 10%
-    animation: fadein 8s
+    animation: fadein 12s
     opacity: 0
-
-  .jumbotron
-    width: 100%
 
 @keyframes fadein
   0%
     opacity: 0
+  50%
+    opacity: 1
   80%
     opacity: 1
   100%

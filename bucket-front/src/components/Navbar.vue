@@ -105,7 +105,7 @@
       position: relative
       top: 50%
       font-size: 1.3em
-      margin-left: 20px
+      margin-left: 20px; margin-bottom: 15px
       border-radius: 15px
 
     &__list
