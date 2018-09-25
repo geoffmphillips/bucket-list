@@ -7,7 +7,7 @@
             source(src='../assets/pexels.mp4', type='video/mp4')
           .overlay-desc
             h2 Welcome to the Future
-            h3 of Discovery
+            h2 of Discovery
 </template>
 
 <script>
@@ -15,6 +15,9 @@ export default {
   name: 'Jumbotron',
   components: {
 
+  },
+  created() {
+    console.log('jumbotron created')
   }
 }
 </script>
@@ -33,8 +36,8 @@ export default {
     font-size: 3em
     display: inline-block
     margin-top: 10%
-    animation: fadein 4s
-    opacity: .7
+    animation: fadein 8s
+    opacity: 0
 
   .jumbotron
     width: 100%
@@ -45,7 +48,7 @@ export default {
   80%
     opacity: 1
   100%
-    opacity: .7
+    opacity: 0
 
 
 </style>

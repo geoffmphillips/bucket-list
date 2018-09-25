@@ -1,9 +1,7 @@
-<!-- //- <template lang="pug"> -->
-<template lang="pug" v-if="!loggedin">
+<template lang="pug">
   #app
     navbar
     jumbotron
-
     router-view
 </template>
 
@@ -11,8 +9,8 @@
 import axios from 'axios'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import Navbar from './components/Navbar'
-import Jumbotron from './components/Jumbotron'
+import Navbar from '@/components/Navbar'
+import Jumbotron from '@/components/Jumbotron'
 
 export default {
   name: 'App',
