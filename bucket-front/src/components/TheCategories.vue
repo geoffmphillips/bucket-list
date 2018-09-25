@@ -153,9 +153,9 @@ export default {
   display: flex;
   flex-flow: row wrap;
   align-items: flex-start;
-  flex-grow: 3;
 }
 .header {
-  width: 400px;
+  width: 300px;
+  margin: 8em 0 0 0;
 }
 </style>

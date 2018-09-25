@@ -29,8 +29,8 @@ a:hover > p {
 }
 div.card {
   margin: 0;
-  width: 225px;
-  height: 350px;
+  width: 350px;
+  height: 225px;
   border: 0px;
   opacity: 0;
 }
