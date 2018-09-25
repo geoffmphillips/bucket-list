@@ -6,6 +6,7 @@ import Users from '@/components/Users';
 import Post from '@/components/Post';
 import TheLocations from '@/components/TheLocations';
 import TheCategories from '@/components/TheCategories';
+import TheCategory from '@/components/TheCategory';
 import NewPost from '@/components/NewPost';
 
 Vue.use(Router);
@@ -37,6 +38,11 @@ export default new Router({
       path: '/categories',
       name: 'TheCategories',
       component: TheCategories,
+    },
+    {
+      path: '/categories/:id',
+      name: 'TheCategory',
+      component: TheCategory,
     },
     {
       path: '/newpost',

@@ -26,13 +26,14 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    categories = @category.categories
-    render json: { category: @category, categories: categories }
+    @category = Category.find(params[:id])
+    @posts = Post.joins(post_categories: :category).where(categories: {id: params[:id]})
+    render json: { posts: @posts, category: @category}
   end
 
   # POST /categories
   def create
-    @category = Category.new(post_params)
+    @category = Category.new(category_params)
 
     if @category.save
       render json: @category, status: :created, location: @category
@@ -43,7 +44,7 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1
   def update
-    if @category.update(post_params)
+    if @category.update(category_params)
       render json: @category
     else
       render json: @category.errors, status: :unprocessable_entity
@@ -62,7 +63,7 @@ class CategoriesController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def post_params
-      params.require(:category).permit(:name)
+    def category_params
+      params.require(:category).permit(:id, :name)
     end
 end

@@ -3,7 +3,6 @@
     <router-link to='/'>
       <img src='./assets/logo.png'>
     </router-link>
-    <jumbotron/>
     <router-view/>
   </div>
 </template>

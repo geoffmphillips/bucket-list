@@ -1,90 +1,90 @@
 <template>
   <div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[0].name}}</strong></h3>
+        <h3><strong>{{this.locations[0].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category1Posts"
+        v-for="post in this.location1Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[1].name}}</strong></h3>
+        <h3><strong>{{this.locations[1].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category2Posts"
+        v-for="post in this.location2Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[2].name}}</strong></h3>
+        <h3><strong>{{this.locations[2].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category3Posts"
+        v-for="post in this.location3Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[3].name}}</strong></h3>
+        <h3><strong>{{this.locations[3].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category4Posts"
+        v-for="post in this.location4Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[4].name}}</strong></h3>
+        <h3><strong>{{this.locations[4].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category5Posts"
+        v-for="post in this.location5Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[5].name}}</strong></h3>
+        <h3><strong>{{this.locations[5].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category6Posts"
+        v-for="post in this.location6Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
         ></card>
       </div>
     </div>
-    <div class="category-container">
+    <div class="location-container">
       <div class="header">
-        <h3><strong>{{this.categories[6].name}}</strong></h3>
+        <h3><strong>{{this.locations[6].name}}</strong></h3>
       </div>
       <div class="posts-container">
         <card
-        v-for="post in this.category7Posts"
+        v-for="post in this.location7Posts"
         :key="post.id"
         :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
         :post="post"
@@ -106,36 +106,36 @@ export default {
   },
   data() {
     return {
-      categories: [],
-      category1Posts: [],
-      category2Posts: [],
-      category3Posts: [],
-      category4Posts: [],
-      category5Posts: [],
-      category6Posts: [],
-      category7Posts: [],
+      locations: [],
+      location1Posts: [],
+      location2Posts: [],
+      location3Posts: [],
+      location4Posts: [],
+      location5Posts: [],
+      location6Posts: [],
+      location7Posts: [],
       errors: [],
     };
   },
   created() {
-    axios.get('http://localhost:3000/categories')
+    axios.get('http://localhost:3000/locations')
       .then((response) => {
-        const { categories,
-          category1Posts,
-          category2Posts,
-          category3Posts,
-          category4Posts,
-          category5Posts,
-          category6Posts,
-          category7Posts } = response.data;
-        this.categories = categories;
-        this.category1Posts = category1Posts;
-        this.category2Posts = category2Posts;
-        this.category3Posts = category3Posts;
-        this.category4Posts = category4Posts;
-        this.category5Posts = category5Posts;
-        this.category6Posts = category6Posts;
-        this.category7Posts = category7Posts;
+        const { locations,
+          location1Posts,
+          location2Posts,
+          location3Posts,
+          location4Posts,
+          location5Posts,
+          location6Posts,
+          location7Posts } = response.data;
+        this.locations = locations;
+        this.location1Posts = location1Posts;
+        this.location2Posts = location2Posts;
+        this.location3Posts = location3Posts;
+        this.location4Posts = location4Posts;
+        this.location5Posts = location5Posts;
+        this.location6Posts = location6Posts;
+        this.location7Posts = location7Posts;
       })
       .catch((e) => {
         this.errors.push(e);
@@ -145,7 +145,7 @@ export default {
 </script>
 
 <style scoped>
-.category-container {
+.location-container {
   display: flex;
   align-items: flex-start;
 }

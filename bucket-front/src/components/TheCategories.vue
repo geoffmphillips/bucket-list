@@ -1,107 +1,65 @@
 <template>
-  <div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[0].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category1Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[1].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category2Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[2].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category3Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[3].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category4Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[4].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category5Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[5].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category6Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
-    <div class="category-container">
-      <div class="header">
-        <h3><strong>{{this.categories[6].name}}</strong></h3>
-      </div>
-      <div class="posts-container">
-        <card
-        v-for="post in this.category7Posts"
-        :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post"
-        ></card>
-      </div>
-    </div>
+  <div class="categories-container">
+    <router-link :to="'/categories/' + this.categories[0].id" class="category-container">
+      <h3><strong>{{this.categories[0].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category1Posts[0].photo_url + ')' }"
+      :post="this.category1Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[1].id" class="category-container">
+      <h3><strong>{{this.categories[1].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category2Posts[0].photo_url + ')' }"
+      :post="this.category2Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[2].id" class="category-container">
+      <h3><strong>{{this.categories[2].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category3Posts[0].photo_url + ')' }"
+      :post="this.category3Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[3].id" class="category-container">
+      <h3><strong>{{this.categories[3].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category4Posts[0].photo_url + ')' }"
+      :post="this.category4Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[4].id" class="category-container">
+      <h3><strong>{{this.categories[4].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category5Posts[0].photo_url + ')' }"
+      :post="this.category5Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[5].id" class="category-container">
+      <h3><strong>{{this.categories[5].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category6Posts[0].photo_url + ')' }"
+      :post="this.category6Posts[0]"
+      ></card-no-link>
+    </router-link>
+    <router-link :to="'/categories/' + this.categories[6].id" class="category-container">
+      <h3><strong>{{this.categories[6].name}}</strong></h3>
+      <card-no-link
+      :style="{ backgroundImage: 'url(' + this.category7Posts[0].photo_url + ')' }"
+      :post="this.category7Posts[0]"
+      ></card-no-link>
+    </router-link>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Card from './cards/Card';
+import CardNoLink from './cards/CardNoLink';
 import CardContainer from './cards/CardContainer';
 
 export default {
   components: {
-    Card,
+    CardNoLink,
     CardContainer,
   },
   data() {
@@ -145,17 +103,21 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: black;
+  position: relative;
+}
+h3 {
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: 4em;
+  width: max-content;
+  top: 2em;
+}
 .category-container {
   display: flex;
   align-items: flex-start;
-}
-.posts-container {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: flex-start;
-}
-.header {
-  width: 300px;
-  margin: 8em 0 0 0;
 }
 </style>
