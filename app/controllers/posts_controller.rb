@@ -12,7 +12,6 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-
     categories = @post.categories.order(:name)
     location = @post.location
     render json: { post: @post, categories: categories, location: location }
