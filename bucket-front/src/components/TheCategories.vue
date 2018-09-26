@@ -78,7 +78,6 @@ export default {
   created() {
     axios.get('http://localhost:3000/categories')
       .then((response) => {
-        console.log(response)
         const { categories,
           category1Posts,
           category2Posts,
