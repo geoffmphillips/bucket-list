@@ -1,56 +1,26 @@
 <template>
   <div class="locations-container">
-    <router-link :to="'/locations/' + this.locations[0].id" class="location-container">
-      <h3><strong>{{this.locations[0].location}}</strong></h3>
-      <card-no-link
-      :style="{ backgroundImage: 'url(' + this.location1Posts[0].photo_url + ')' }"
-      :post="this.location1Posts[0]"
-      ></card-no-link>
-    </router-link>
-    <router-link :to="'/locations/' + this.locations[1].id" class="location-container">
-      <h3><strong>{{this.locations[1].location}}</strong></h3>
-      <card-no-link
-      :style="{ backgroundImage: 'url(' + this.location2Posts[0].photo_url + ')' }"
-      :post="this.location2Posts[0]"
-      ></card-no-link>
-    </router-link>
-    <router-link :to="'/locations/' + this.locations[2].id" class="location-container">
-      <h3><strong>{{this.locations[2].location}}</strong></h3>
-      <card-no-link
-      :style="{ backgroundImage: 'url(' + this.location3Posts[0].photo_url + ')' }"
-      :post="this.location3Posts[0]"
-      ></card-no-link>
-    </router-link>
-    <router-link :to="'/locations/' + this.locations[3].id" class="location-container">
-      <h3><strong>{{this.locations[3].location}}</strong></h3>
-      <card-no-link
-      :style="{ backgroundImage: 'url(' + this.location4Posts[0].photo_url + ')' }"
-      :post="this.location4Posts[0]"
-      ></card-no-link>
-    </router-link>
+    <location-card
+      v-for="(location, index) in locations"
+      :location="location"
+      :post="posts[index]"
+      :key="index"
+    ></location-card>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import CardNoLink from './cards/CardNoLink';
-import CardContainer from './cards/CardContainer';
+import LocationCard from './cards/LocationCard';
 
 export default {
   components: {
-    CardNoLink,
-    CardContainer,
+    LocationCard
   },
   data() {
     return {
       locations: [],
-      location1Posts: [],
-      location2Posts: [],
-      location3Posts: [],
-      location4Posts: [],
-      location5Posts: [],
-      location6Posts: [],
-      location7Posts: [],
+      posts: [],
       errors: [],
     };
   },
@@ -64,10 +34,10 @@ export default {
           location4Posts,
         } = response.data;
         this.locations = locations;
-        this.location1Posts = location1Posts;
-        this.location2Posts = location2Posts;
-        this.location3Posts = location3Posts;
-        this.location4Posts = location4Posts;
+        this.posts = [ location1Posts,
+                       location2Posts,
+                       location3Posts,
+                       location4Posts ]
       })
       .catch((e) => {
         this.errors.push(e);
