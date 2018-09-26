@@ -60,10 +60,6 @@ export default {
         this.$router.replace('/posts');
       }
     },
-    // logout() {
-    //   localStorage.removeItem('jwt');
-    //   this.$store.dispatch('removeStoreJWT');
-    // },
   },
 };
 </script>
