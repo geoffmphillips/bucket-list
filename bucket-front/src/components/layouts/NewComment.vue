@@ -27,12 +27,14 @@ export default {
   methods: {
     submit(event) {
       if(this.text !== '') {
-        console.log("POST: ", this.post)
-        axios.post('http://localhost:3000/comments/new', {
+        axios.post('http://localhost:3000/comments', {
           post_id: this.post.id,
           text: this.text,
+          user_id: 1,
         })
         .then((response) => {
+          this.text = '';
+          router.push(`/posts/${this.post.id}`)
         })
         .catch((error) => {
           this.errors.push(error);
@@ -41,7 +43,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style lang="css">
