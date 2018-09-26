@@ -1,10 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-<<<<<<< HEAD
-=======
 import Vuetify from 'vuetify';
 import CardContainer from '@/components/cards/CardContainer';
->>>>>>> 3375973243a2ec039d3aa3baf5c88400bce05dba
 import Users from '@/components/Users';
 import Post from '@/components/Post';
 import TheLocations from '@/components/TheLocations';
@@ -19,14 +16,11 @@ Vue.use(Vuetify);
 export default new Router({
   routes: [
     {
-<<<<<<< HEAD
-=======
       path: '/',
       name: 'CardContainer',
       component: CardContainer,
     },
     {
->>>>>>> 3375973243a2ec039d3aa3baf5c88400bce05dba
       path: '/users',
       name: 'Users',
       component: Users,

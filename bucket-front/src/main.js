@@ -1,11 +1,9 @@
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
-import Vuetify from 'vuetify';
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
 import App from './App';
 import Vuetify from 'vuetify'
 import router from './router';
-import store from '../store';
 import { sync } from 'vuex-router-sync'
 
 import Navbar from './components/Navbar';

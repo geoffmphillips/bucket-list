@@ -2,7 +2,6 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :location
 
-  has_many :post_categories
   has_many :comments
   has_many :post_categories
   has_many :board_items
