@@ -14,7 +14,7 @@ class PostsController < ApplicationController
   def show
     categories = @post.categories.order(:name)
     location = @post.location
-    comments = @post.comments
+    comments = @post.comments.order(created_at: :desc)
 
     render json: { post: @post, categories: categories, location: location, comments: comments }
   end

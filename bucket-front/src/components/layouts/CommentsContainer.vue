@@ -1,36 +1,28 @@
 <template>
-<div class="card" style="width: 18rem;">
+<div class="card">
   <ul class="list-group list-group-flush">
-    <comment
-      v-for="comment in comments"
+    <comment-card
+      v-for="comment in this.comments"
       :key="comment.id"
       :comment="comment"
-    ></comment>
+    ></comment-card>
   </ul>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import CommentCard from './CommentCard'
 
 export default {
+  name: 'CommentsContainer',
+  props: {
+    comments: {
+      type: Array,
+    },
+  },
   components: {
-    Comment
-  },
-  data() {
-    return {
-
-      errors: [],
-    };
-  },
-  created() {
-    axios.get('http://localhost:3000/posts')
-      .then((response) => {
-        this.posts = response.data.posts;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+    CommentCard
   },
 };
 </script>

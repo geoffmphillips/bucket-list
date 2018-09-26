@@ -1,6 +1,6 @@
 <template>
     <li class="list-group-item">
-      <p>{{this.user.first_name}}</p>
+      <p><strong>{{this.user.first_name}}</strong></p>
       <br>
       <p>{{comment.text}}</p>
     </li>
@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'CommentCard',
   props: {
     comment: {
       type: Object,
@@ -19,9 +20,9 @@ export default {
     };
   },
   created() {
-    axios.get('http://localhost:3000/' + comment.id)
+    axios.get('http://localhost:3000/comments/' + this.comment.id)
       .then((response) => {
-        this.posts = response.data.posts;
+        this.user = response.data.user;
       })
       .catch((e) => {
         this.errors.push(e);
