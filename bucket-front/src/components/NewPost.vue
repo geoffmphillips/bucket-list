@@ -62,7 +62,8 @@
                       <v-list-tile>
                         <v-list-tile-content>
                           <v-list-tile-title>
-                            No results matching "<strong>{{ search }}</strong>". Press <kbd>enter</kbd> to create a new one
+                            No results matching "<strong>{{ search }}</strong>".
+                            Press <kbd>enter</kbd> to create a new one
                           </v-list-tile-title>
                         </v-list-tile-content>
                       </v-list-tile>

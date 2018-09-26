@@ -1,12 +1,14 @@
 <template>
 <div id="profile">
   <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+  <p>{{ jwtSubject }}</p>
 
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -31,7 +33,13 @@ export default {
         this.errors.push(e);
       });
   },
+  computed: {
+    ...mapGetters([
+      'jwtSubject',
+    ]),
+  },
 };
+
 </script>
 
 <style scoped>

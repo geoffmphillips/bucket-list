@@ -29,33 +29,42 @@ export default {
     return {
       email: '',
       password: '',
+      error: '',
     };
+  },
+  created() {
+    this.checkSignedIn();
+  },
+  updated() {
+    this.checkSignedIn();
   },
   methods: {
     login() {
-      const self = this;
-      event.preventDefault();
-      axios.post('http://localhost:3000/user_token', { auth: {
-        email: this.email,
-        password: this.password,
-      } })
-        .then((response) => {
-          console.log('Response: ', response);
-          // redirect logic
-          self.$router.push('/users');
-        })
-        .catch((err) => {
-          console.log('Error: ', err);
-        });
+      axios.post('http://localhost:3000/user_token', { auth: { email: this.email, password: this.password } })
+        .then(response => this.signinSuccessful(response))
+        .catch(error => this.signinFailed(error));
     },
+    signinSuccessful(response) {
+      localStorage.setItem('jwt', response.data.jwt);
+      localStorage.signedIn = true;
+      this.$store.dispatch('setStoreJWT', response.data.jwt);
+      this.error = '';
+      this.$router.replace('/users');
+    },
+    signinFailed(error) {
+      this.error = (error.response && error.response.data && error.response.data.error) || '';
+      delete localStorage.signedIn;
+    },
+    checkSignedIn() {
+      if (localStorage.signedIn) {
+        this.$router.replace('/posts');
+      }
+    },
+    // logout() {
+    //   localStorage.removeItem('jwt');
+    //   this.$store.dispatch('removeStoreJWT');
+    // },
   },
-  // created() {
-  //   axios.get('http://localhost:3000/login', {
-  //     responseType: 'json',
-  //     params: {
-  //     },
-  //   })
-  // },
 };
 </script>
 
