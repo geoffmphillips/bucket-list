@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @posts = Post.all
     @categories = Category.all
 
-    render json: { post: @post, categories: @categories }
+    render json: { posts: @posts, categories: @categories }
   end
 
   # GET /posts/1
