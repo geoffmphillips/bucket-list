@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios';
-import CategoryCard from './cards/CategoryCard';
+import CategoryCard from '../cards/CategoryCard';
 
 export default {
   components: {

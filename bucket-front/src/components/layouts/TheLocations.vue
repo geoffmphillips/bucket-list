@@ -11,7 +11,7 @@
 
 <script>
 import axios from 'axios';
-import LocationCard from './cards/LocationCard';
+import LocationCard from '../cards/LocationCard';
 
 export default {
   components: {
