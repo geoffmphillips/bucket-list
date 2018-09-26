@@ -1,11 +1,11 @@
 <template>
-<router-link :to="'/locations/' + location.id" class="location-container">
-  <h3><strong>{{location.location}}</strong></h3>
-  <card-no-link
-  :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }"
-  :post="post[0]"
-  ></card-no-link>
-</router-link>
+  <router-link :to="'/locations/' + location.id" class="location-container panel">
+    <h3 class="panel__text">{{location.location}}</h3>
+    <card-no-link
+    :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }"
+    :post="post[0]"
+    ></card-no-link>
+  </router-link>
 </template>
 
 <script>
@@ -29,20 +29,20 @@ export default {
 
 <style scoped>
 a {
-  text-decoration: none;
+  /* text-decoration: none;
   color: black;
-  position: relative;
+  position: relative; */
 }
 h3 {
-  position: absolute;
+  /* position: absolute;
   z-index: 2;
   color: white;
   font-size: 4em;
   width: max-content;
-  top: 2em;
+  top: 2em; */
 }
 .location-container {
-  display: flex;
-  align-items: flex-start;
+  /* display: flex;
+  align-items: flex-start; */
 }
 </style>

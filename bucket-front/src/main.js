@@ -37,14 +37,12 @@ Vue.use(Vuetify, {
   }
 })
 
-// // Styles
-// require('./styles/scss/main.scss')
-// require('./styles/stylus/main.styl')
+// Styles
+require('./styles/stylus/main.styl')
 
 // Global Components
 Vue.component('Navbar', Navbar)
 Vue.component('Sidebar', Sidebar)
-
 
 /* eslint-disable no-new */
 new Vue({

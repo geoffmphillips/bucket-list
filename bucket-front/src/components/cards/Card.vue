@@ -1,7 +1,7 @@
 <template lang="pug">
 
-  router-link(:to="'/posts/' + post.id")
-    p {{post.title}}
+  router-link.panel(:to="'/posts/' + post.id")
+    p.panel__text {{post.title}}
     .card
 
 </template>
@@ -34,7 +34,6 @@ div.card {
 p {
   z-index: 2;
   margin: 0px;
-  color: white;
-  opacity: 0;
+  color: black;
 }
 </style>

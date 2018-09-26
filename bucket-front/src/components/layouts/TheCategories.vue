@@ -67,6 +67,5 @@ h3 {
 }
 .category-container {
   display: flex;
-  align-items: flex-start;
 }
 </style>
