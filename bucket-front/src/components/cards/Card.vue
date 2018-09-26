@@ -1,9 +1,9 @@
-<template>
-<router-link :to="'/posts/' + post.id">
-  <!-- <p>{{post.title}}</p> -->
-  <div class="card">
-  </div>
-</router-link>
+<template lang="pug">
+
+  router-link(:to="'/posts/' + post.id")
+    p {{post.title}}
+    .card
+
 </template>
 
 <script>
@@ -23,9 +23,6 @@ a {
   margin: 0 10px 20px;
   border-radius: 0.75em;
   text-decoration: none;
-}
-a:hover > p {
-  opacity: 1;
 }
 div.card {
   margin: 0;

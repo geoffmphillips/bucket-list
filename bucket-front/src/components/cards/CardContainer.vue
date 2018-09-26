@@ -1,12 +1,9 @@
-<template>
-  <div id="card-container">
-    <card
-      v-for="post in posts"
-      :key="post.id"
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-      :post="post"
-    ></card>
-  </div>
+<template lang="pug">
+  #card-container
+    card(v-for='post in posts', 
+    :key='post.id', 
+    :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+    :post='post')
 </template>
 
 <script>
@@ -35,11 +32,10 @@ export default {
 };
 </script>
 
-<style scoped>
-#card-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: flex-start;
-}
+<style scoped lang="stylus">
+  #card-container
+    display: flex
+    flex-flow: row wrap
+    justify-content: center
+    align-items: flex-start
 </style>

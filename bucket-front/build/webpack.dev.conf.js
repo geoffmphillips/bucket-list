@@ -42,7 +42,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       // poll: config.dev.poll,
-      poll: 2000  //this is needed so that vue will reload page automatically with changes
+      poll: 3000  //this is needed so that vue will reload page automatically with changes
     }
   },
   plugins: [
