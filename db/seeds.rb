@@ -17,10 +17,10 @@ user4 = User.create(first_name: "Guy", last_name: "guyyyyyyy", email: "guy@test.
 
 puts "Creating locations ----------"
 
-location1 = Location.create(city: "Vancouver", location: "Kits Beach", lat: 492827, long: -1231207)
-location2 = Location.create(city: "Paris", location: "Eiffel Tower", lat: 488566, long: 23522)
-location3 = Location.create(city: "Beijing", location: "Tiananmen Square", lat: 399042, long: 1164074)
-location4 = Location.create(city: "Sydney", location: "Opera House", lat: -338688, long: 1512093)
+location1 = Location.create(city: "Vancouver", location: "Kits Beach", lat: 492827, long: -1231207, google_id: 1)
+location2 = Location.create(city: "Paris", location: "Eiffel Tower", lat: 488566, long: 23522, google_id: 2)
+location3 = Location.create(city: "Beijing", location: "Tiananmen Square", lat: 399042, long: 1164074, google_id: 3)
+location4 = Location.create(city: "Sydney", location: "Opera House", lat: -338688, long: 1512093, google_id: 4)
 
 # POSTS
 
