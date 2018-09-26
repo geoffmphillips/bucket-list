@@ -35,13 +35,14 @@
                     <v-text-field label="Title" v-model="newpost.title"></v-text-field>
                     <v-textarea label="Note" v-model="newpost.note">
                       <div slot="label">
-                        Description <small>(Optional)</small>
+                        Note <small>(Optional)</small>
                       </div>
                     </v-textarea>
                     <v-text-field
                       label="Image URL (Optional)"
                       v-model="newpost.photo_url"
                     ></v-text-field>
+
 
                   <v-btn flat @click.native="step = 1">Previous</v-btn>
                   <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
@@ -54,7 +55,7 @@
                     :items="boards"
                     :search-input.sync="search"
                     hide-selected
-                    label="Choose your buckets or type to create a new one"
+                    label="Choose your boards or type to create a new one"
                     multiple
                     small-chips
                   >
@@ -62,16 +63,16 @@
                       <v-list-tile>
                         <v-list-tile-content>
                           <v-list-tile-title>
-                            No results matching "<strong>{{ search }}</strong>".
-                            Press <kbd>enter</kbd> to create a new one
+                            Press <kbd>enter</kbd> to create a new board.
                           </v-list-tile-title>
                         </v-list-tile-content>
                       </v-list-tile>
                     </template>
                   </v-combobox>
                   <v-select
-                    :items="categories"
+                    :items= categories
                     v-model="newpost.categories"
+                    item-text="name"
                     label="Choose your categories"
                     multiple
                     chips
@@ -90,6 +91,7 @@
 
     </v-app>
     <br><br>Debug: {{newpost}}
+    <br><br>Seebug: {{ address }}
     </div>
 </template>
 
@@ -110,13 +112,26 @@ export default {
       note: null,
       location: null,
       photo_url: null,
+      city: null,
       board: null,
       categories: null,
     },
     boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
-    categories: ['Beach', 'Romantic', 'Backpacking', 'Roadtrip', 'Foodie', 'Cultural'],
+    categories: this.categories,
     search: null,
+    address: this.address,
   }),
+
+  created() {
+    axios.get(`http://localhost:3000/posts/`, {
+    })
+      .then((response) => {
+        this.categories = response.data.categories;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+  },
 
   methods: {
     /**
@@ -125,19 +140,41 @@ export default {
     * @param {Object} placeResultData PlaceResult object
     * @param {String} id Input container ID
     */
-    getAddressData: function getAddressData(addressData, placeResultData, id) {
-      this.address = {};
+    getAddressData: function (placeResultData) {
+      this.address = placeResultData;
     },
+
+    getCityName: function (locationData) {
+      this.locality = locationData.address_components.find((obj) => {
+        return (obj.types[0] === 'locality');
+      });
+      return this.locality.long_name;
+    },
+
     submit() {
-      axios.post('http://localhost:3000/posts/', {
-        title: this.newpost.title,
-        note: this.newpost.note,
-        location: this.newpost.location,
-        photo_url: this.newpost.photo_url,
-        lat: 1.5,
-        long: 1.00,
-        user_id: 2,
-      })
+      const submitPost = {
+        post: {
+          title: this.newpost.title,
+          note: this.newpost.note,
+          photo_url: this.newpost.photo_url,
+          user_id: 2,
+        },
+        location: {
+          city: this.address.locality,
+          location: this.address.name,
+          google_id: this.address.place_id,
+          lat: (this.address.latitude * (10 ** 4)),
+          long: (this.address.longitude * (10 ** 4)),
+        },
+        categories:
+          this.newpost.categories,
+        boards:
+          this.newpost.boards,
+      };
+
+      console.log(submitPost);
+
+      axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
           this.newpost = response.data;
         })

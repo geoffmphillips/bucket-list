@@ -1,30 +1,33 @@
-<template>
-  <div id='app'>
-    <router-link to='/'>
-      <img src="./assets/bucket-small.png" height="40">
-    </router-link>
-    <router-view/>
-  </div>
+<template lang="pug">
+  v-app
+    sidebar
+    navbar
+    jumbotron
+    router-view
 </template>
 
 <script>
-import Jumbotron from './components/Jumbotron';
+import axios from 'axios'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import Navbar from '@/components/Navbar'
+import Jumbotron from '@/components/Jumbotron'
+import Sidebar from '@/components/Sidebar'
 
 export default {
   name: 'App',
   components: {
+    Navbar,
     Jumbotron,
+    Sidebar,
   },
-};
+  data() {
+    return {
+    }
+  }
+}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 20px;
-}
+<style lang="stylus">
+
 </style>

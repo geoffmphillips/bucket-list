@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   
   resources :categories
+  resources :locations
 end

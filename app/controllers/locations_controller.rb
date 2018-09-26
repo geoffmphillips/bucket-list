@@ -1,16 +1,13 @@
 class LocationsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :set_location, only: [:show, :update, :destroy]
 
   # GET /locations
   def index
-    @locations = location.all
-    @location1Posts = Post.joins(post_locations: :location).where(locations: { id: 1})
-    @location2Posts = Post.joins(post_locations: :location).where(locations: { id: 2})
-    @location3Posts = Post.joins(post_locations: :location).where(locations: { id: 3})
-    @location4Posts = Post.joins(post_locations: :location).where(locations: { id: 4})
-    @location5Posts = Post.joins(post_locations: :location).where(locations: { id: 5})
-    @location6Posts = Post.joins(post_locations: :location).where(locations: { id: 6})
-    @location7Posts = Post.joins(post_locations: :location).where(locations: { id: 7})
+    @locations = Location.all
+    @location1Posts = Location.find(1).posts
+    @location2Posts = Location.find(2).posts
+    @location3Posts = Location.find(3).posts
+    @location4Posts = Location.find(4).posts
 
     render json: {
       locations: @locations,
@@ -18,21 +15,19 @@ class LocationsController < ApplicationController
       location2Posts: @location2Posts,
       location3Posts: @location3Posts,
       location4Posts: @location4Posts,
-      location5Posts: @location5Posts,
-      location6Posts: @location6Posts,
-      location7Posts: @location7Posts,
     }
   end
 
   # GET /locations/1
   def show
-    locations = @location.locations
-    render json: { location: @location, locations: locations }
+    @location = Location.find(params[:id])
+    @posts = @location.posts
+    render json: { posts: @posts, location: @location}
   end
 
   # POST /locations
   def create
-    @location = location.new(post_params)
+    @location = Location.new(location_params)
 
     if @location.save
       render json: @location, status: :created, location: @location
@@ -43,7 +38,7 @@ class LocationsController < ApplicationController
 
   # PATCH/PUT /locations/1
   def update
-    if @location.update(post_params)
+    if @location.update(location_params)
       render json: @location
     else
       render json: @location.errors, status: :unprocessable_entity
@@ -57,12 +52,12 @@ class LocationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @location = location.find(params[:id])
+    def set_location
+      @location = Location.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
-    def post_params
-      params.require(:location).permit(:name)
+    def location_params
+      params.require(:location).permit(:id, :city, :location, :lat, :long, :google_id)
     end
 end
