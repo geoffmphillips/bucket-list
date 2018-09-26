@@ -55,7 +55,7 @@
                     :items="boards"
                     :search-input.sync="search"
                     hide-selected
-                    label="Choose your buckets or type to create a new one"
+                    label="Choose your boards or type to create a new one"
                     multiple
                     small-chips
                   >
@@ -153,15 +153,26 @@ export default {
 
     submit() {
       const submitPost = {
-        title: this.newpost.title,
-        note: this.newpost.note,
-        city: this.getCityName(this.address),
-        location: this.address.name,
-        photo_url: this.newpost.photo_url,
-        lat: (this.address.geometry.location.lat() * (10 ** 4)),
-        long: (this.address.geometry.location.lng() * (10 ** 4)),
-        user_id: 2,
+        post: {
+          title: this.newpost.title,
+          note: this.newpost.note,
+          photo_url: this.newpost.photo_url,
+          user_id: 2,
+        },
+        location: {
+          city: this.address.locality,
+          location: this.address.name,
+          google_id: this.address.place_id,
+          lat: (this.address.latitude * (10 ** 4)),
+          long: (this.address.longitude * (10 ** 4)),
+        },
+        categories:
+          this.newpost.categories,
+        boards:
+          this.newpost.boards,
       };
+
+      console.log(submitPost);
 
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
