@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @categories = Category.all
+    @boards = Board.all
 
     render json: { post: @post, categories: @categories }
   end
