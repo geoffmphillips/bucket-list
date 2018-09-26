@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-jumbotron
+  v-responsive
     v-layout(align-center)
       .jumbotron
         video.jumbotron__video(type='video/mp4', autoplay loop muted)
@@ -16,7 +16,6 @@ export default {
 
   },
   created() {
-    console.log('jumbotron created')
   }
 }
 </script>

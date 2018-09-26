@@ -6,20 +6,22 @@
     app
     dense
   )
-    a(href='/')
+    router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
     v-autocomplete.navbar__search-field(
-      v-model='model', 
-      :items='stuff', 
-      item-text='name', 
-      :label='`Search some buckets...`', 
+      v-model='model',
+      :items='stuff',
+      item-text='name',
+      :label='`Search some buckets...`',
       return-object='',
       color="darkslategrey",
     )
     v-spacer
     v-toolbar-items.navbar__list
-      v-btn.navbar__list-item(flat='') Categories
-      v-btn.navbar__list-item(flat='') Locations
+      router-link(:to="'/categories'")
+        v-btn.navbar__list-item(flat='') Categories
+      router-link(:to="'/locations'")
+        v-btn.navbar__list-item(flat='') Locations
 
     v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
     v-btn(icon v-show="backButton" @click.stop="$router.back()")

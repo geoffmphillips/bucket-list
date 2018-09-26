@@ -15,7 +15,7 @@ import Card from './Card';
 
 export default {
   components: {
-    Card,
+    Card
   },
   data() {
     return {
@@ -26,7 +26,7 @@ export default {
   created() {
     axios.get('http://localhost:3000/posts')
       .then((response) => {
-        this.posts = response.data;
+        this.posts = response.data.posts;
       })
       .catch((e) => {
         this.errors.push(e);
