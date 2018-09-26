@@ -1,0 +1,180 @@
+<template>
+  <div id="app">
+    <v-app>
+
+      <v-content>
+
+          <v-container>
+            <v-stepper v-model="step" vertical>
+              <v-stepper-header>
+                <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
+                <v-divider></v-divider>
+                <v-stepper-step step="2" :complete="step > 2">Describe it</v-stepper-step>
+                <v-divider></v-divider>
+                <v-stepper-step step="3">Categorize it</v-stepper-step>
+              </v-stepper-header>
+              <v-stepper-items>
+                <v-stepper-content step="1">
+
+                  <vuetify-google-autocomplete
+                    label="Location"
+                    v-model="newpost.location"
+                    id="map"
+                    ref="address"
+                    types=""
+                    append-icon="search"
+                    placeholder="Start typing"
+                    v-on:placechanged="getAddressData"
+                  >
+                  </vuetify-google-autocomplete>
+
+                  <v-btn color="primary" @click.native="step = 2">Continue</v-btn>
+                </v-stepper-content>
+                <v-stepper-content step="2">
+
+                    <v-text-field label="Title" v-model="newpost.title"></v-text-field>
+                    <v-textarea label="Note" v-model="newpost.note">
+                      <div slot="label">
+                        Note <small>(Optional)</small>
+                      </div>
+                    </v-textarea>
+                    <v-text-field
+                      label="Image URL (Optional)"
+                      v-model="newpost.photo_url"
+                    ></v-text-field>
+
+
+                  <v-btn flat @click.native="step = 1">Previous</v-btn>
+                  <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
+
+                </v-stepper-content>
+                <v-stepper-content step="3">
+
+                  <v-combobox
+                    v-model="newpost.boards"
+                    :items="boards"
+                    :search-input.sync="search"
+                    hide-selected
+                    label="Choose your buckets or type to create a new one"
+                    multiple
+                    small-chips
+                  >
+                    <template slot="no-data">
+                      <v-list-tile>
+                        <v-list-tile-content>
+                          <v-list-tile-title>
+                            Press <kbd>enter</kbd> to create a new board.
+                          </v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                    </template>
+                  </v-combobox>
+                  <v-select
+                    :items= categories
+                    v-model="newpost.categories"
+                    item-text="name"
+                    label="Choose your categories"
+                    multiple
+                    chips
+                  ></v-select>
+
+                  <v-btn flat @click.native="step = 2">Previous</v-btn>
+                  <v-btn color="primary" @click.prevent="submit">Save</v-btn>
+
+                </v-stepper-content>
+              </v-stepper-items>
+            </v-stepper>
+
+          </v-container>
+
+      </v-content>
+
+    </v-app>
+    <br><br>Debug: {{newpost}}
+    <br><br>Seebug: {{ address }}
+    </div>
+</template>
+
+
+<script>
+import axios from 'axios';
+
+export default {
+  mounted() {
+    this.$refs.address.focus();
+  },
+
+  data: () => ({
+    errors: [],
+    step: 1,
+    newpost: {
+      title: null,
+      note: null,
+      location: null,
+      photo_url: null,
+      city: null,
+      board: null,
+      categories: null,
+    },
+    boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
+    categories: this.categories,
+    search: null,
+    address: this.address,
+  }),
+
+  created() {
+    axios.get(`http://localhost:3000/posts/`, {
+    })
+      .then((response) => {
+        this.categories = response.data.categories;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+  },
+
+  methods: {
+    /**
+    * When the location found
+    * @param {Object} addressData Data of the found location
+    * @param {Object} placeResultData PlaceResult object
+    * @param {String} id Input container ID
+    */
+    getAddressData: function (placeResultData) {
+      this.address = placeResultData;
+    },
+
+    getCityName: function (locationData) {
+      this.locality = locationData.address_components.find((obj) => {
+        return (obj.types[0] === 'locality');
+      });
+      return this.locality.long_name;
+    },
+
+    submit() {
+      const submitPost = {
+        title: this.newpost.title,
+        note: this.newpost.note,
+        city: this.getCityName(this.address),
+        location: this.address.name,
+        photo_url: this.newpost.photo_url,
+        lat: (this.address.geometry.location.lat() * (10 ** 4)),
+        long: (this.address.geometry.location.lng() * (10 ** 4)),
+        user_id: 2,
+      };
+
+      axios.post('http://localhost:3000/posts/', submitPost)
+        .then((response) => {
+          this.newpost = response.data;
+        })
+        .catch((error) => {
+          this.errors.push(error);
+        });
+    },
+  },
+};
+</script>
+
+<style scoped>
+
+</style>

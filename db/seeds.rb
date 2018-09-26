@@ -13,171 +13,134 @@ user2 = User.create(first_name: "Kyle", last_name: "kyleeee", email: "kyle@test.
 user3 = User.create(first_name: "Alex", last_name: "alexxxx", email: "alex@test.test", password: "12345", password_confirmation: "12345")
 user4 = User.create(first_name: "Guy", last_name: "guyyyyyyy", email: "guy@test.test", password: "12345", password_confirmation: "12345")
 
-## POSTS
+# LOCATIONS
+
+puts "Creating locations ----------"
+
+location1 = Location.create(city: "Vancouver", location: "Kits Beach", lat: 492827, long: -1231207)
+location2 = Location.create(city: "Paris", location: "Eiffel Tower", lat: 488566, long: 23522)
+location3 = Location.create(city: "Beijing", location: "Tiananmen Square", lat: 399042, long: 1164074)
+location4 = Location.create(city: "Sydney", location: "Opera House", lat: -338688, long: 1512093)
+
+# POSTS
 
 puts "Re-creating Posts -----------"
 
 Post.destroy_all
 
 user1.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "the poopiest water in town",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Kits beach",
-  lat: 10,
-  long: 10,
+  location_id: location1.id,
 })
 
 user1.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "some pizza",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "PIIZZAA",
-  lat: 20,
-  long: 20,
+  location_id: location2.id,
 })
 
 user1.posts.create!({
-  location: "West END",
-  city: "Vancouver",
   note: "Stuff happens here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Stuff",
-  lat: 10,
-  long: 10,
+  location_id: location3.id,
 })
 
 user1.posts.create!({
-  location: "East Van",
-  city: "Vancouver",
   note: "They have that cross thing here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Commercial drive",
-  lat: 10,
-  long: 10,
+  location_id: location4.id,
 })
 
 user2.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "the poopiest water in town",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Kits beach",
-  lat: 10,
-  long: 10,
+  location_id: location1.id,
 })
 
 user2.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "some pizza",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "PIIZZAA",
-  lat: 20,
-  long: 20,
+  location_id: location2.id,
 })
 
 user2.posts.create!({
-  location: "West END",
-  city: "Vancouver",
   note: "Stuff happens here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Stuff",
-  lat: 10,
-  long: 10,
+  location_id: location3.id,
 })
 
 user2.posts.create!({
-  location: "East Van",
-  city: "Vancouver",
   note: "They have that cross thing here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Commercial drive",
-  lat: 10,
-  long: 10,
+  location_id: location4.id,
 })
 
 user3.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "the poopiest water in town",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Kits beach",
-  lat: 10,
-  long: 10,
+  location_id: location1.id,
 })
 
 user3.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "some pizza",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "PIIZZAA",
-  lat: 20,
-  long: 20,
+  location_id: location2.id,
 })
 
 user3.posts.create!({
-  location: "West END",
-  city: "Vancouver",
   note: "Stuff happens here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Stuff",
-  lat: 10,
-  long: 10,
+  location_id: location3.id,
 })
 
 user3.posts.create!({
-  location: "East Van",
-  city: "Vancouver",
   note: "They have that cross thing here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Commercial drive",
-  lat: 10,
-  long: 10,
+  location_id: location4.id,
 })
 
 user4.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "the poopiest water in town",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Kits beach",
-  lat: 10,
-  long: 10,
+  location_id: location1.id,
 })
 
 user4.posts.create!({
-  location: "Kits",
-  city: "Vancouver",
   note: "some pizza",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "PIIZZAA",
-  lat: 20,
-  long: 20,
+  location_id: location2.id,
 })
 
 user4.posts.create!({
-  location: "West END",
-  city: "Vancouver",
   note: "Stuff happens here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Stuff",
-  lat: 10,
-  long: 10,
+  location_id: location3.id,
 })
 
 user4.posts.create!({
-  location: "East Van",
-  city: "Vancouver",
   note: "They have that cross thing here",
   photo_url: "https://kittenrescue.org/wp-content/uploads/2017/03/KittenRescue_KittenCareHandbook.jpg",
   title: "Commercial drive",
-  lat: 10,
-  long: 10,
+  location_id: location4.id,
 })
+
+
 
 # BOARDS
 

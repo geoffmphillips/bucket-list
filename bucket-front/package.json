@@ -20,10 +20,12 @@
     "vue": "^2.5.2",
     "vue-instant": "^1.0.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.2.4",
-    "vuex": "^3.0.1",
     "vuex-router-sync": "^5.0.0",
-    "vuex-search": "^2.2.2"
+    "vuex-search": "^2.2.2",
+    "vue2-google-maps": "^0.10.2",
+    "vuetify": "^1.2.4",
+    "vuetify-google-autocomplete": "^2.0.0-beta.5",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

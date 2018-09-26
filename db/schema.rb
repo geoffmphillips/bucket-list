@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_222534) do
+ActiveRecord::Schema.define(version: 2018_09_25_214307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2018_09_21_222534) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "city"
+    t.string "location"
+    t.string "lat"
+    t.string "long"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "google_id"
+  end
+
   create_table "post_categories", force: :cascade do |t|
     t.bigint "post_id"
     t.bigint "category_id"
@@ -59,16 +69,13 @@ ActiveRecord::Schema.define(version: 2018_09_21_222534) do
 
   create_table "posts", force: :cascade do |t|
     t.string "note"
-    t.string "location"
-    t.string "city"
     t.string "photo_url"
     t.string "title"
-    t.integer "lat"
-    t.integer "long"
-    t.string "categories"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_posts_on_location_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
