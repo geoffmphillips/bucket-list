@@ -1,30 +1,30 @@
 <template lang="pug">
   .categories-container
-    router-link.container__category(:to="'/categories/' + this.categories[0].id")
+    router-link.category(:to="'/categories/' + this.categories[0].id")
       h3 {{this.categories[0].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category1Posts[0].photo_url + ')' }", :post='this.category1Posts[0]')
 
-    router-link.container__category(:to="'/categories/' + this.categories[1].id")
+    router-link.category(:to="'/categories/' + this.categories[1].id")
       h3 {{this.categories[1].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category2Posts[0].photo_url + ')' }", :post='this.category2Posts[0]')
 
-    router-link.container__category(:to="'/categories/' + this.categories[2].id")
+    router-link.category(:to="'/categories/' + this.categories[2].id")
       h3 {{this.categories[2].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category3Posts[0].photo_url + ')' }", :post='this.category3Posts[0]')
 
-    router-link.container__category(:to="'/categories/' + this.categories[3].id")
+    router-link.category(:to="'/categories/' + this.categories[3].id")
       h3 {{this.categories[3].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category4Posts[0].photo_url + ')' }", :post='this.category4Posts[0]')
 
-    router-link.container__category(:to="'/categories/' + this.categories[4].id")
+    router-link.category(:to="'/categories/' + this.categories[4].id")
       h3 {{this.categories[4].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category5Posts[0].photo_url + ')' }", :post='this.category5Posts[0]')
 
-    router-link.container__category(:to="'/categories/' + this.categories[5].id")
+    router-link.category(:to="'/categories/' + this.categories[5].id")
       h3 {{this.categories[5].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category6Posts[0].photo_url + ')' }", :post='this.category6Posts[0]')
       
-    router-link.container__category(:to="'/categories/' + this.categories[6].id")
+    router-link.category(:to="'/categories/' + this.categories[6].id")
       h3 {{this.categories[6].name}}
       card-no-link(:style="{ backgroundImage: 'url(' + this.category7Posts[0].photo_url + ')' }", :post='this.category7Posts[0]')
 
@@ -80,9 +80,19 @@ export default {
 };
 </script>
 
-<style style>
-.categories-container
-
+<style>
+.categories-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.category {
+  text-decoration: none;
+  color: black;
+  position: relative;
+  background: rgb(255, 218, 218);
+}
 h3 {
   position: absolute;
   z-index: 2;
@@ -90,12 +100,5 @@ h3 {
   font-size: 4em;
   width: max-content;
   top: 2em;
-}
-.container__category {
-  display: flex;
-  align-items: flex-start;
-  text-decoration: none;
-  color: black;
-  position: relative;
 }
 </style>
