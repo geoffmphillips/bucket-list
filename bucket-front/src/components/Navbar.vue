@@ -18,6 +18,9 @@
     )
     v-spacer
     v-toolbar-items.navbar__list
+      .modal-button
+        button#show-modal(@click='showModal = true') Show Modal
+        new-post(v-if="showModal", @close='showModal = false')
       router-link(:to="'/categories'")
         v-btn.navbar__list-item(flat='') Categories
       router-link(:to="'/locations'")
@@ -29,10 +32,12 @@
 </template>
 
 <script>
+import NewPost from './NewPost'
+
   export default {
     name: 'Navbar',
     components: {
-
+      NewPost
     },
     props: {
       backButton: {
@@ -43,6 +48,7 @@
     data() {
       return {
         autoUpdate: true,
+        showModal: false,
         friends: [],
         isUpdating: false,
         name: 'Midnight Crew',

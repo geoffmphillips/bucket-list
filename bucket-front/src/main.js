@@ -11,6 +11,7 @@ import { sync } from 'vuex-router-sync'
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import store from '../store/index';
+import NewPost from './components/NewPost';
 
 Vue.use(VueAxios, axios);
 
@@ -48,6 +49,7 @@ Vue.use(Vuetify, {
 // Global Components
 Vue.component('Navbar', Navbar)
 Vue.component('Sidebar', Sidebar)
+Vue.component('NewPost', NewPost)
 
 
 /* eslint-disable no-new */
