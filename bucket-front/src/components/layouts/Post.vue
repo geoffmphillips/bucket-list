@@ -40,7 +40,7 @@
 
 <script>
 import axios from 'axios';
-import Category from './Category';
+import Category from './CategoryTag';
 
 export default {
   name: 'Post',
