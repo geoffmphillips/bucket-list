@@ -21,35 +21,31 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @location = params[:location]
-    @post = params[:post]
-    @categories = params[:categories]
-    @boards = params[:boards]
+    @location = post_params[:location]
+    @post = post_params[:post]
+    @categories = post_params[:categories]
+    @boards = post_params[:boards]
+    @test = post_params[:test]
 
+    puts "POST PARAMS ----"
+    pp post_params
+
+    puts "POST ----"
     pp @post
+    puts "LOCATION ----"
     pp @location
+    puts "CATEGORIES ----"
     pp @categories
+    puts "BOARDS ----"
     pp @boards
+    puts "TEST ----"
+    pp @test
 
     if @post.save
       render json: @post, status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
     end
-  end
-
-  # PATCH/PUT /posts/1
-  def update
-    if @post.update(post_params)
-      render json: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /posts/1
-  def destroy
-    @post.destroy
   end
 
   private
@@ -60,6 +56,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:post, :boards, :location, :categories, :title, :note, :lat, :long, :user_id, :photo_url, :city)
+      params.require(:post).permit(:boards, :location, :categories, :title, :note, :lat, :long, :user_id, :photo_url, :city, :test)
     end
 end

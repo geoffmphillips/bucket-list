@@ -170,6 +170,8 @@ export default {
           this.newpost.categories,
         boards:
           this.newpost.boards,
+        test:
+          "hyyy",
       };
 
       console.log(submitPost);

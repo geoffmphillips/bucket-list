@@ -15,7 +15,7 @@ export default {
   name: "NewComment",
   props: {
     post: {
-      type: Object,
+      type: Array,
     },
   },
   data() {
@@ -34,7 +34,7 @@ export default {
         })
         .then((response) => {
           this.text = '';
-          router.push(`/posts/${this.post.id}`)
+          this.$router.push({ name: 'Post', params: { id: 1 }});
         })
         .catch((error) => {
           this.errors.push(error);
