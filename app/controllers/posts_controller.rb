@@ -22,25 +22,17 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @location = Location.find_or_create_by(post_params[:location].to_h)
-    @post = {}
-    @post[:title] = post_params[:title]
-    @post[:note] = post_params[:note]
-    @post[:photo_url] = post_params[:photo_url]
-    @post[:user_id] = post_params[:user_id]
-    @post[:location_id] = @location[:id]
+    @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
     @boards = post_params[:boards]
 
-    puts "POST ----"
-    pp @post
-    puts "LOCATION ----"
-    pp @location
-    puts "CATEGORIES ----"
-    pp @categories
-    puts "BOARDS ----"
-    pp @boards
-
     if @post.save
+      puts 1
+      create_post_categories
+      puts 2
+      create_board_items
+      puts 3
+
       render json: @post, status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -48,6 +40,20 @@ class PostsController < ApplicationController
   end
 
   private
+    def create_post_categories
+      @categories.each do |category|
+        cat = Category.find_by(name: category)
+        PostCategory.create!(post_id: @post[:id], category_id: cat[:id])
+      end
+    end
+
+    def create_board_items
+      @boards.each do |board|
+        b = Board.find_by(name: board)
+        BoardItem.create!(post_id: @post[:id], board_id: 1)
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
