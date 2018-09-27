@@ -17,23 +17,15 @@ export default {
 </script>
 
 <style scoped>
-a {
-  z-index: 1;
-  background-position: center;
-  margin: 0 10px 20px;
-  border-radius: 0.75em;
-  text-decoration: none;
+.panel {
+  /* background-position: center;  */
+  /* margin: 0 10px 20px; */
+  /* border-radius: 0.75em; */
+  /* width: 500px;
+  height: 250px; */
 }
-div.card {
-  margin: 0;
-  width: 500px;
-  height: 250px;
-  border: 0px;
-  opacity: 0;
+.card {
+
 }
-p {
-  z-index: 2;
-  margin: 0px;
-  color: black;
-}
+
 </style>
