@@ -1,18 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Users from '@/components/Users';
-import UserProfile from '@/components/UserProfile';
+import Vuetify from 'vuetify';
+
 import Login from '@/components/Login';
 import Boards from '@/components/Boards';
-
-import Vuetify from 'vuetify';
 import CardContainer from '@/components/cards/CardContainer';
-import Post from '@/components/Post';
-import TheLocations from '@/components/TheLocations';
-import TheLocation from '@/components/TheLocation';
-import TheCategories from '@/components/TheCategories';
-import TheCategory from '@/components/TheCategory';
+import Users from '@/components/Users';
+import UserProfile from '@/components/UserProfile';
+import Post from '@/components/layouts/Post';
 import NewPost from '@/components/NewPost';
+import TheLocations from '@/components/layouts/TheLocations';
+import TheLocation from '@/components/layouts/TheLocation';
+import TheCategories from '@/components/layouts/TheCategories';
+import TheCategory from '@/components/layouts/TheCategory';
+
 
 Vue.use(Router);
 Vue.use(Vuetify);

@@ -12,7 +12,7 @@
       v-model='model',
       :items='stuff',
       item-text='name',
-      :label='`Search some buckets...`',
+      :label='`Search for buckets...`',
       return-object='',
       color="darkslategrey",
     )

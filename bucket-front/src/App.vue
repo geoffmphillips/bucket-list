@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app
+  v-app(v-if="isSessionReady")
     sidebar
     navbar
     jumbotron
@@ -20,6 +20,14 @@ export default {
     Navbar,
     Jumbotron,
     Sidebar,
+  },
+  mounted () {
+    this.$store.dispatch('setupSession');
+  },
+  computed: {
+    isSessionReady() {
+      return this.$store.state.user.isSessionReady;
+    }
   },
   data() {
     return {

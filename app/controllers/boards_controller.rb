@@ -4,7 +4,6 @@ class BoardsController < ApplicationController
   # GET /boards
   def index
     @boards = Board.all.board_items.first
-    pp "Query returns!!!!!!!: #{@boards}"
     render json: @boards
   end
 

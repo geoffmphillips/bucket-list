@@ -1,15 +1,16 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
-  # GET /users
-  def index
-    @users = User.all
-
-    render json: @users
-  end
-
   # GET /users/1
   def show
+    token = extract_token(request)
+
+    Authenticator.authenticated("test")    
+
+    if !authenticated(token)
+      # Render error page and return
+    end
+
     @user = User.find params[:id]
     @boards = @user.boards.order(created_at: :desc)
     render json: @user
@@ -35,9 +36,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  def destroy
-    @user.destroy
+  def extract_token(request)
+    request.headers["Authorization"]
+    # let token = 
+    return token
   end
 
   private

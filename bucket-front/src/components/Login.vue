@@ -45,11 +45,9 @@ export default {
         .catch(error => this.signinFailed(error));
     },
     signinSuccessful(response) {
-      localStorage.setItem('jwt', response.data.jwt);
-      localStorage.signedIn = true;
       this.$store.dispatch('setStoreJWT', response.data.jwt);
       this.error = '';
-      this.$router.replace('/users');
+      this.$router.replace('/posts');
     },
     signinFailed(error) {
       this.error = (error.response && error.response.data && error.response.data.error) || '';

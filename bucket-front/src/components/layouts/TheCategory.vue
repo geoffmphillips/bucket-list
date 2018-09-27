@@ -1,6 +1,6 @@
 <template>
   <div id="card-container">
-    <h3>{{this.location.location}}</h3>
+    <h3>{{this.category.name}}</h3>
     <card
       v-for="post in posts"
       :key="post.id"
@@ -12,7 +12,7 @@
 
 <script>
 import axios from 'axios';
-import Card from './cards/Card';
+import Card from '../cards/Card';
 
 export default {
   components: {
@@ -21,15 +21,15 @@ export default {
   data() {
     return {
       posts: [],
-      location: [],
+      category: [],
       errors: [],
     };
   },
   created() {
-    axios.get(`http://localhost:3000/locations/${this.$route.params.id}`)
+    axios.get(`http://localhost:3000/categories/${this.$route.params.id}`)
       .then((response) => {
         this.posts = response.data.posts;
-        this.location = response.data.location;
+        this.category = response.data.category;
       })
       .catch((e) => {
         this.errors.push(e);
