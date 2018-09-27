@@ -1,13 +1,13 @@
-<template>
-  <div id="card-container">
-    <h3>{{this.location.location}}</h3>
-    <card
-      v-for="post in posts"
-      :key="post.id"
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-      :post="post"
-    ></card>
-  </div>
+<template lang="pug">
+  .panel-container
+    h3 {{this.location.location}}
+    card(
+      v-for='post in posts', 
+      :key='post.id', 
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+      :post='post'
+      )
+
 </template>
 
 <script>
@@ -39,10 +39,5 @@ export default {
 </script>
 
 <style scoped>
-#card-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: flex-start;
-}
+
 </style>
