@@ -1,13 +1,13 @@
-<template>
-  <div id="card-container">
-    <h3>{{this.category.name}}</h3>
-    <card
-      v-for="post in posts"
-      :key="post.id"
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-      :post="post"
-    ></card>
-  </div>
+<template lang="pug">
+  #card-container
+    h3 {{this.category.name}}
+    card(
+      v-for='post in posts', 
+      :key='post.id', 
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+      :post='post'
+      )
+
 </template>
 
 <script>

@@ -1,12 +1,12 @@
-<template>
-  <div class="categories-container">
-    <category-card
-      v-for="(category, index) in categories"
-      :category="category"
-      :post="posts[index]"
-      :key="index"
-    ></category-card>
-  </div>
+<template lang="pug">
+  .categories-container
+    category-card(
+      v-for='(category, index) in categories', 
+      :category='category', 
+      :post='posts[index]', 
+      :key='index'
+      )
+
 </template>
 
 <script>

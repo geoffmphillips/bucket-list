@@ -1,8 +1,7 @@
-<template>
-<a>
-  <div class="card">
-  </div>
-</a>
+<template lang="pug">
+  a
+    .card.panel
+
 </template>
 
 <script>

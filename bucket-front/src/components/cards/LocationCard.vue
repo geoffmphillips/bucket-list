@@ -1,11 +1,13 @@
-<template>
-  <router-link :to="'/locations/' + location.id" class="location-container panel">
-    <h3 class="panel__text">{{location.location}}</h3>
-    <card-no-link
-    :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }"
-    :post="post[0]"
-    ></card-no-link>
-  </router-link>
+<template lang="pug">
+  router-link.location-container.panel(
+    :to="'/locations/' + location.id"
+    )
+    h3.panel__text {{location.location}}
+    card-no-link(
+      :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", 
+      :post='post[0]'
+      )
+
 </template>
 
 <script>
