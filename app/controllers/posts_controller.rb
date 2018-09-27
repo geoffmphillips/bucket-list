@@ -21,14 +21,15 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @location = post_params[:location]
-    @post = post_params[:post]
+    @location = Location.find_or_create_by(post_params[:location].to_h)
+    @post = {}
+    @post[:title] = post_params[:title]
+    @post[:note] = post_params[:note]
+    @post[:photo_url] = post_params[:photo_url]
+    @post[:user_id] = post_params[:user_id]
+    @post[:location_id] = @location[:id]
     @categories = post_params[:categories]
     @boards = post_params[:boards]
-    @test = post_params[:test]
-
-    puts "POST PARAMS ----"
-    pp post_params
 
     puts "POST ----"
     pp @post
@@ -38,8 +39,6 @@ class PostsController < ApplicationController
     pp @categories
     puts "BOARDS ----"
     pp @boards
-    puts "TEST ----"
-    pp @test
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -56,6 +55,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:boards, :location, :categories, :title, :note, :lat, :long, :user_id, :photo_url, :city, :test)
+      params.require(:post).permit(:google_id, :title, :note, :lat, :long, :user_id, :photo_url, :city, location: {}, boards: [], categories: [])
     end
 end
