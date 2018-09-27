@@ -1,5 +1,5 @@
 <template lang="pug">
-  #card-container
+  .panel-container
     h3 {{this.category.name}}
     card(
       v-for='post in posts', 
@@ -39,10 +39,5 @@ export default {
 </script>
 
 <style scoped>
-#card-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  align-items: flex-start;
-}
+
 </style>

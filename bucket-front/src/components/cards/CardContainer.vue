@@ -1,5 +1,5 @@
 <template lang="pug">
-  #card-container
+  .card-container.panel-container
     card(v-for='post in posts', 
     :key='post.id', 
     :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
@@ -33,9 +33,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  // #card-container
-  //   display: flex
-  //   flex-flow: row wrap
-  //   justify-content: center
-  //   align-items: flex-start
+  #card-container
+    // border: 10px solid grey
+    // display: flex
+    // flex-flow: row wrap
+    // justify-content: center
+    // align-items: flex-start
 </style>

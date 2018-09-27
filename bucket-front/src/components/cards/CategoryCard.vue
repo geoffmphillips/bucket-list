@@ -1,11 +1,7 @@
-<template>
-  <router-link :to="'/categories/' + category.id" class="category-container panel">
-    <h3 class="panel__text">{{category.name}}</h3>
-    <card-no-link
-    :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }"
-    :post="post[0]"
-    ></card-no-link>
-  </router-link>
+<template lang="pug">
+  router-link.panel(:to="'/categories/' + category.id")
+    h3.panel__text {{category.name}}
+    card-no-link(:style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", :post='post[0]')
 </template>
 
 <script>
@@ -43,4 +39,5 @@ h3 {
   width: max-content;
   top: 2em; */
 }
+
 </style>

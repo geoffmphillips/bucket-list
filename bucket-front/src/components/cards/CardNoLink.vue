@@ -1,6 +1,6 @@
 <template lang="pug">
-  a
-    .card.panel
+  a.panel
+    .card
 
 </template>
 
@@ -16,16 +16,17 @@ export default {
 
 <style scoped>
 a {
-  background-position: center;
+  /* background-position: center;
   margin: 0 10px 20px;
   border-radius: 0.75em;
-  text-decoration: none;
+  text-decoration: none; */
 }
 div.card {
-  margin: 0;
+  /* margin: 0;
   width: 500px;
   height: 250px;
   border: 0px;
   opacity: 0;
+  opacity: .5; */
 }
 </style>

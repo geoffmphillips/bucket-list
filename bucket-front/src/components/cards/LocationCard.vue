@@ -30,21 +30,5 @@ export default {
 </script>
 
 <style scoped>
-a {
-  /* text-decoration: none;
-  color: black;
-  position: relative; */
-}
-h3 {
-  /* position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 4em;
-  width: max-content;
-  top: 2em; */
-}
-.location-container {
-  /* display: flex;
-  align-items: flex-start; */
-}
+
 </style>
