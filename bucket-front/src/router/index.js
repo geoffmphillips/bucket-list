@@ -3,11 +3,11 @@ import Router from 'vue-router';
 import Vuetify from 'vuetify';
 import CardContainer from '@/components/cards/CardContainer';
 import Users from '@/components/Users';
-import Post from '@/components/Post';
-import TheLocations from '@/components/TheLocations';
-import TheLocation from '@/components/TheLocation';
-import TheCategories from '@/components/TheCategories';
-import TheCategory from '@/components/TheCategory';
+import Post from '@/components/layouts/Post';
+import TheLocations from '@/components/layouts/TheLocations';
+import TheLocation from '@/components/layouts/TheLocation';
+import TheCategories from '@/components/layouts/TheCategories';
+import TheCategory from '@/components/layouts/TheCategory';
 import NewPost from '@/components/NewPost';
 
 Vue.use(Router);
