@@ -33,10 +33,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  #card-container
-    // border: 10px solid grey
-    // display: flex
-    // flex-flow: row wrap
-    // justify-content: center
-    // align-items: flex-start
+
 </style>

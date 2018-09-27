@@ -1,19 +1,5 @@
-// .card-container
-//   display: flex
-//   flex-flow: row wrap
-//   justify-content: center
-//   align-items: flex-start
-
-// .categories-container
-//   display: flex
-//   flex-wrap: wrap
-//   justify-content: center
-
-// .locations-container
-//   display: flex
-//   flex-wrap: wrap
-//   align-items: flex-start
-//   justify-content: center
+random(min,max)
+  return floor(math(0, 'random')*(max - min + 1) + min)
 
 .panel-container
   display: flex
@@ -25,10 +11,11 @@
     border-radius: 0.75em
     display: inline-block
     position: relative
-    width: 500px
+    max-width: 500px
+    width: random(95, 98) + "%"
     height: 250px
     margin: 0 10px 20px
-    background-position: center 
+    background-position: center
 
     &__text
       font-weight: 300px

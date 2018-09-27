@@ -24,20 +24,5 @@ export default {
 </script>
 
 <style scoped>
-.category-container {
-  /* text-decoration: none;
-  color: black;
-  position: relative;
-  display: flex;
-  align-items: flex-start; */
-}
-h3 {
-  /* position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 4em;
-  width: max-content;
-  top: 2em; */
-}
 
 </style>
