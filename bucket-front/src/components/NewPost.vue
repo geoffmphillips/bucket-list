@@ -23,6 +23,8 @@
                           <vuetify-google-autocomplete
                             label="Location"
                             v-model="newpost.location"
+                            :rules="[(v) => !!v || 'Location is required']"
+                            required
                             id="map"
                             ref="address"
                             types=""
@@ -32,11 +34,18 @@
                           >
                           </vuetify-google-autocomplete>
 
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn color="primary" @click.native="step = 2">Continue</v-btn>
                         </v-stepper-content>
                         <v-stepper-content step="2">
 
-                            <v-text-field label="Title" v-model="newpost.title"></v-text-field>
+                            <v-text-field
+                              label="Title"
+                              v-model="newpost.title"
+                              :rules="[(v) => !!v || 'Title is required']"
+                              required
+                              >
+                              </v-text-field>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
@@ -47,7 +56,7 @@
                               v-model="newpost.photo_url"
                             ></v-text-field>
 
-
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn flat @click.native="step = 1">Previous</v-btn>
                           <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
 
@@ -82,6 +91,7 @@
                             chips
                           ></v-select>
 
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn flat @click.native="step = 2">Previous</v-btn>
                           <v-btn color="primary" @click="$emit('close')" @click.prevent="submit">Save</v-btn>
 
@@ -107,7 +117,7 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    // this.$refs.address.focus();
+
   },
 
   data: () => ({
@@ -149,13 +159,6 @@ export default {
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
-
-    // getCityName: function (locationData) {
-    //   this.locality = locationData.address_components.find((obj) => {
-    //     return (obj.types[0] === 'locality');
-    //   });
-    //   return this.locality.long_name;
-    // },
 
     submit() {
       const submitPost = {

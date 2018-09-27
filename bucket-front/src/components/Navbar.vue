@@ -19,7 +19,7 @@
     v-spacer
     v-toolbar-items.navbar__list
       .modal-button
-        button#show-modal(@click='showModal = true') Show Modal
+        button#show-modal(@click='showModal = true') New Post
         new-post(v-if="showModal", @close='showModal = false')
       router-link(:to="'/categories'")
         v-btn.navbar__list-item(flat='') Categories
@@ -45,6 +45,16 @@ import NewPost from './NewPost'
         default: false
       }
     },
+
+    mounted () {
+      document.addEventListener("keydown", (e) => {
+        if (e.keyCode == 27) {
+          console.log("closing!");
+          this.showModal = false;
+        }
+      });
+    },
+
     data() {
       return {
         autoUpdate: true,
