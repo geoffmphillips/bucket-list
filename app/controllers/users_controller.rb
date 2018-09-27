@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update]
+  before_action :authenticate_user, only [:update]
 
   # GET /users/1
-  def show
-    token = extract_token(request)
+  def show 
 
-    Authenticator.authenticated("test")    
-
-    if !authenticated(token)
+    if current_user
       # Render error page and return
+      @user = User.find params[:id]
+      @boards = @user.boards.order(created_at: :desc)
+      render json: @user
     end
 
-    @user = User.find params[:id]
-    @boards = @user.boards.order(created_at: :desc)
-    render json: @user
+    redirect_to '/login'
+
   end
 
   # POST /users
@@ -36,11 +36,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def extract_token(request)
-    request.headers["Authorization"]
-    # let token = 
-    return token
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
