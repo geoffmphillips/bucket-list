@@ -27,7 +27,7 @@
         lng: this.markers[0].position.lng,
         }"
       :zoom="12"
-      :options="{styles: this.$store.state.mapStyle}"
+      :options="{styles: this.$store.state.mapStyle.mapStyle}"
       map-type-id="roadmap"
       style="width: 500px; height: 300px"
     >

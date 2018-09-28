@@ -12,5 +12,5 @@ class User < ApplicationRecord
       email: email
     }
   end
-
+  
 end

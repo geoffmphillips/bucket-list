@@ -10,7 +10,7 @@ import router from './router';
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import store from '../store/index';
+import store from './store/index';
 import NewPost from './components/NewPost';
 
 Vue.use(VueAxios, axios);
