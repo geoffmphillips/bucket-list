@@ -1,9 +1,19 @@
 <template lang="pug">
-  .card-container.panel-container
-    card(v-for='post in posts', 
-    :key='post.id', 
-    :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
-    :post='post')
+  .panel-container(
+    v-masonry='', 
+    transition-duration='0.4s', 
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
+    card.item(
+      v-masonry-tile='',
+      v-for='(post, index) in posts', 
+      :key='post.id', 
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+      :post='post',
+      stagger="300"
+    )
 </template>
 
 <script>

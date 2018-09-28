@@ -5,6 +5,8 @@ import App from './App';
 import Vuetify from 'vuetify'
 import router from './router';
 import { sync } from 'vuex-router-sync'
+import VueMasonryPlugin from 'vue-masonry'
+// const VueMasonryPlugin = require('vue-masonry');
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -23,6 +25,8 @@ Vue.use(Vuetify);
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });
+
+Vue.use(VueMasonryPlugin);
 
 // Polyfills
 global.URLSearchParams = URLSearchParams

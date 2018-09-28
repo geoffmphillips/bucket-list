@@ -1,12 +1,18 @@
 <template lang="pug">
-  .categories-container.panel-container
-    category-card(
+  .panel-container(
+    v-masonry='', 
+    transition-duration='0.4s', 
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
+    category-card.item(
+      v-masonry-tile='',
       v-for='(category, index) in categories', 
+      :key='index',
       :category='category', 
       :post='posts[index]', 
-      :key='index'
-      )
-
+    )
 </template>
 
 <script>
