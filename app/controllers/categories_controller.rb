@@ -42,20 +42,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /categories/1
-  def update
-    if @category.update(category_params)
-      render json: @category
-    else
-      render json: @category.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /categories/1
-  def destroy
-    @category.destroy
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
