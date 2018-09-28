@@ -55,7 +55,6 @@ export default {
     },
     checkSignedIn() {
       if (localStorage.signedIn === true) {
-        console.log("SIGNED IN!!!!!!!");
         this.$router.replace('/posts');
       }
     },

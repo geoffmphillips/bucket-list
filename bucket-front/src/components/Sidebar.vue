@@ -109,6 +109,7 @@ import axios from 'axios';
     methods: {
       logout () {
         this.$store.dispatch('logOut');
+        this.$router.replace('/');
       }
     }
 
