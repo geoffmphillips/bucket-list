@@ -1,19 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update]
-  before_action :authenticate_user, only [:update]
+  before_action :authenticate_user, only: [:update]
 
   # GET /users/1
-  def show 
-
-    if current_user
-      # Render error page and return
-      @user = User.find params[:id]
-      @boards = @user.boards.order(created_at: :desc)
-      render json: @user
-    end
-
-    redirect_to '/login'
-
+  def show
+    @user = current_user
+    @boards = @user.boards.order(created_at: :desc)
+    render json: @user
   end
 
   # POST /users
