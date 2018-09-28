@@ -3,6 +3,7 @@ import * as VueGoogleMaps from 'vue2-google-maps';
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
 import App from './App';
 import Vuetify from 'vuetify'
+import VeeValidate from 'vee-validate';
 import router from './router';
 import { sync } from 'vuex-router-sync'
 
@@ -20,6 +21,7 @@ Vue.use(VueGoogleMaps, {
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
+Vue.use(VeeValidate);
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });

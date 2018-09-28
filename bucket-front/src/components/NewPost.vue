@@ -9,22 +9,21 @@
               <v-content>
 
                   <v-container>
-                    <v-stepper v-model="step" vertical>
+                    <v-stepper v-model="e1" vertical>
                       <v-stepper-header>
-                        <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
+                        <v-stepper-step step="1" :complete="e1 > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
-                        <v-stepper-step step="2" :complete="step > 2">Describe it</v-stepper-step>
+                        <v-stepper-step step="2" :complete="e1 > 2">Describe it</v-stepper-step>
                         <v-divider></v-divider>
                         <v-stepper-step step="3">Categorize it</v-stepper-step>
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
+                          <form data-vv-scope="form1">
 
                           <vuetify-google-autocomplete
                             label="Location"
                             v-model="newpost.location"
-                            :rules="[(v) => !!v || 'Location is required']"
-                            required
                             id="map"
                             ref="address"
                             types=""
@@ -35,9 +34,11 @@
                           </vuetify-google-autocomplete>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
-                          <v-btn color="primary" @click.native="step = 2">Continue</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form1')">Continue</v-btn>
+                        </form>
                         </v-stepper-content>
                         <v-stepper-content step="2">
+                          <form data-vv-scope="form2">
 
                             <v-text-field
                               label="Title"
@@ -57,11 +58,13 @@
                             ></v-text-field>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
-                          <v-btn flat @click.native="step = 1">Previous</v-btn>
-                          <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
+                          <v-btn flat @click.native="goBack()">Previous</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form2')">Continue</v-btn>
 
+                        </form>
                         </v-stepper-content>
                         <v-stepper-content step="3">
+                          <form data-vv-scope="form3">
 
                           <v-combobox
                             v-model="newpost.boards"
@@ -92,9 +95,10 @@
                           ></v-select>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
-                          <v-btn flat @click.native="step = 2">Previous</v-btn>
+                          <v-btn flat @click.native="goBack()">Previous</v-btn>
                           <v-btn color="primary" @click="$emit('close')" @click.prevent="submit">Save</v-btn>
 
+                        </form>
                         </v-stepper-content>
                       </v-stepper-items>
                     </v-stepper>
@@ -121,6 +125,7 @@ export default {
   },
 
   data: () => ({
+    e1: 0,
     errors: [],
     step: 1,
     newpost: {
@@ -150,6 +155,17 @@ export default {
   },
 
   methods: {
+
+    submitForm(scope) {
+      this.$validator.validateAll(scope).then(result => {
+        if (result) {
+          this.e1++;
+        }
+      });
+    },
+    goBack(){
+      this.e1--
+    },
     /**
     * When the location found
     * @param {Object} addressData Data of the found location
