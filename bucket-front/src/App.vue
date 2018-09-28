@@ -3,6 +3,7 @@
     sidebar
     navbar
     jumbotron
+    div(v-if='alert.message', :class='`alert ${alert.type}`') {{alert.message}}
     router-view
 </template>
 
@@ -27,8 +28,17 @@ export default {
   computed: {
     isSessionReady() {
       return this.$store.state.user.isSessionReady;
+    },
+    alert() {
+      return this.$store.state.alert;
     }
   },
+  watch:{
+    $route (to, from){
+      // clear alert on location change
+      this.$store.dispatch('alert/clear');
+    }
+  }, 
   data() {
     return {
     }

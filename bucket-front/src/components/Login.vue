@@ -29,6 +29,7 @@ export default {
     return {
       email: '',
       password: '',
+      submitted: false,
       error: '',
     };
   },
@@ -39,25 +40,33 @@ export default {
     this.checkSignedIn();
   },
   methods: {
-    login() {
-      axios.post('http://localhost:3000/user_token', { auth: { email: this.email, password: this.password } })
-        .then(response => this.signinSuccessful(response))
-        .catch(error => this.signinFailed(error));
+    handleSubmit (event) {
+      this.submitted = true;
+      const { username, password } = this;
+      const { dispatch } = this.$store;
+      if (username && password) {
+          dispatch('authentication/login', { username, password });
+      };
     },
-    signinSuccessful(response) {
-      this.$store.dispatch('setStoreJWT', response.data.jwt);
-      this.error = '';
-      this.$router.replace('/posts');
-    },
-    signinFailed(error) {
-      this.error = (error.response && error.response.data && error.response.data.error) || '';
-      delete localStorage.signedIn;
-    },
-    checkSignedIn() {
-      if (localStorage.signedIn) {
-        this.$router.replace('/posts');
-      }
-    },
+    // login() {
+    //   axios.post('http://localhost:3000/user_token', { auth: { email: this.email, password: this.password } })
+    //     .then(response => this.signinSuccessful(response))
+    //     .catch(error => this.signinFailed(error));
+    // },
+    // signinSuccessful(response) {
+    //   this.$store.dispatch('logIn', response.data.jwt);
+    //   this.error = '';
+    //   this.$router.replace('/posts');
+    // },
+    // signinFailed(error) {
+    //   this.error = (error.response && error.response.data && error.response.data.error) || '';
+    //   delete localStorage.signedIn;
+    // },
+    // checkSignedIn() {
+    //   if (localStorage.signedIn) {
+    //     this.$router.replace('/posts');
+    //   }
+    // },
   },
 };
 </script>

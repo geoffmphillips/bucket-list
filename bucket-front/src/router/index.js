@@ -5,7 +5,6 @@ import Vuetify from 'vuetify';
 import Login from '@/components/Login';
 import Boards from '@/components/Boards';
 import CardContainer from '@/components/cards/CardContainer';
-import Users from '@/components/Users';
 import UserProfile from '@/components/UserProfile';
 import Post from '@/components/layouts/Post';
 import NewPost from '@/components/NewPost';
@@ -18,17 +17,13 @@ import TheCategory from '@/components/layouts/TheCategory';
 Vue.use(Router);
 Vue.use(Vuetify);
 
-export default new Router({
+export const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'CardContainer',
       component: CardContainer,
-    },
-    {
-      path: '/users',
-      name: 'Users',
-      component: Users,
     },
     {
       path: '/users/:id',
@@ -79,4 +74,17 @@ export default new Router({
     { path: '*', redirect: '/' },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const restrictedPages = ['/newpost', '/users/:id'];
+  const authRequired = restrictedPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+
+  if (authRequired && !loggedIn) {
+    return next('/login');
+  }
+
+  next();
+})
 
