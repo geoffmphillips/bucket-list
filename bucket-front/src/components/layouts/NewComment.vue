@@ -13,11 +13,6 @@ import axios from 'axios';
 
 export default {
   name: "NewComment",
-  props: {
-    post: {
-      type: Array,
-    },
-  },
   data() {
     return {
       text: "",

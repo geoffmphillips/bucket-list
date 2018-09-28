@@ -10,7 +10,7 @@ import App from './App';
 import router from './router';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import store from '../store/index';
+import store from './store/index';
 import NewPost from './components/NewPost';
 
 Vue.use(VueAxios, axios);
@@ -43,7 +43,7 @@ Vue.use(Vuetify, {
 });
 
 // Styles
-require('./styles/stylus/main.styl')
+require('./styles/stylus/main.styl');
 
 // Global Components
 Vue.component('Navbar', Navbar);

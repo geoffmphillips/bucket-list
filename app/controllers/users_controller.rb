@@ -1,4 +1,3 @@
-s
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update]
   before_action :authenticate_user, only: [:update]
