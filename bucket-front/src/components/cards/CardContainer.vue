@@ -12,7 +12,6 @@
       :key='post.id', 
       :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
       :post='post',
-      stagger="300"
     )
 </template>
 
