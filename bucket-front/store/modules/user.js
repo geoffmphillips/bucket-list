@@ -3,23 +3,30 @@ import axios from 'axios';
 export default {
   state: {
     isLoggedIn: false,
-    currentJWT: '',
+    user: '',
     isSessionReady: false,
   },
 
   getters: {
-    isLoggedIn: state => { state.isLoggedIn },
-    jwt: state => { state.currentJWT },
+    isLoggedIn: (state) => { 
+      return state.isLoggedIn;
+    },
+    jwt: (state) => { 
+      return state.currentJWT;
+    },
+    user: (state) => { 
+      return state.user;
+    },
   },
 
   mutations: {
     setJWT(state, jwt) {
       // When this updates, the getters and anything bound to them updates as well.
-      state.currentJWT = jwt;
+      state.user = jwt;
       state.isLoggedIn = true;
     },
     removeJWT(state) {
-      state.currentJWT = '';
+      state.user = '';
       state.isLoggedIn = false;
     },
     sessionReady(state) {
@@ -36,18 +43,20 @@ export default {
       commit('sessionReady');
     },
 
-    setStoreJWT({ commit, state }, token) {
+    logIn({ commit, state }, token) {
       // Calls the mutation defined to update the state's JWT.
       localStorage.setItem('jwt', token);
       localStorage.signedIn = true;
-      
+
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       }
 
       commit('setJWT', { jwt: token });
     },
-    removeStoreJWT({ commit }) {
+    logOut({ commit }) {
+      localStorage.removeItem('jwt');
+      localStorage.signedIn = false;
       commit('removeJWT');
     },
   },

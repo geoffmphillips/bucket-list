@@ -108,9 +108,7 @@ import axios from 'axios';
     },
     methods: {
       logout () {
-        localStorage.removeItem('jwt');
-        this.$store.dispatch('removeStoreJWT');
-        localStorage.signedIn = false;
+        this.$store.dispatch('logOut');
       }
     }
 

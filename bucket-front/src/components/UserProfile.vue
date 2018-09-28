@@ -1,31 +1,28 @@
 <template>
 <div id="profile">
-  <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-  <p>{{ jwtSubject }}</p>
+  <h1>{{ user.first_name }}</h1>
 
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
 
 export default {
   data() {
     return {
-      id: this.$route.params.id,
       user: {
       },
       errors: [],
     };
   },
+  // computed: {
+  //   user () {
+  //     return this.$store.state.user;
+  //   },
+  // },
   created() {
-    axios.get('http://localhost:3000/users/2', {
-      responseType: 'json',
-      params: {
-        id: 2,
-      },
-    })
+    axios.get('http://localhost:3000/users/1')
       .then((response) => {
         this.user = response.data;
       })
@@ -33,11 +30,8 @@ export default {
         this.errors.push(e);
       });
   },
-  computed: {
-    ...mapGetters([
-      'jwtSubject',
-    ]),
-  },
+
+    
 };
 
 </script>

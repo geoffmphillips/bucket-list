@@ -45,9 +45,9 @@ export default {
         .catch(error => this.signinFailed(error));
     },
     signinSuccessful(response) {
-      this.$store.dispatch('setStoreJWT', response.data.jwt);
+      this.$store.dispatch('logIn', response.data.jwt);
       this.error = '';
-      this.$router.replace('/posts');
+      this.$router.replace('/userprofile');
     },
     signinFailed(error) {
       this.error = (error.response && error.response.data && error.response.data.error) || '';
@@ -55,6 +55,7 @@ export default {
     },
     checkSignedIn() {
       if (localStorage.signedIn) {
+        console.log("SIGNED IN!!!!!!!");
         this.$router.replace('/posts');
       }
     },
