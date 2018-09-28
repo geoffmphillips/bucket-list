@@ -1,15 +1,19 @@
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
 import { sync } from 'vuex-router-sync';
 import Vuetify from 'vuetify';
+
 import App from './App';
 import router from './router';
-
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import store from '../store/index';
 import NewPost from './components/NewPost';
+
+Vue.use(VueAxios, axios);
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -51,6 +55,7 @@ new Vue({
   el: '#app',
   render: h => h(App),
   router,
+  axios,
   store,
   components: { App },
   template: '<App/>',
