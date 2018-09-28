@@ -1,7 +1,8 @@
 <template lang="pug">
   .panel-container(
     v-masonry='', 
-    transition-duration='0.4s', 
+    transition-duration="0.4s", 
+    percent-position: true,
     item-selector='.item',
     :origin-top="true",
     :horizontal-order="false",
