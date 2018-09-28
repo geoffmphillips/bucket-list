@@ -41,7 +41,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
-      poll:  10000, // config.dev.poll,
+      // poll: config.dev.poll,
+      poll: 5000  //this is needed so that vue will reload page automatically with changes
     }
   },
   plugins: [

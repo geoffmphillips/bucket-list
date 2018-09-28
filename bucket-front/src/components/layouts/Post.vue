@@ -14,12 +14,27 @@
       <p>{{this.post.note}}</p>
     </div>
   </div>
+  <button
+    @click="this.toggleComments"
+    v-if="!this.displayComments"
+    type="button" name="button"
+    class="btn btn-primary"
+  >View comments</button>
   <comments-container
+    v-if="this.displayComments"
     :comments="this.comments"
   ></comments-container>
   <new-comment
+    v-if="this.displayComments"
     :post="this.post"
   ></new-comment>
+  <button
+    @click="this.toggleComments"
+    v-if="this.displayComments"
+    type="button"
+    name="button"
+    class="btn btn-primary"
+  >Hide comments</button>
   <div class="map-container">
     <GmapMap
       :center="{
@@ -57,8 +72,14 @@ export default {
     CommentsContainer,
     NewComment,
   },
+  methods: {
+    toggleComments() {
+      this.displayComments = !this.displayComments;
+    }
+  },
   data() {
     return {
+      displayComments: false,
       post: [],
       comments: [],
       categories: [],
