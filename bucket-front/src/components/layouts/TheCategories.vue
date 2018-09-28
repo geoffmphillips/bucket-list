@@ -1,12 +1,12 @@
-<template>
-  <div class="categories-container">
-    <category-card
-      v-for="(category, index) in categories"
-      :category="category"
-      :post="posts[index]"
-      :key="index"
-    ></category-card>
-  </div>
+<template lang="pug">
+  .categories-container.panel-container
+    category-card(
+      v-for='(category, index) in categories', 
+      :category='category', 
+      :post='posts[index]', 
+      :key='index'
+      )
+
 </template>
 
 <script>
@@ -54,21 +54,5 @@ export default {
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-  color: black;
-  position: relative;
-}
-h3 {
-  position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 4em;
-  width: max-content;
-  top: 2em;
-}
-.category-container {
-  display: flex;
-  align-items: flex-start;
-}
+
 </style>
