@@ -1,8 +1,7 @@
-<template>
-<a>
-  <div class="card">
-  </div>
-</a>
+<template lang="pug">
+  a.panel
+    .card
+
 </template>
 
 <script>
@@ -16,17 +15,5 @@ export default {
 </script>
 
 <style scoped>
-a {
-  background-position: center;
-  margin: 0 10px 20px;
-  border-radius: 0.75em;
-  text-decoration: none;
-}
-div.card {
-  margin: 0;
-  width: 500px;
-  height: 250px;
-  border: 0px;
-  opacity: 0;
-}
+
 </style>

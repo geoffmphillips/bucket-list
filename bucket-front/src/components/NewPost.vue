@@ -74,7 +74,7 @@
                             </template>
                           </v-combobox>
                           <v-select
-                            :items= categories
+                            :items="categories"
                             v-model="newpost.categories"
                             item-text="name"
                             label="Choose your categories"
@@ -150,13 +150,6 @@ export default {
       this.address = placeResultData;
     },
 
-    // getCityName: function (locationData) {
-    //   this.locality = locationData.address_components.find((obj) => {
-    //     return (obj.types[0] === 'locality');
-    //   });
-    //   return this.locality.long_name;
-    // },
-
     submit() {
       const submitPost = {
         post: {
@@ -164,18 +157,16 @@ export default {
           note: this.newpost.note,
           photo_url: this.newpost.photo_url,
           user_id: 2,
+          location: {
+            city: this.address.locality,
+            location: this.address.name,
+            google_id: this.address.place_id,
+            lat: (this.address.latitude * (10 ** 4)),
+            long: (this.address.longitude * (10 ** 4)),
+          },
+          categories: this.newpost.categories,
+          boards: this.newpost.boards,
         },
-        location: {
-          city: this.address.locality,
-          location: this.address.name,
-          google_id: this.address.place_id,
-          lat: (this.address.latitude * (10 ** 4)),
-          long: (this.address.longitude * (10 ** 4)),
-        },
-        categories:
-          this.newpost.categories,
-        boards:
-          this.newpost.boards,
       };
 
       console.log(submitPost);

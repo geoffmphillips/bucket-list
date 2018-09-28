@@ -1,12 +1,10 @@
 <template lang="pug">
-  v-responsive
-    v-layout(align-center)
-      .jumbotron
-        video.jumbotron__video(type='video/mp4', autoplay loop muted)
-          source(src='../assets/pexels.mp4', type='video/mp4')
-        .jumbotron__overlay
-          h2.-text1 Welcome to the Future
-          h2.-text2 of Discovery
+  v-jumbotron.jumbotron
+    video.jumbotron__video(type='video/mp4', autoplay loop muted)
+      source(src='../assets/pexels.mp4', type='video/mp4')
+    .jumbotron__overlay
+      h2.-text1 Welcome to the Future
+      h2.-text2 of Discovery
 </template>
 
 <script>
@@ -22,10 +20,9 @@ export default {
 
 <style lang="stylus">
 .jumbotron
-  margin: 0 auto
   min-height: 550px
   width: 90%
-  margin: 0 auto
+  margin: 0 auto 50px
 
   &__video
     width: 100%
