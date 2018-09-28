@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-navigation-drawer.my-sidebar(
+  v-navigation-drawer.sidebar(
     v-model="isActive"
     fixed
     :mobile-break-point="1904"
@@ -9,14 +9,14 @@
     right
   )
     v-layout(justify-center wrap)
-      .my-sidebar__hero-pattern
+      .sidebar__hero-pattern
 
     v-divider
 
-    v-list.my-sidebar__list(light)
+    v-list.sidebar__list(light)
       v-list-group(prepend-icon='person')
         v-list-tile(slot="activator" ripple)
-          v-list-tile-content.my-sidebar__username
+          v-list-tile-content.sidebar__username
             v-list-tile-title Username
         v-list-tile(ripple :to="{ name: 'account' }")
           v-list-tile-action
@@ -117,7 +117,7 @@ import axios from 'axios';
 </script>
 
 <style lang="stylus">
-  .my-sidebar
+  .sidebar
     z-index: 8
 
     &__logo
