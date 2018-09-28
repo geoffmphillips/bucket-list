@@ -51,10 +51,10 @@ export default {
     },
     signinFailed(error) {
       this.error = (error.response && error.response.data && error.response.data.error) || '';
-      delete localStorage.signedIn;
+      delete localStorage.jwt;
     },
     checkSignedIn() {
-      if (localStorage.signedIn) {
+      if (localStorage.signedIn === true) {
         console.log("SIGNED IN!!!!!!!");
         this.$router.replace('/posts');
       }
