@@ -12,19 +12,23 @@
       v-model='model',
       :items='stuff',
       item-text='name',
-      :label='`Search some buckets...`',
+      :label='`Search for buckets...`',
       return-object='',
       color="darkslategrey",
     )
     v-spacer
     v-toolbar-items.navbar__list
-      .modal-button
-        button#show-modal(@click='showModal = true') Show Modal
-        new-post(v-if="showModal", @close='showModal = false')
-      router-link(:to="'/categories'")
+      router-link(:to="'/categories'" ripple)
         v-btn.navbar__list-item(flat='') Categories
-      router-link(:to="'/locations'")
+      router-link(:to="'/locations'" ripple)
         v-btn.navbar__list-item(flat='') Locations
+      .modal-button.navbar__list-item
+        button#show-modal(@click='showModal = true') NEW POST
+        new-post(
+          v-if="showModal", 
+          @close='showModal = false'
+        )
+        //- v-icon.add-icon(dark='') add_box
 
     v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
     v-btn(icon v-show="backButton" @click.stop="$router.back()")
@@ -135,6 +139,9 @@ import NewPost from './NewPost'
         font-size: 1.2em
         margin-left: 30px
         margin-right: 30px
+
+        .add-icon
+          margin-left: 10px
 
     &__sidebar-btn
       font-size: 4em

@@ -32,55 +32,55 @@
     v-divider
 
     v-list(dark)
-      v-list-tile(ripple :to="{ name: 'tutorial' }")
+      v-list-tile(ripple :to="{ name: 'Boards' }")
         v-list-tile-action
           v-icon library_books
         v-list-tile-content
           v-list-tile-title My Boards
 
-      v-list-tile(ripple :to="{ name: 'dashboard' }")
+      v-list-tile(ripple :to="{ name: 'favourites' }")
         v-list-tile-action
           v-icon dashboard
         v-list-tile-content
           v-list-tile-title Favorites
 
-      v-list-group(prepend-icon='build')
-        v-list-tile(slot="activator" ripple)
-          v-list-tile-content
-            v-list-tile-title Example
-        v-list-tile(ripple :to="{ name: 'budgetTool' }")
-          v-list-tile-content
-            v-list-tile-title Inner Example
-        v-list-tile(ripple :to="{ name: 'rateTool' }")
-          v-list-tile-content
-            v-list-tile-title Inner Example
+      //- v-list-group(prepend-icon='build')
+      //-   v-list-tile(slot="activator" ripple)
+      //-     v-list-tile-content
+      //-       v-list-tile-title Example
+      //-   v-list-tile(ripple :to="{ name: 'budgetTool' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title Inner Example
+      //-   v-list-tile(ripple :to="{ name: 'rateTool' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title Inner Example
 
-      v-list-group(prepend-icon='assessment')
-        v-list-tile(slot="activator" ripple)
-          v-list-tile-content
-            v-list-tile-title Example
-        v-list-tile(ripple :to="{ name: 'laborReport' }")
-          v-list-tile-content
-            v-list-tile-title Inner Example
-        v-list-tile(ripple :to="{ name: 'earningsReport' }")
-          v-list-tile-content
-            v-list-tile-title Inner Example
+      //- v-list-group(prepend-icon='assessment')
+      //-   v-list-tile(slot="activator" ripple)
+      //-     v-list-tile-content
+      //-       v-list-tile-title Example
+      //-   v-list-tile(ripple :to="{ name: 'laborReport' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title Inner Example
+      //-   v-list-tile(ripple :to="{ name: 'earningsReport' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title Inner Example
 
-      v-list-group(prepend-icon='web')
-        v-list-tile(slot="activator" ripple)
-          v-list-tile-content
-            v-list-tile-title Example
-        v-list-tile(ripple :to="{ name: 'wip' }")
-          v-list-tile-content
-            v-list-tile-title Inner Example
+      //- v-list-group(prepend-icon='web')
+      //-   v-list-tile(slot="activator" ripple)
+      //-     v-list-tile-content
+      //-       v-list-tile-title Example
+      //-   v-list-tile(ripple :to="{ name: 'wip' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title Inner Example
 
-      v-list-group(prepend-icon='more_horiz')
-        v-list-tile(slot="activator" ripple)
-          v-list-tile-content
-            v-list-tile-title More
-        v-list-tile(ripple :to="{ name: 'importMyData' }")
-          v-list-tile-content
-            v-list-tile-title More Here
+      //- v-list-group(prepend-icon='more_horiz')
+      //-   v-list-tile(slot="activator" ripple)
+      //-     v-list-tile-content
+      //-       v-list-tile-title More
+      //-   v-list-tile(ripple :to="{ name: 'importMyData' }")
+      //-     v-list-tile-content
+      //-       v-list-tile-title More Here
 
       v-list-tile(@click="logout()" ripple)
         v-list-tile-action
@@ -90,6 +90,9 @@
 </template>
 
 <script>
+
+import axios from 'axios';
+
   export default {
     name: 'AppSidebar',
 
@@ -105,7 +108,8 @@
     },
     methods: {
       logout () {
-        auth.logout()
+        this.$store.dispatch('logOut');
+        this.$router.replace('/');
       }
     }
 

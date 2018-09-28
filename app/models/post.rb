@@ -2,10 +2,11 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :location
 
-  has_many :comments
-  has_many :post_categories
-  has_many :board_items
+  has_many :comments, dependent: :delete_all
+  has_many :post_categories, dependent: :delete_all
+  has_many :board_items, dependent: :delete_all
   has_many :boards, through: :board_items
+  has_many :post_categories
   has_many :categories, through: :post_categories
 
   validates :title, presence: true
