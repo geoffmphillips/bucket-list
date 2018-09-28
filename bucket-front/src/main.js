@@ -26,7 +26,15 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify);
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#21CE99',
+    secondary: '#D81B60',
+    accent: '#805441',
+  },
+});
+
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });
@@ -39,13 +47,6 @@ global.URLSearchParams = URLSearchParams;
 // Sync router to store, as `store.state.route`.
 sync(store, router);
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#21CE99',
-    secondary: '#D81B60',
-    accent: '#805441',
-  },
-});
 
 // Styles
 require('./styles/stylus/main.styl')

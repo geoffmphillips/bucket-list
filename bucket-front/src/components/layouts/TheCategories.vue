@@ -1,6 +1,7 @@
 <template lang="pug">
   .panel-container(
     v-masonry='', 
+    fit-width="true",
     transition-duration='0.4s', 
     item-selector='.item',
     :origin-top="true",
@@ -59,6 +60,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
 </style>

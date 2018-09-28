@@ -38,6 +38,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .panel-container !important
+    width: 500px
+    height: 250px
 </style>

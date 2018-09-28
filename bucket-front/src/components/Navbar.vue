@@ -1,6 +1,6 @@
 <template lang="pug">
   v-toolbar.navbar(
-    :color="$vuetify.breakpoint.smAndDown ? 'primary' : 'default'"
+    color="$vuetify.breakpoint.smAndDown ? 'primary' : 'secondary'"
     :dark="$vuetify.breakpoint.smAndDown"
     fixed
     app
@@ -28,7 +28,6 @@
           v-if="showModal", 
           @close='showModal = false'
         )
-        //- v-icon.add-icon(dark='') add_box
 
     v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
     v-btn(icon v-show="backButton" @click.stop="$router.back()")
@@ -105,7 +104,7 @@ import NewPost from './NewPost'
   font-family: 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  color: #2c3e50
+  // color: #2c3e50
   box-sizing: border-box
 
   .navbar

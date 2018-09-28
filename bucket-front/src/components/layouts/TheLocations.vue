@@ -1,6 +1,7 @@
 <template lang="pug">
   .panel-container(
     v-masonry='', 
+    fit-width="true",
     transition-duration='0.4s', 
     item-selector='.item',
     :origin-top="true",
@@ -9,7 +10,7 @@
     location-card.item(
       v-masonry-tile='',
       v-for='(location, index) in locations', 
-      :key='index'
+      :key='index',
       :location='location', 
       :post='posts[index]', 
     )

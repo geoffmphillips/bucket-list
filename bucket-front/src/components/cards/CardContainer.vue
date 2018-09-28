@@ -1,6 +1,7 @@
 <template lang="pug">
   .panel-container(
     v-masonry='', 
+    fit-width="true",
     transition-duration="0.4s", 
     percent-position: true,
     item-selector='.item',
