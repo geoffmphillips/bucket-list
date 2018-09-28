@@ -36,6 +36,7 @@ import NewPost from './NewPost'
 
   export default {
     name: 'Navbar',
+    inject: ['$validator'],
     components: {
       NewPost
     },

@@ -22,16 +22,20 @@
                           <form data-vv-scope="form1">
 
                           <vuetify-google-autocomplete
-                            label="Location"
+                            label="Location (Required)"
                             v-model="newpost.location"
                             id="map"
                             ref="address"
                             types=""
-                            append-icon="search"
+                            name="location"
+                            v-validate="'required'"
+                            :error-messages="vErrors.collect('location')"
+                            data-vv-name="location" required data-vv-scope="form1"
                             placeholder="Start typing"
                             v-on:placechanged="getAddressData"
                           >
                           </vuetify-google-autocomplete>
+                          <span class="help is-danger">{{ vErrors.first('location') }}</span>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn color="primary" @click.native="submitForm('form1')">Continue</v-btn>
@@ -42,11 +46,15 @@
 
                             <v-text-field
                               label="Title"
+                              name="title"
                               v-model="newpost.title"
-                              :rules="[(v) => !!v || 'Title is required']"
-                              required
+                              :error-messages="vErrors.first('title')"
+                              :class="{ 'is-danger': vErrors.has('title') }"
+                              v-validate="'required'"
+                              data-vv-name="title" required data-vv-scope="form2"
                               >
                               </v-text-field>
+                              <span class="help is-danger">{{ vErrors.first('title') }}</span>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
@@ -126,7 +134,6 @@ export default {
 
   data: () => ({
     e1: 0,
-    errors: [],
     step: 1,
     newpost: {
       title: null,
@@ -174,6 +181,13 @@ export default {
     */
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
+    },
+
+    setIcon: function (field) {
+      return (!this.flags.dirty(field)) ? '' : (this.flags.dirty(field) && this.flags.passed(field)) ? 'done' : 'warning'
+    },
+    setRules: function (field) {
+         return (!this.vErrors.first(field)) ? [true] : [this.vErrors.first(field)]
     },
 
     submit() {
