@@ -1,92 +1,78 @@
-<template lang="pug">
-  v-navigation-drawer.sidebar(
-    v-model="isActive"
-    fixed
-    :mobile-break-point="1904"
-    app
-    touchless
-    dark
-    right
-  )
-    v-layout(justify-center wrap)
-      .sidebar__hero-pattern
-
-    v-divider
-
-    v-list.sidebar__list(light)
-      v-list-group(prepend-icon='person')
-        v-list-tile(slot="activator" ripple)
-          v-list-tile-content.sidebar__username
-            v-list-tile-title Username
-        v-list-tile(ripple :to="{ name: 'account' }")
-          v-list-tile-action
-            v-icon account_box
-          v-list-tile-content
-            v-list-tile-title Account
-        v-list-tile(ripple :to="{ name: 'settings' }")
-          v-list-tile-action
-            v-icon settings
-          v-list-tile-content
-            v-list-tile-title Settings
-
-    v-divider
-
-    v-list(dark)
-      v-list-tile(ripple :to="{ name: 'Boards' }")
-        v-list-tile-action
-          v-icon library_books
-        v-list-tile-content
-          v-list-tile-title My Boards
-
-      v-list-tile(ripple :to="{ name: 'favourites' }")
-        v-list-tile-action
-          v-icon dashboard
-        v-list-tile-content
-          v-list-tile-title Favorites
-
-      //- v-list-group(prepend-icon='build')
-      //-   v-list-tile(slot="activator" ripple)
-      //-     v-list-tile-content
-      //-       v-list-tile-title Example
-      //-   v-list-tile(ripple :to="{ name: 'budgetTool' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title Inner Example
-      //-   v-list-tile(ripple :to="{ name: 'rateTool' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title Inner Example
-
-      //- v-list-group(prepend-icon='assessment')
-      //-   v-list-tile(slot="activator" ripple)
-      //-     v-list-tile-content
-      //-       v-list-tile-title Example
-      //-   v-list-tile(ripple :to="{ name: 'laborReport' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title Inner Example
-      //-   v-list-tile(ripple :to="{ name: 'earningsReport' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title Inner Example
-
-      //- v-list-group(prepend-icon='web')
-      //-   v-list-tile(slot="activator" ripple)
-      //-     v-list-tile-content
-      //-       v-list-tile-title Example
-      //-   v-list-tile(ripple :to="{ name: 'wip' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title Inner Example
-
-      //- v-list-group(prepend-icon='more_horiz')
-      //-   v-list-tile(slot="activator" ripple)
-      //-     v-list-tile-content
-      //-       v-list-tile-title More
-      //-   v-list-tile(ripple :to="{ name: 'importMyData' }")
-      //-     v-list-tile-content
-      //-       v-list-tile-title More Here
-
-      v-list-tile(@click="logout()" ripple)
-        v-list-tile-action
-          v-icon exit_to_app
-        v-list-tile-content
-          v-list-tile-title Log out
+<template>
+  <v-navigation-drawer class="sidebar" v-model="isActive" fixed="fixed" :mobile-break-point="1904" app="app" touchless="touchless" dark="dark" right="right">
+    <v-layout justify-center="justify-center" wrap="wrap">
+      <div class="sidebar__hero-pattern"></div>
+    </v-layout>
+    <v-divider></v-divider>
+    <v-list class="sidebar__list" light="light">
+        <v-list-tile v-if="!this.signedIn" slot="activator" ripple="ripple">
+          <v-list-tile-content class="sidebar__username">
+            <v-list-tile-title> Log in For more features </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      <v-list-group v-if="this.signedIn" prepend-icon="person">
+        <v-list-tile slot="activator" ripple="ripple">
+          <v-list-tile-content class="sidebar__username">
+            <v-list-tile-title>{{ user.first_name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile ripple="ripple" :to="{ name: 'account' }">
+          <v-list-tile-action>
+            <v-icon>account_box</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Account</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile ripple="ripple" :to="{ name: 'settings' }">
+          <v-list-tile-action>
+            <v-icon>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Settings</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list-group>
+    </v-list>
+    <v-divider></v-divider>
+    <v-list-tile v-if="!this.signedIn" ripple :to="{ name: 'Login' }">
+      <v-list-tile-action>
+        <v-icon>exit_to_app</v-icon>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-list-tile-title>Log in</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+    <div v-if="this.signedIn">
+      <v-list dark="dark">
+        <v-list-tile ripple="ripple" :to="{ name: 'Boards' }">
+          <v-list-tile-action>
+            <v-icon>library_books</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>My Boards</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile ripple="ripple" :to="{ name: 'favourites' }">
+          <v-list-tile-action>
+            <v-icon>dashboard</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Favorites</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="logout()" ripple="ripple">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Log out</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </div>
+    
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -95,7 +81,26 @@ import axios from 'axios';
 
   export default {
     name: 'AppSidebar',
-
+    data() {
+      return {
+        signedIn: false,
+        user: {
+        },
+        errors: [],
+      }
+    },
+    beforeMount() {
+      axios.get('http://localhost:3000/users/1')
+      .then((response) => {
+        this.user = response.data;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+      if (localStorage.signedIn) {
+        this.signedIn = localStorage.signedIn;
+      }
+    },
     computed: {
       isActive: {
         get () {
@@ -110,6 +115,8 @@ import axios from 'axios';
       logout () {
         this.$store.dispatch('logOut');
         this.$router.replace('/');
+        this.user = {};
+        this.signedIn = false;
       }
     }
 
@@ -117,7 +124,7 @@ import axios from 'axios';
 </script>
 
 <style lang="stylus">
-  .sidebar
+  .my-sidebar
     z-index: 8
 
     &__logo

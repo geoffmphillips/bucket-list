@@ -5,12 +5,11 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import { sync } from 'vuex-router-sync';
 import Vuetify from 'vuetify';
+// const VueMasonryPlugin = require('vue-masonry');
+import VueMasonryPlugin from 'vue-masonry';
 
 import App from './App';
 import router from './router';
-import VueMasonryPlugin from 'vue-masonry'
-// const VueMasonryPlugin = require('vue-masonry');
-
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import store from './store/index';
