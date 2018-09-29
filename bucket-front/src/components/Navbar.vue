@@ -8,18 +8,17 @@
   )
     router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
+      
     v-autocomplete.navbar__search-field(
-      v-model='model',
-      :items='stuff',
+      v-model='item',
+      :items='items',
       item-text='name',
       :label='`Search for buckets...`',
-      return-object='',
+      placeholder='Search for buckets...',
+      return-object,
       color="darkslategrey",
-      :get-label='getLabel',
+      :search-input.sync="search",
       @item-selected="itemSelected",
-      @item-clicked="itemSelected",
-      @update-items='update',
-      :search-input.sync="search"
     )
     v-spacer
     v-toolbar-items.navbar__list
@@ -60,7 +59,7 @@ import NewPost from './NewPost'
         friends: [],
         isUpdating: false,
         name: 'Midnight Crew',
-        stuff: [
+        items: [
           {
             name: "kyle",
             group: "tycholiz"
@@ -78,18 +77,7 @@ import NewPost from './NewPost'
         this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
       },
       itemSelected(item) {
-        console.log("hey!!")
-      },
-      getLabel (item) {
-      if (item) {
-        return item.name
-      }
-      return ''
-      },
-      update (text) {
-        this.items = Animals.filter((item) => {
-          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
-        })
+        console.log(item)
       }
     },
     
@@ -141,14 +129,55 @@ import NewPost from './NewPost'
       margin-top: 40px; margin-right: 10px; margin-left: 10px
       cursor: pointer
 
-    &__search-field
-      height: 40px
-      width: 500px
-      position: relative
-      top: 50%
-      font-size: 1.3em
-      margin-left: 20px; margin-bottom: 15px
-      border-radius: 15px
+    // &__search-field
+    //   height: 40px
+    //   width: 500px
+    //   position: relative
+    //   top: 50%
+    //   font-size: 1.3em
+    //   margin-left: 20px; margin-bottom: 15px
+    //   border-radius: 4px
+    //   border: 1px solid black
+    //   background: #ffffff
+
+    .v-autocomplete
+      .v-autocomplete-input-group
+        .v-autocomplete-input
+          font-size 1.5em
+          padding 10px 15px
+          box-shadow none
+          border 1px solid #157977
+          width calc(100% - 32px)
+          outline none
+          background-color #eee
+        &.v-autocomplete-selected
+          .v-autocomplete-input
+            color green
+            background-color #f2fff2
+      .v-autocomplete-list
+        width 100%
+        text-align left
+        border none
+        border-top none
+        max-height 400px
+        overflow-y auto
+        border-bottom 1px solid #157977
+        .v-autocomplete-list-item
+          cursor pointer
+          background-color #fff
+          padding 10px
+          border-bottom 1px solid #157977
+          border-left 1px solid #157977
+          border-right 1px solid #157977
+          &:last-child
+            border-bottom none
+          &:hover
+            background-color #eee
+          abbr
+            opacity 0.8
+            font-size 0.8em
+            display block
+            font-family sans-serif
 
     &__list
       float: right
