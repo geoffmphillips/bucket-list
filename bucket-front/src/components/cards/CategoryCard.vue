@@ -1,6 +1,6 @@
 <template lang="pug">
   router-link.panel(:to="'/categories/' + category.id")
-    h3.panel__text {{category.name}}
+    p.panel__text {{category.name}}
     card-no-link(:style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", :post='post[0]')
 </template>
 
@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  z-index: 2;
+}
 </style>

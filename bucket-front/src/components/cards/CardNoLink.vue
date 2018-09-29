@@ -1,7 +1,5 @@
 <template lang="pug">
   a.panel
-    .card
-
 </template>
 
 <script>
