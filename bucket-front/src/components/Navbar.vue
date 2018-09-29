@@ -10,16 +10,17 @@
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
       
     v-autocomplete.navbar__search-field(
-      v-model='item',
-      :items='items',
-      item-text='name',
-      :label='`Search for buckets...`',
-      placeholder='Search for buckets...',
-      return-object,
-      color="darkslategrey",
-      :search-input.sync="search",
-      @item-selected="itemSelected",
+      v-model='item'
+      :items='items'
+      :component-item='template' 
+      @update-items="updateItems"
+      @item-selected="itemSelected"
+      @item-clicked="itemClicked"
+      :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}"
+
+
     )
+
     v-spacer
     v-toolbar-items.navbar__list
       router-link(:to="'/categories'" ripple)
@@ -39,7 +40,9 @@
 </template>
 
 <script>
+import ItemTemplate from './ItemTemplate.vue'
 import NewPost from './NewPost'
+import Animals from './animals.js'
 
   export default {
     name: 'Navbar',
@@ -56,20 +59,14 @@ import NewPost from './NewPost'
       return {
         autoUpdate: true,
         showModal: false,
-        friends: [],
         isUpdating: false,
-        name: 'Midnight Crew',
-        items: [
-          {
-            name: "kyle",
-            group: "tycholiz"
-          },
-          {
-            name: "Eli",
-            group: "Arias"
-          }
-        ],
-        model: '',
+        item: {
+          id: 9, 
+          name: 'Lion', 
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        items: [],
+        template: ItemTemplate
       }
     },
     methods: {
@@ -77,19 +74,36 @@ import NewPost from './NewPost'
         this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
       },
       itemSelected(item) {
-        console.log(item)
+        console.log("item selected:", item.name)
+      },
+      itemClicked(item) {
+        console.log("item clicked:", item.name)
+      },
+      // updateItems (text) {
+      //   axios.get(`http://localhost:3000/posts`)
+      //   .then(response => {
+      //     this.posts = response.data
+      //   })
+      //   .catch(e => {
+      //     this.errors.push(e)
+      //   })
+      // },
+      updateItems (text) {
+        this.items = Animals.filter((item) => {
+          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
+        })
       }
     },
     
-    created() {
-      axios.get(`http://localhost:3000/posts`)
-      .then(response => {
-        this.posts = response.data
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
-    },
+    // created() {
+    //   axios.get(`http://localhost:3000/posts`)
+    //   .then(response => {
+    //     this.posts = response.data
+    //   })
+    //   .catch(e => {
+    //     this.errors.push(e)
+    //   })
+    // },
     computed: {
       filteredPosts: function() {
         return this.posts.filter((post) => {
@@ -128,17 +142,6 @@ import NewPost from './NewPost'
       float: left
       margin-top: 40px; margin-right: 10px; margin-left: 10px
       cursor: pointer
-
-    // &__search-field
-    //   height: 40px
-    //   width: 500px
-    //   position: relative
-    //   top: 50%
-    //   font-size: 1.3em
-    //   margin-left: 20px; margin-bottom: 15px
-    //   border-radius: 4px
-    //   border: 1px solid black
-    //   background: #ffffff
 
     .v-autocomplete
       .v-autocomplete-input-group
