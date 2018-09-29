@@ -15,7 +15,9 @@
                         <v-divider></v-divider>
                         <v-stepper-step step="2" :complete="e1 > 2">Describe it</v-stepper-step>
                         <v-divider></v-divider>
-                        <v-stepper-step step="3">Categorize it</v-stepper-step>
+                        <v-stepper-step step="3" :complete="e1 > 3">Photograph it</v-stepper-step>
+                        <v-divider></v-divider>
+                        <v-stepper-step step="4">Categorize it</v-stepper-step>
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
@@ -59,13 +61,6 @@
                                 Note <small>(Optional)</small>
                               </div>
                             </v-textarea>
-                            <v-text-field
-                              label="Photo URL (Optional)"
-                              v-validate="'url:require_protocol'"
-                              :error-messages="vErrors.first('photo_url')"
-                              data-vv-name="photo_url" data-vv-scope="form2"
-                              v-model="newpost.photo_url"
-                            ></v-text-field>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn flat @click.native="goBack()">Previous</v-btn>
@@ -75,6 +70,23 @@
                         </v-stepper-content>
                         <v-stepper-content step="3">
                           <form data-vv-scope="form3">
+
+                            <v-text-field
+                              label="Photo URL (Optional)"
+                              v-validate="'url:require_protocol'"
+                              :error-messages="vErrors.first('photo_url')"
+                              data-vv-name="photo_url" data-vv-scope="form3"
+                              v-model="newpost.photo_url"
+                            ></v-text-field>
+
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
+                          <v-btn flat @click.native="goBack()">Previous</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form2')">Continue</v-btn>
+
+                        </form>
+                        </v-stepper-content>
+                        <v-stepper-content step="4">
+                          <form data-vv-scope="form4">
 
                           <v-combobox
                             v-model="newpost.boards"

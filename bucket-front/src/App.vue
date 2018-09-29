@@ -2,7 +2,6 @@
   v-app
     sidebar
     navbar
-    jumbotron
     router-view
 </template>
 
