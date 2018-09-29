@@ -1,12 +1,11 @@
-<template>
-  <div class="locations-container">
-    <location-card
-      v-for="(location, index) in locations"
-      :location="location"
-      :post="posts[index]"
-      :key="index"
-    ></location-card>
-  </div>
+<template lang="pug">
+  .panel-container
+    location-card(
+      v-for='(location, index) in locations', 
+      :location='location', 
+      :post='posts[index]', 
+      :key='index')
+
 </template>
 
 <script>
@@ -47,21 +46,5 @@ export default {
 </script>
 
 <style scoped>
-a {
-  text-decoration: none;
-  color: black;
-  position: relative;
-}
-h3 {
-  position: absolute;
-  z-index: 2;
-  color: white;
-  font-size: 4em;
-  width: max-content;
-  top: 2em;
-}
-.location-container {
-  display: flex;
-  align-items: flex-start;
-}
+
 </style>

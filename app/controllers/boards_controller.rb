@@ -3,8 +3,7 @@ class BoardsController < ApplicationController
 
   # GET /boards
   def index
-    @boards = Board.all
-
+    @boards = Board.all.board_items.first
     render json: @boards
   end
 

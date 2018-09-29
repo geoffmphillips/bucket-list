@@ -5,15 +5,36 @@
       <p>{{this.post.title}}</p>
       <img :src="this.post.photo_url" :alt="this.post.note">
       <div class="categories-container">
-        <category
+        <category-tag
           v-for="category in categories"
           :key="category.id"
           :category="category"
-        ></category>
+        ></category-tag>
       </div>
       <p>{{this.post.note}}</p>
     </div>
   </div>
+  <button
+    @click="this.toggleComments"
+    v-if="!this.displayComments"
+    type="button" name="button"
+    class="btn btn-primary"
+  >View comments</button>
+  <comments-container
+    v-if="this.displayComments"
+    :comments="this.comments"
+  ></comments-container>
+  <new-comment
+    v-if="this.displayComments"
+    :post="this.post"
+  ></new-comment>
+  <button
+    @click="this.toggleComments"
+    v-if="this.displayComments"
+    type="button"
+    name="button"
+    class="btn btn-primary"
+  >Hide comments</button>
   <div class="map-container">
     <GmapMap
       :center="{
@@ -21,7 +42,7 @@
         lng: this.markers[0].position.lng,
         }"
       :zoom="12"
-      :options="{styles: this.$store.state.mapStyle}"
+      :options="{styles: this.$store.state.mapStyle.mapStyle}"
       map-type-id="roadmap"
       style="width: 500px; height: 300px"
     >
@@ -40,16 +61,27 @@
 
 <script>
 import axios from 'axios';
-import Category from './Category';
+import CategoryTag from './CategoryTag';
+import CommentsContainer from './CommentsContainer';
+import NewComment from './NewComment';
 
 export default {
   name: 'Post',
   components: {
-    Category,
+    CategoryTag,
+    CommentsContainer,
+    NewComment,
+  },
+  methods: {
+    toggleComments() {
+      this.displayComments = !this.displayComments;
+    }
   },
   data() {
     return {
+      displayComments: false,
       post: [],
+      comments: [],
       categories: [],
       markers: [{
         position: {
@@ -64,10 +96,11 @@ export default {
   created() {
     axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
       .then((response) => {
-        const { post, categories, location } = response.data;
+        const { post, categories, location, comments, } = response.data;
         this.post = post;
         this.categories = categories;
         this.location = location;
+        this.comments = comments,
         this.markers[0].position.lat = (this.location.lat * (10 ** -4));
         this.markers[0].position.lng = (this.location.long * (10 ** -4));
       })

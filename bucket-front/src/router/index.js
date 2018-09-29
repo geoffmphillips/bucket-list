@@ -1,14 +1,19 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Vuetify from 'vuetify';
+
+import Login from '@/components/Login';
+import Boards from '@/components/Boards';
 import CardContainer from '@/components/cards/CardContainer';
 import Users from '@/components/Users';
+import UserProfile from '@/components/UserProfile';
 import Post from '@/components/layouts/Post';
+import NewPost from '@/components/NewPost';
 import TheLocations from '@/components/layouts/TheLocations';
 import TheLocation from '@/components/layouts/TheLocation';
 import TheCategories from '@/components/layouts/TheCategories';
 import TheCategory from '@/components/layouts/TheCategory';
-import NewPost from '@/components/NewPost';
+
 
 Vue.use(Router);
 Vue.use(Vuetify);
@@ -24,6 +29,21 @@ export default new Router({
       path: '/users',
       name: 'Users',
       component: Users,
+    },
+    {
+      path: '/userprofile',
+      name: 'UserProfile',
+      component: UserProfile,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    },
+    {
+      path: '/boards',
+      name: 'Boards',
+      component: Boards,
     },
     {
       path: '/posts/:id',
@@ -55,5 +75,8 @@ export default new Router({
       name: 'NewPost',
       component: NewPost,
     },
+    // otherwise redirect to home
+    { path: '*', redirect: '/' },
   ],
 });
+

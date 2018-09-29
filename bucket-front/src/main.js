@@ -1,16 +1,21 @@
 import Vue from 'vue';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+import { sync } from 'vuex-router-sync';
+import Vuetify from 'vuetify';
+
 import App from './App';
-import Vuetify from 'vuetify'
+
 import VeeValidate from 'vee-validate';
 import router from './router';
-import { sync } from 'vuex-router-sync'
-
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
-import store from '../store/index';
+import store from './store/index';
 import NewPost from './components/NewPost';
+
+Vue.use(VueAxios, axios);
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -27,34 +32,33 @@ Vue.use(VuetifyGoogleAutocomplete, {
 });
 
 // Polyfills
-global.URLSearchParams = URLSearchParams
+global.URLSearchParams = URLSearchParams;
 
 // Sync router to store, as `store.state.route`.
-sync(store, router)
+sync(store, router);
 
 Vue.use(Vuetify, {
   theme: {
     primary: '#21CE99',
     secondary: '#D81B60',
     accent: '#805441',
-  }
-})
+  },
+});
 
-// // Styles
-// require('./styles/scss/main.scss')
-// require('./styles/stylus/main.styl')
+// Styles
+require('./styles/stylus/main.styl');
 
 // Global Components
-Vue.component('Navbar', Navbar)
-Vue.component('Sidebar', Sidebar)
-Vue.component('NewPost', NewPost)
-
+Vue.component('Navbar', Navbar);
+Vue.component('Sidebar', Sidebar);
+Vue.component('NewPost', NewPost);
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   render: h => h(App),
   router,
+  axios,
   store,
   components: { App },
   template: '<App/>',

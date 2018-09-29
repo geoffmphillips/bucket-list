@@ -148,7 +148,7 @@
                             </template>
                           </v-combobox>
                           <v-select
-                            :items= categories
+                            :items="categories"
                             v-model="newpost.categories"
                             item-text="name"
                             v-validate="'required'"
@@ -241,13 +241,6 @@ export default {
       this.address = placeResultData;
     },
 
-    setIcon: function (field) {
-      return (!this.flags.dirty(field)) ? '' : (this.flags.dirty(field) && this.flags.passed(field)) ? 'done' : 'warning'
-    },
-    setRules: function (field) {
-         return (!this.vErrors.first(field)) ? [true] : [this.vErrors.first(field)]
-    },
-
     submit() {
       const submitPost = {
         post: {
@@ -255,18 +248,16 @@ export default {
           note: this.newpost.note,
           photo_url: this.newpost.photo_url,
           user_id: 2,
+          location: {
+            city: this.address.locality,
+            location: this.address.name,
+            google_id: this.address.place_id,
+            lat: (this.address.latitude * (10 ** 4)),
+            long: (this.address.longitude * (10 ** 4)),
+          },
+          categories: this.newpost.categories,
+          boards: this.newpost.boards,
         },
-        location: {
-          city: this.address.locality,
-          location: this.address.name,
-          google_id: this.address.place_id,
-          lat: (this.address.latitude * (10 ** 4)),
-          long: (this.address.longitude * (10 ** 4)),
-        },
-        categories:
-          this.newpost.categories,
-        boards:
-          this.newpost.boards,
       };
 
       const photoDetails = this.address.photos[0].getUrl()
