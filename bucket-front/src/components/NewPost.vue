@@ -79,6 +79,7 @@
                           <v-combobox
                             v-model="newpost.boards"
                             :items="boards"
+                            item-text="name"
                             :search-input.sync="search"
                             v-validate="'required'"
                             :error-messages="vErrors.first('boards')"
@@ -86,7 +87,8 @@
                             hide-selected
                             label="Choose your boards or type to create a new one"
                             multiple
-                            small-chips
+                            chips
+                            deletable-chips="true"
                           >
                             <template slot="no-data">
                               <v-list-tile>
@@ -108,6 +110,7 @@
                             label="Choose your categories"
                             multiple
                             chips
+                            deletable-chips="true"
                           ></v-select>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
@@ -119,7 +122,7 @@
                       </v-stepper-items>
                     </v-stepper>
                     <br><br>Debug: {{ this.address }}
-                    <br><br>Rebug: {{ this.info }}
+                    <br><br>Rebug: {{ this.boards }}
                   </v-container>
 
               </v-content>
@@ -138,9 +141,9 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    axios
-      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-      .then(response => (this.info = response))
+    // axios
+    //   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    //   .then(response => (this.info = response))
   },
 
   data: () => ({
@@ -155,8 +158,8 @@ export default {
       board: null,
       categories: null,
     },
-    boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
-    categories: this.categories,
+    // boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
+    // categories: this.categories,
     search: null,
     address: this.address,
   }),
@@ -166,6 +169,9 @@ export default {
     })
       .then((response) => {
         this.categories = response.data.categories;
+        this.boards = response.data.boards.filter(obj => {
+          return obj.user_id === 2
+        });
       })
       .catch((e) => {
         this.errors.push(e);
