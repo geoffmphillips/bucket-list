@@ -121,8 +121,6 @@
                         </v-stepper-content>
                       </v-stepper-items>
                     </v-stepper>
-                    <br><br>Debug: {{ this.address }}
-                    <br><br>Rebug: {{ this.boards }}
                   </v-container>
 
               </v-content>
@@ -141,9 +139,7 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    // axios
-    //   .get('https://api.coindesk.com/v1/bpi/currentprice.json')
-    //   .then(response => (this.info = response))
+
   },
 
   data: () => ({
@@ -158,8 +154,6 @@ export default {
       board: null,
       categories: null,
     },
-    // boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
-    // categories: this.categories,
     search: null,
     address: this.address,
   }),
