@@ -29,13 +29,12 @@
                             types=""
                             name="location"
                             v-validate="'required'"
-                            :error-messages="vErrors.collect('location')"
+                            :error-messages="vErrors.first('location')"
                             data-vv-name="location" required data-vv-scope="form1"
                             placeholder="Start typing"
                             v-on:placechanged="getAddressData"
                           >
                           </vuetify-google-autocomplete>
-                          <span class="help is-danger">{{ vErrors.first('location') }}</span>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
                           <v-btn color="primary" @click.native="submitForm('form1')">Continue</v-btn>
@@ -61,7 +60,10 @@
                               </div>
                             </v-textarea>
                             <v-text-field
-                              label="Image URL (Optional)"
+                              label="Photo URL (Optional)"
+                              v-validate="'url:require_protocol'"
+                              :error-messages="vErrors.first('photo_url')"
+                              data-vv-name="photo_url" data-vv-scope="form2"
                               v-model="newpost.photo_url"
                             ></v-text-field>
 
@@ -78,6 +80,9 @@
                             v-model="newpost.boards"
                             :items="boards"
                             :search-input.sync="search"
+                            v-validate="'required'"
+                            :error-messages="vErrors.first('boards')"
+                            data-vv-name="boards" required data-vv-scope="form3"
                             hide-selected
                             label="Choose your boards or type to create a new one"
                             multiple
@@ -97,6 +102,9 @@
                             :items= categories
                             v-model="newpost.categories"
                             item-text="name"
+                            v-validate="'required'"
+                            :error-messages="vErrors.first('categories')"
+                            data-vv-name="categories" required data-vv-scope="form3"
                             label="Choose your categories"
                             multiple
                             chips
@@ -110,7 +118,8 @@
                         </v-stepper-content>
                       </v-stepper-items>
                     </v-stepper>
-
+                    <br><br>Debug: {{ this.address }}
+                    <br><br>Rebug: {{ this.info }}
                   </v-container>
 
               </v-content>
@@ -129,7 +138,9 @@ import axios from 'axios';
 
 export default {
   mounted() {
-
+    axios
+      .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then(response => (this.info = response))
   },
 
   data: () => ({
@@ -211,7 +222,9 @@ export default {
           this.newpost.boards,
       };
 
-      console.log(submitPost);
+      const photoDetails = this.address.photos[0].getUrl()
+
+      console.log(photoDetails);
 
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
