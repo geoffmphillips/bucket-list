@@ -1,7 +1,5 @@
 <template lang="pug">
   v-toolbar.navbar(
-    :color="$vuetify.breakpoint.smAndDown ? 'primary' : 'default'"
-    :dark="$vuetify.breakpoint.smAndDown"
     fixed
     app
     dense
@@ -105,7 +103,7 @@ import NewPost from './NewPost'
   box-sizing: border-box
 
   .navbar
-    background: #39B885
+    background: #0255e5
     height: 90px
     display: block
 
