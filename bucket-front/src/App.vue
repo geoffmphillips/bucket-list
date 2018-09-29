@@ -2,7 +2,6 @@
   v-app(v-if="isSessionReady")
     sidebar
     navbar
-    jumbotron
     router-view
 </template>
 

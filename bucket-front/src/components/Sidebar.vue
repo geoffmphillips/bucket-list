@@ -5,12 +5,12 @@
     </v-layout>
     <v-divider></v-divider>
     <v-list class="sidebar__list" light="light">
-        <v-list-tile v-if="!this.signedIn" slot="activator" ripple="ripple">
+        <v-list-tile v-if="!this.loggedIn" slot="activator" ripple="ripple">
           <v-list-tile-content class="sidebar__username">
             <v-list-tile-title> Log in For more features </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      <v-list-group v-if="this.signedIn" prepend-icon="person">
+      <v-list-group v-if="this.loggedIn" prepend-icon="person">
         <v-list-tile slot="activator" ripple="ripple">
           <v-list-tile-content class="sidebar__username">
             <v-list-tile-title>{{ user.first_name }}</v-list-tile-title>
@@ -35,7 +35,7 @@
       </v-list-group>
     </v-list>
     <v-divider></v-divider>
-    <v-list-tile v-if="!this.signedIn" ripple :to="{ name: 'Login' }">
+    <v-list-tile v-if="!this.loggedIn" ripple :to="{ name: 'Login' }">
       <v-list-tile-action>
         <v-icon>exit_to_app</v-icon>
       </v-list-tile-action>
@@ -43,7 +43,7 @@
         <v-list-tile-title>Log in</v-list-tile-title>
       </v-list-tile-content>
     </v-list-tile>
-    <div v-if="this.signedIn">
+    <div v-if="this.loggedIn">
       <v-list dark="dark">
         <v-list-tile ripple="ripple" :to="{ name: 'Boards' }">
           <v-list-tile-action>
@@ -83,28 +83,30 @@ import axios from 'axios';
     name: 'AppSidebar',
     data() {
       return {
-        signedIn: false,
+        loggedIn: true, //isLoggedIn(),
         user: {
         },
         errors: [],
       }
     },
-    beforeMount() {
-      axios.get('http://localhost:3000/users/1')
-      .then((response) => {
-        this.user = response.data;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
+    created() {
       if (localStorage.signedIn) {
-        this.signedIn = localStorage.signedIn;
+        axios.get('http://localhost:3000/users/1')
+          .then((response) => {
+            this.user = response.data;
+          })
+          .catch((e) => {
+            this.errors.push(e);
+          });
       }
     },
     computed: {
+      isLoggedIn () {
+        return this.$store.getters.isLoggedIn;
+      },
       isActive: {
         get () {
-          return this.$store.state.common.sidebar.visible
+          return this.$store.state.common.sidebar.visible;
         },
         set (val) {
           this.$store.dispatch('common/updateSidebar', { visible: val })
@@ -116,7 +118,6 @@ import axios from 'axios';
         this.$store.dispatch('logOut');
         this.$router.replace('/');
         this.user = {};
-        this.signedIn = false;
       }
     }
 

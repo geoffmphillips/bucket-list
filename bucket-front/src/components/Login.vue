@@ -64,7 +64,7 @@ export default {
 
 <style lang="css">
 body {
-  background: rgb(196, 189, 189);
+  background:  #fff;
 }
 
 .login-wrapper {
