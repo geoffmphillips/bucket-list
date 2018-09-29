@@ -9,12 +9,23 @@ import Vuetify from 'vuetify';
 import App from './App';
 import router from './router';
 import VueMasonryPlugin from 'vue-masonry'
-// const VueMasonryPlugin = require('vue-masonry');
+import Autocomplete from 'v-autocomplete'
+import 'v-autocomplete/dist/v-autocomplete.css'
 
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import store from './store/index';
 import NewPost from './components/NewPost';
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#21CE99',
+    secondary: '#D81B60',
+    accent: '#805441',
+  },
+});
+
+Vue.use(Autocomplete)
 
 Vue.use(VueAxios, axios);
 
@@ -27,13 +38,6 @@ Vue.use(VueGoogleMaps, {
 
 Vue.config.productionTip = false;
 
-Vue.use(Vuetify, {
-  theme: {
-    primary: '#21CE99',
-    secondary: '#D81B60',
-    accent: '#805441',
-  },
-});
 
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
@@ -46,7 +50,6 @@ global.URLSearchParams = URLSearchParams;
 
 // Sync router to store, as `store.state.route`.
 sync(store, router);
-
 
 // Styles
 require('./styles/stylus/main.styl');

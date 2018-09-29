@@ -15,6 +15,11 @@
       :label='`Search for buckets...`',
       return-object='',
       color="darkslategrey",
+      :get-label='getLabel',
+      @item-selected="itemSelected",
+      @item-clicked="itemSelected",
+      @update-items='update',
+      :search-input.sync="search"
     )
     v-spacer
     v-toolbar-items.navbar__list
@@ -40,7 +45,7 @@ import NewPost from './NewPost'
   export default {
     name: 'Navbar',
     components: {
-      NewPost
+      NewPost,
     },
     props: {
       backButton: {
@@ -71,8 +76,23 @@ import NewPost from './NewPost'
     methods: {
       toggleSidebar () {
         this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
+      },
+      itemSelected(item) {
+        console.log("hey!!")
+      },
+      getLabel (item) {
+      if (item) {
+        return item.name
+      }
+      return ''
+      },
+      update (text) {
+        this.items = Animals.filter((item) => {
+          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
+        })
       }
     },
+    
     created() {
       axios.get(`http://localhost:3000/posts`)
       .then(response => {
@@ -94,9 +114,12 @@ import NewPost from './NewPost'
         if (val) {
           setTimeout(() => (this.isUpdating = false), 3000)
         }
+      },
+      search (val) {
+        console.log(this.stuff)
       }
     }
-  };
+  }
 </script>
 
 <style lang="stylus">
