@@ -4,13 +4,17 @@
       <div class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
-            <v-app>
+            <v-app v-bind:style="{ 
+              height: calcHeight, 
+              minWidth: calcWidth, 
+              margin: calcMargin 
+            }">
 
-              <v-content>
+              <v-content v-bind:style="{ boxShadow: removeBoxShadow }">
 
                   <v-container>
-                    <v-stepper v-model="step" vertical>
-                      <v-stepper-header>
+                    <v-stepper v-model="step" v-bind="{ boxShadow: calcBoxShadow }" vertical>
+                      <v-stepper-header v-bind:style="{ boxShadow: removeBoxShadow }">
                         <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
                         <v-stepper-step step="2" :complete="step > 2">Describe it</v-stepper-step>
@@ -127,6 +131,23 @@ export default {
     search: null,
     address: this.address,
   }),
+  computed: {
+    removeBoxShadow: function() {
+      return "initial"
+    },
+    calcHeight: function() {
+      return "0px"
+    },
+    calcWidth: function() {
+      return "822px"
+    },
+    calcMargin: function() {
+      return "0 auto"
+    },
+    calcBoxShadow: function() {
+      return "3px 0px 5px 0px rgba(0,0,0,0.75)"
+    }
+  },
 
   created() {
     axios.get(`http://localhost:3000/posts/`, {
@@ -193,9 +214,10 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, .5)
-  opacity: 0.8
+  // opacity: 0.8
   display: table
-  transition: opacity .3s ease
+  // transition: opacity .3s ease
+  height: 0px
 
   .model-wrapper
     display: table-cell
@@ -207,14 +229,18 @@ export default {
       padding: 20px 30px
       background-color: #fff
       border-radius: 2px
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .33)
+      // box-shadow: 0 2px 8px rgba(0, 0, 0, .33)
       transition: all .3s ease
       font-family: Helvetica, Arial, sans-serif
 
+      .application 
+        height: 0
+        background: red
+
 .modal-enter
-  opacity: 0
+  // opacity: 0
 
 .modal-leave-active
-  opacity: 0
+  // opacity: 0
 
 </style>
