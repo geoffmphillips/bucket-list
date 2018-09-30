@@ -1,7 +1,16 @@
 <template lang="pug">
-  .panel-container
+  .panel-container(
+    v-masonry='', 
+    fit-width="true",
+    transition-duration="0.4s", 
+    percent-position: true,
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
     h3 {{this.category.name}}
-    card(
+    card.item(
+      v-masonry-tile='',
       v-for='post in posts', 
       :key='post.id', 
       :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
@@ -38,6 +47,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .panel-container !important
+    width: 500px
+    height: 250px
 </style>

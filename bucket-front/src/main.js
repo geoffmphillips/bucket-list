@@ -10,6 +10,9 @@ import App from './App';
 
 import VeeValidate from 'vee-validate';
 import router from './router';
+import VueMasonryPlugin from 'vue-masonry'
+// const VueMasonryPlugin = require('vue-masonry');
+
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import store from './store/index';
@@ -25,18 +28,6 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify);
-Vue.use(VeeValidate, {errorBagName: 'vErrors'});
-Vue.use(VuetifyGoogleAutocomplete, {
-  apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
-});
-
-// Polyfills
-global.URLSearchParams = URLSearchParams;
-
-// Sync router to store, as `store.state.route`.
-sync(store, router);
-
 Vue.use(Vuetify, {
   theme: {
     primary: '#21CE99',
@@ -44,6 +35,19 @@ Vue.use(Vuetify, {
     accent: '#805441',
   },
 });
+Vue.use(VeeValidate, {errorBagName: 'vErrors'});
+Vue.use(VuetifyGoogleAutocomplete, {
+  apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
+});
+
+Vue.use(VueMasonryPlugin);
+
+// Polyfills
+global.URLSearchParams = URLSearchParams;
+
+// Sync router to store, as `store.state.route`.
+sync(store, router);
+
 
 // Styles
 require('./styles/stylus/main.styl');
