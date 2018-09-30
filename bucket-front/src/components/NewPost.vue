@@ -13,8 +13,10 @@
               <v-content v-bind:style="{ boxShadow: removeBoxShadow }">
 
                   <v-container>
-                    <v-stepper v-model="step" v-bind="{ boxShadow: calcBoxShadow }" vertical>
-                      <v-stepper-header v-bind:style="{ boxShadow: removeBoxShadow }">
+                     <!-- v-bind="{ boxShadow: calcBoxShadow }" -->
+                       <!-- v-bind:style="{ boxShadow: removeBoxShadow }" -->
+                    <v-stepper v-model="step" vertical>
+                      <v-stepper-header>
                         <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
                         <v-stepper-step step="2" :complete="e1 > 2">Describe it</v-stepper-step>
