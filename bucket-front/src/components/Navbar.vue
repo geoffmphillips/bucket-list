@@ -10,7 +10,7 @@
       v-model='model',
       :items='stuff',
       item-text='name',
-      :label='`Search for buckets...`',
+      :label='`Search for inspiration...`',
       return-object='',
       color="darkslategrey",
     )
@@ -45,33 +45,32 @@ import NewPost from './NewPost'
     },
     data() {
       return {
-        autoUpdate: true,
         showModal: false,
-        friends: [],
-        isUpdating: false,
-        name: 'Midnight Crew',
-        stuff: [
-          {
-            name: "kyle",
-            group: "tycholiz"
-          },
-          {
-            name: "Eli",
-            group: "Arias"
-          }
-        ],
         model: '',
       }
     },
     methods: {
-      toggleSidebar () {
-        this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
-      }
+      itemSelected(item) {
+        console.log("item selected:", item.name)
+      },
+      itemClicked(item) {
+        console.log("item clicked:", item.name)
+      },
     },
     created() {
       axios.get(`http://localhost:3000/posts`)
       .then(response => {
-        this.posts = response.data
+        this.posts = response.data.posts.sort((a, b) => {
+          let nameA = a.title.toUpperCase()
+          let nameB = b.title.toUpperCase()
+          if (nameA < nameB) {
+            return -1;
+          } else if (nameB < nameA) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
       })
       .catch(e => {
         this.errors.push(e)
@@ -84,26 +83,19 @@ import NewPost from './NewPost'
         });
       }
     },
-    watch: {
-      isUpdating (val) {
-        if (val) {
-          setTimeout(() => (this.isUpdating = false), 3000)
-        }
-      }
-    }
   };
 </script>
 
 <style lang="stylus">
 #app
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  font-family: 'Montserrat', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   color: #2c3e50
   box-sizing: border-box
 
   .navbar
-    background: #0255e5
+    background: #0074c6
     height: 90px
     display: block
 
@@ -112,15 +104,6 @@ import NewPost from './NewPost'
       float: left
       margin-top: 40px; margin-right: 10px; margin-left: 10px
       cursor: pointer
-
-    &__search-field
-      height: 40px
-      width: 500px
-      position: relative
-      top: 50%
-      font-size: 1.3em
-      margin-left: 20px; margin-bottom: 15px
-      border-radius: 15px
 
     &__list
       float: right
