@@ -45,11 +45,8 @@ export default {
       padding 24px
       box-shadow inset 0px 7px 13px -3px #42422F //I'm ok to take this one out. it is a bit unconventional.
  
-
       &__wrapper
         border-radius 3px
-
-
 
       .panel-container 
         margin-top 50px

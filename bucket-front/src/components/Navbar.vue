@@ -122,6 +122,7 @@ import NewPost from './NewPost'
     background: #39B885
     height: 90px
     display: block
+    top: 0
 
     &__logo
       height: 70px

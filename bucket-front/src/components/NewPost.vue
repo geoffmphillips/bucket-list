@@ -5,11 +5,10 @@
         <div class="modal-wrapper" :style="{ boxShadow: removeBoxShadow }">
           <div class="modal-container">
             <v-app :style="{ height: calcHeight }">
-
               <v-content :style="{ boxShadow: removeBoxShadow }">
 
                   <v-container>
-                    <v-stepper v-model="e1" :style='modalContainer'>
+                    <v-stepper v-model="e1" :style='{ modalContainer }'>
                       <v-stepper-header :style="{ boxShadow: removeBoxShadow }">
                         <v-stepper-step step="1" :complete="e1 > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
@@ -33,7 +32,7 @@
                             v-validate="'required'"
                             :error-messages="vErrors.first('location')"
                             data-vv-name="location" required data-vv-scope="form1"
-                            placeholder="Start typing"
+                            placeholder='Try "Eiffel Tower"...'
                             v-on:placechanged="getAddressData"
                           >
                           </vuetify-google-autocomplete>
@@ -80,7 +79,7 @@
                             ></v-text-field>
                             <v-layout>
                               <v-flex xs12 xl6 offset-md3>
-                                <v-card>
+                                <v-card :style="{ modalImages }">
                                   <v-container grid-list-sm align-content-centered="true" fluid>
                                     <v-layout row wrap>
                                       <v-flex
@@ -88,6 +87,7 @@
                                         :key="n"
                                         xs4
                                         d-flex
+                                        :style="{ cursor: calcPointer }"
                                       >
                                         <v-card flat tile class="d-flex">
                                           <v-img
@@ -212,7 +212,9 @@ export default {
       top: '100px',
       padding: '33px',
       borderRadius: '6px'
-
+    },
+    modalImages: {
+      margin: '27px auto'
     }
   }),
 
@@ -244,6 +246,9 @@ export default {
     },
     calcBoxShadow: function() {
       return "3px 0px 5px 0px rgba(0,0,0,0.75)"
+    },
+    calcPointer: function() {
+      return "pointer"
     }
   },
   methods: {
