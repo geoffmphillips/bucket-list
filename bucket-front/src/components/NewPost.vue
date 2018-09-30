@@ -9,59 +9,133 @@
               <v-content>
 
                   <v-container>
-                    <v-stepper v-model="step" vertical>
+                    <v-stepper v-model="e1" vertical>
                       <v-stepper-header>
-                        <v-stepper-step step="1" :complete="step > 1">Locate it</v-stepper-step>
+                        <v-stepper-step step="1" :complete="e1 > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
-                        <v-stepper-step step="2" :complete="step > 2">Describe it</v-stepper-step>
+                        <v-stepper-step step="2" :complete="e1 > 2">Describe it</v-stepper-step>
                         <v-divider></v-divider>
-                        <v-stepper-step step="3">Categorize it</v-stepper-step>
+                        <v-stepper-step step="3" :complete="e1 > 3">Photograph it</v-stepper-step>
+                        <v-divider></v-divider>
+                        <v-stepper-step step="4">Categorize it</v-stepper-step>
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
+                          <form data-vv-scope="form1">
 
                           <vuetify-google-autocomplete
-                            label="Location"
+                            label="Location (Required)"
                             v-model="newpost.location"
                             id="map"
                             ref="address"
                             types=""
-                            append-icon="search"
+                            name="location"
+                            v-validate="'required'"
+                            :error-messages="vErrors.first('location')"
+                            data-vv-name="location" required data-vv-scope="form1"
                             placeholder="Start typing"
                             v-on:placechanged="getAddressData"
                           >
                           </vuetify-google-autocomplete>
 
-                          <v-btn color="primary" @click.native="step = 2">Continue</v-btn>
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form1')">Continue</v-btn>
+                        </form>
                         </v-stepper-content>
                         <v-stepper-content step="2">
+                          <form data-vv-scope="form2">
 
-                            <v-text-field label="Title" v-model="newpost.title"></v-text-field>
+                            <v-text-field
+                              label="Title"
+                              name="title"
+                              v-model="newpost.title"
+                              :error-messages="vErrors.first('title')"
+                              :class="{ 'is-danger': vErrors.has('title') }"
+                              v-validate="'required'"
+                              data-vv-name="title" required data-vv-scope="form2"
+                              >
+                              </v-text-field>
+                              <span class="help is-danger">{{ vErrors.first('title') }}</span>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
                               </div>
                             </v-textarea>
-                            <v-text-field
-                              label="Image URL (Optional)"
-                              v-model="newpost.photo_url"
-                            ></v-text-field>
 
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
+                          <v-btn flat @click.native="goBack()">Previous</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form2')">Continue</v-btn>
 
-                          <v-btn flat @click.native="step = 1">Previous</v-btn>
-                          <v-btn color="primary" @click.native="step = 3">Continue</v-btn>
-
+                        </form>
                         </v-stepper-content>
                         <v-stepper-content step="3">
+                          <form data-vv-scope="form3">
+
+                            <v-text-field
+                              label="Photo URL (Optional)"
+                              v-validate="'url:require_protocol'"
+                              :error-messages="vErrors.first('photo_url')"
+                              data-vv-name="photo_url" data-vv-scope="form3"
+                              v-model="newpost.photo_url"
+                            ></v-text-field>
+                            <v-layout>
+                              <v-flex xs12 xl6 offset-md3>
+                                <v-card>
+                                  <v-container grid-list-sm align-content-centered="true" fluid>
+                                    <v-layout row wrap>
+                                      <v-flex
+                                        v-for="n in 6"
+                                        :key="n"
+                                        xs4
+                                        d-flex
+                                      >
+                                        <v-card flat tile class="d-flex">
+                                          <v-img
+                                            :src= photos[n]
+                                            @click.native="savePhoto(n)"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                          >
+                                            <v-layout
+                                              slot="placeholder"
+                                              fill-height
+                                              align-center
+                                              justify-center
+                                              ma-0
+                                            >
+                                              <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                            </v-layout>
+                                          </v-img>
+                                        </v-card>
+                                      </v-flex>
+                                    </v-layout>
+                                  </v-container>
+                                </v-card>
+                              </v-flex>
+                            </v-layout>
+
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
+                          <v-btn flat @click.native="getPhotos()">Previous</v-btn>
+                          <v-btn color="primary" @click.native="submitForm('form2')">Continue</v-btn>
+
+                        </form>
+                        </v-stepper-content>
+                        <v-stepper-content step="4">
+                          <form data-vv-scope="form4">
 
                           <v-combobox
                             v-model="newpost.boards"
                             :items="boards"
+                            item-text="name"
                             :search-input.sync="search"
+                            v-validate="'required'"
+                            :error-messages="vErrors.first('boards')"
+                            data-vv-name="boards" required data-vv-scope="form3"
                             hide-selected
                             label="Choose your boards or type to create a new one"
                             multiple
-                            small-chips
+                            chips
+                            deletable-chips=true
                           >
                             <template slot="no-data">
                               <v-list-tile>
@@ -77,18 +151,23 @@
                             :items="categories"
                             v-model="newpost.categories"
                             item-text="name"
+                            v-validate="'required'"
+                            :error-messages="vErrors.first('categories')"
+                            data-vv-name="categories" required data-vv-scope="form3"
                             label="Choose your categories"
                             multiple
                             chips
+                            deletable-chips=true
                           ></v-select>
 
-                          <v-btn flat @click.native="step = 2">Previous</v-btn>
+                          <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
+                          <v-btn flat @click.native="goBack()">Previous</v-btn>
                           <v-btn color="primary" @click="$emit('close')" @click.prevent="submit">Save</v-btn>
 
+                        </form>
                         </v-stepper-content>
                       </v-stepper-items>
                     </v-stepper>
-
                   </v-container>
 
               </v-content>
@@ -107,12 +186,13 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    // this.$refs.address.focus();
+
   },
 
   data: () => ({
-    errors: [],
+    e1: 0,
     step: 1,
+    photos: {},
     newpost: {
       title: null,
       note: null,
@@ -122,8 +202,6 @@ export default {
       board: null,
       categories: null,
     },
-    boards: ['2019 Family Vacation', 'Weekend ideas', 'Anniversary Trip', 'Runaway plans'],
-    categories: this.categories,
     search: null,
     address: this.address,
   }),
@@ -133,6 +211,9 @@ export default {
     })
       .then((response) => {
         this.categories = response.data.categories;
+        this.boards = response.data.boards.filter(obj => {
+          return obj.user_id === 2
+        });
       })
       .catch((e) => {
         this.errors.push(e);
@@ -140,6 +221,24 @@ export default {
   },
 
   methods: {
+
+    submitForm(scope) {
+      this.$validator.validateAll(scope).then(result => {
+        if (result && scope === "form2") {
+          this.e1++;
+          for (let i=0; i<8; i++) {
+            this.photos[i] = this.address.photos[i].getUrl();
+          }
+          return this.photos;
+        }
+        else if (result) {
+          this.e1++;
+        }
+      });
+    },
+    goBack(){
+      this.e1--
+    },
     /**
     * When the location found
     * @param {Object} addressData Data of the found location
@@ -149,6 +248,19 @@ export default {
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
+
+    savePhoto(n) {
+      this.newpost.photo_url = this.photos[n]
+    },
+
+    // getPhotos() {
+    //   const photos = {}
+    //   for (let i=0; i<8; i++) {
+    //     photos[i] = this.address.photos[i].getUrl()
+    //   }
+    //   console.log(photos);
+    //   return photos
+    // },
 
     submit() {
       const submitPost = {
@@ -168,8 +280,6 @@ export default {
           boards: this.newpost.boards,
         },
       };
-
-      console.log(submitPost);
 
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
@@ -193,7 +303,7 @@ export default {
   width: 100%
   height: 100%
   background-color: rgba(0, 0, 0, .5)
-  opacity: 0.8
+  opacity: 0.95
   display: table
   transition: opacity .3s ease
 
