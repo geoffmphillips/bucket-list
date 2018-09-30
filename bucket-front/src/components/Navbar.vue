@@ -12,6 +12,7 @@
       @update-items="updateItems"
       @item-selected="itemSelected"
       @item-clicked="itemClicked"
+      placeholder='Search for inspiration...',
       :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}"
     )
     v-spacer
@@ -23,10 +24,6 @@
         v-btn.navbar__list-item(flat='') Categories
       router-link(:to="'/locations'")
         v-btn.navbar__list-item(flat='') Locations
-
-    v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
-    v-btn(icon v-show="backButton" @click.stop="$router.back()")
-      v-icon arrow_back
 </template>
 
 <script>

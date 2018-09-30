@@ -13,6 +13,11 @@ import axios from 'axios';
 
 export default {
   name: "NewComment",
+  props: {
+    post: {
+      type: Object,
+    }
+  },
   data() {
     return {
       text: "",
@@ -29,7 +34,7 @@ export default {
         })
         .then((response) => {
           this.text = '';
-          this.$router.push({ name: 'Post', params: { id: 1 }});
+          this.$router.replace({ name: 'Post', params: { id: this.post.id }});
         })
         .catch((error) => {
           this.errors.push(error);

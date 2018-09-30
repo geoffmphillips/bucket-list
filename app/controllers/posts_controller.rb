@@ -25,13 +25,11 @@ class PostsController < ApplicationController
     @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
     @boards = post_params[:boards]
+    puts @boards
 
     if @post.save
-      puts 1
       create_post_categories
-      puts 2
       create_board_items
-      puts 3
 
       render json: @post, status: :created, location: @post
     else
