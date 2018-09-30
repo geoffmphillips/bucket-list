@@ -23,17 +23,14 @@
 
     v-spacer
     v-toolbar-items.navbar__list
-      .modal-button
-        button#show-modal(@click='showModal = true') New Post
-        new-post(v-if="showModal", @close='showModal = false')
-      router-link(:to="'/categories'")
+      router-link(:to="'/categories'" ripple)
         v-btn.navbar__list-item(flat='') Categories
       router-link(:to="'/locations'" ripple)
         v-btn.navbar__list-item(flat='') Locations
       .modal-button.navbar__list-item
         button#show-modal(@click='showModal = true') NEW POST
         new-post(
-          v-if="showModal", 
+          v-if="showModal",
           @close='showModal = false'
         )
 
