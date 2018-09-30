@@ -21,7 +21,7 @@
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
-                          <form data-vv-scope="form1">
+                          <form data-vv-scope="form1" @keydown.enter.prevent.self>
 
                           <vuetify-google-autocomplete
                             label="Location (Required)"
@@ -43,7 +43,7 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="2">
-                          <form data-vv-scope="form2">
+                          <form data-vv-scope="form2" @keydown.enter.prevent.self>
 
                             <v-text-field
                               label="Title"
@@ -69,12 +69,13 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="3">
-                          <form data-vv-scope="form3">
+                          <form data-vv-scope="form3" @keydown.enter.prevent.self>
 
                             <span><h3>Please either choose a image from Google Places, or input a custom image URL</h3></span>
                             <v-text-field
                               label="Photo URL (Optional)"
                               v-validate="'url:require_protocol'"
+                              v-on:keyup.enter="submitForm('form3')"
                               :error-messages="vErrors.first('photo_url')"
                               data-vv-name="photo_url" data-vv-scope="form3"
                               v-model="newpost.photo_url"
@@ -316,6 +317,7 @@ export default {
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
           this.newpost = response.data;
+          console.log(this.newpost.post.id);
         })
         .catch((error) => {
           this.errors.push(error);
