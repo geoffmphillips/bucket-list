@@ -71,6 +71,7 @@
                         <v-stepper-content step="3">
                           <form data-vv-scope="form3">
 
+                            <span><h3>Please either choose a image from Google Places, or input a custom image URL</h3></span>
                             <v-text-field
                               label="Photo URL (Optional)"
                               v-validate="'url:require_protocol'"
