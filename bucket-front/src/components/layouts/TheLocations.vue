@@ -1,11 +1,16 @@
 <template lang="pug">
-  .panel-container
-    location-card(
-      v-for='(location, index) in locations', 
-      :location='location', 
-      :post='posts[index]', 
-      :key='index')
-
+  .panel-container(
+    fit-width="true",
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
+    location-card.item(
+      v-for='(location, index) in locations',
+      :key='index',
+      :location='location',
+      :post='posts[index]',
+    )
 </template>
 
 <script>

@@ -114,9 +114,6 @@ export default {
 </script>
 
 <style scoped>
-#fade-in {
-  transition: all .75s ease;
-}
 .post-container {
   display: flex;
   justify-content: center;

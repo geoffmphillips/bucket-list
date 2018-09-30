@@ -1,10 +1,16 @@
 <template lang="pug">
-  .panel-container
+  .panel-container(
+    fit-width="true",
+    percent-position: true,
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
     h3 {{this.category.name}}
-    card(
-      v-for='post in posts', 
-      :key='post.id', 
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+    card.item(
+      v-for='post in posts',
+      :key='post.id',
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
       :post='post'
       )
 
@@ -38,6 +44,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+  .panel-container !important
+    width: 500px
+    height: 250px
 </style>

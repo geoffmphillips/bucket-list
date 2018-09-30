@@ -1,12 +1,16 @@
 <template lang="pug">
-  .categories-container.panel-container
-    category-card(
-      v-for='(category, index) in categories', 
-      :category='category', 
-      :post='posts[index]', 
-      :key='index'
-      )
-
+  .panel-container(
+    fit-width="true",
+    item-selector='.item',
+    :origin-top="true",
+    :horizontal-order="false",
+  )
+    category-card.item(
+      v-for='(category, index) in categories',
+      :key='index',
+      :category='category',
+      :post='posts[index]',
+    )
 </template>
 
 <script>
@@ -53,6 +57,5 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
 </style>

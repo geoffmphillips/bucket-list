@@ -2,15 +2,15 @@
   <div id="app">
     <transition name="modal">
       <div class="modal-mask">
-        <div class="modal-wrapper">
+        <div class="modal-wrapper" :style="{ boxShadow: removeBoxShadow }">
           <div class="modal-container">
-            <v-app>
+            <v-app :style="{ height: calcHeight }">
 
-              <v-content>
+              <v-content :style="{ boxShadow: removeBoxShadow }">
 
                   <v-container>
-                    <v-stepper v-model="e1" vertical>
-                      <v-stepper-header>
+                    <v-stepper v-model="e1" :style='modalContainer'>
+                      <v-stepper-header :style="{ boxShadow: removeBoxShadow }">
                         <v-stepper-step step="1" :complete="e1 > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
                         <v-stepper-step step="2" :complete="e1 > 2">Describe it</v-stepper-step>
@@ -204,6 +204,16 @@ export default {
     },
     search: null,
     address: this.address,
+
+    modalContainer: {
+      maxWidth: '822px',
+      boxShadow: '3px 0px 5px 0px rgba(0,0,0,0.75)',
+      margin: '0 auto',
+      top: '100px',
+      padding: '33px',
+      borderRadius: '6px'
+
+    }
   }),
 
   created() {
@@ -219,7 +229,23 @@ export default {
         this.errors.push(e);
       });
   },
-
+  computed: {
+    removeBoxShadow: function() {
+      return "initial"
+    },
+    calcHeight: function() {
+      return "0px"
+    },
+    calcWidth: function() {
+      return "822px"
+    },
+    calcMargin: function() {
+      return "0 auto"
+    },
+    calcBoxShadow: function() {
+      return "3px 0px 5px 0px rgba(0,0,0,0.75)"
+    }
+  },
   methods: {
 
     submitForm(scope) {
@@ -294,16 +320,14 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-
 .modal-mask
   position: fixed
   z-index: 9998
   top: 0
   left: 0
   width: 100%
-  height: 100%
+  height: 1000px
   background-color: rgba(0, 0, 0, .5)
-  opacity: 0.95
   display: table
   transition: opacity .3s ease
 
@@ -317,7 +341,7 @@ export default {
   padding: 20px 30px
   background-color: #fff
   border-radius: 2px
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33)
+  // box-shadow: 0 2px 8px rgba(0, 0, 0, .33)
   transition: all .3s ease
   font-family: Helvetica, Arial, sans-serif
 
