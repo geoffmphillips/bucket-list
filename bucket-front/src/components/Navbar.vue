@@ -7,12 +7,12 @@
     router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
     v-autocomplete.navbar__search-field(
-      v-model='model',
-      :items='stuff',
-      item-text='name',
-      :label='`Search for inspiration...`',
-      return-object='',
-      color="darkslategrey",
+      :items='Animals'
+      :component-item='template'
+      @update-items="updateItems"
+      @item-selected="itemSelected"
+      @item-clicked="itemClicked"
+      :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}"
     )
     v-spacer
     v-toolbar-items.navbar__list
@@ -30,7 +30,9 @@
 </template>
 
 <script>
+import ItemTemplate from './ItemTemplate'
 import NewPost from './NewPost'
+import Animals from './animals.js'
 
   export default {
     name: 'Navbar',
@@ -47,6 +49,14 @@ import NewPost from './NewPost'
       return {
         showModal: false,
         model: '',
+        posts: [],
+        item: {
+          id: 9,
+          name: 'Lion',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        items: [],
+        template: ItemTemplate
       }
     },
     methods: {
@@ -55,6 +65,11 @@ import NewPost from './NewPost'
       },
       itemClicked(item) {
         console.log("item clicked:", item.name)
+      },
+      updateItems (text) {
+        this.items = Animals.filter((item) => {
+          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
+        })
       },
     },
     created() {
