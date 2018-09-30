@@ -5,7 +5,6 @@
       :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", 
       :post='post[0]'
       )
-
 </template>
 
 <script>
