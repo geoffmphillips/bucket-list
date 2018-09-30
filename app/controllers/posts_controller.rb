@@ -27,11 +27,8 @@ class PostsController < ApplicationController
     @boards = post_params[:boards]
 
     if @post.save
-      puts 1
       create_post_categories
-      puts 2
       create_board_items
-      puts 3
 
       render json: @post, status: :created, location: @post
     else

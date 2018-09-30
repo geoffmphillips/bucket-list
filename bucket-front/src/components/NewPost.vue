@@ -31,7 +31,6 @@
                             types=""
                             name="location"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('location')"
                             data-vv-name="location" required data-vv-scope="form1"
                             placeholder="Start typing"
                             v-on:placechanged="getAddressData"
@@ -49,13 +48,11 @@
                               label="Title"
                               name="title"
                               v-model="newpost.title"
-                              :error-messages="vErrors.first('title')"
                               :class="{ 'is-danger': vErrors.has('title') }"
                               v-validate="'required'"
                               data-vv-name="title" required data-vv-scope="form2"
                               >
                               </v-text-field>
-                              <span class="help is-danger">{{ vErrors.first('title') }}</span>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
@@ -75,8 +72,6 @@
                             <v-text-field
                               label="Photo URL (Optional)"
                               v-validate="'url:require_protocol'"
-                              v-on:keyup.enter="submitForm('form3')"
-                              :error-messages="vErrors.first('photo_url')"
                               data-vv-name="photo_url" data-vv-scope="form3"
                               v-model="newpost.photo_url"
                             ></v-text-field>
@@ -131,7 +126,6 @@
                             item-text="name"
                             :search-input.sync="search"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('boards')"
                             data-vv-name="boards" required data-vv-scope="form3"
                             hide-selected
                             label="Choose your boards or type to create a new one"
@@ -154,7 +148,6 @@
                             v-model="newpost.categories"
                             item-text="name"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('categories')"
                             data-vv-name="categories" required data-vv-scope="form3"
                             label="Choose your categories"
                             multiple
@@ -188,11 +181,7 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    document.addEventListener("keydown", (enter) => {
-      if (enter.keycode == 13) {
 
-      }
-    });
   },
 
   data: () => ({
