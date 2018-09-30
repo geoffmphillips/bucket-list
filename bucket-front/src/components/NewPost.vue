@@ -94,7 +94,7 @@
                                             :src= photos[n]
                                             @click.native="savePhoto(n)"
                                             aspect-ratio="1"
-                                            class="grey lighten-2"
+                                            class="grey lighten-2 pointer"
                                           >
                                             <v-layout
                                               slot="placeholder"
@@ -135,7 +135,7 @@
                             label="Choose your boards or type to create a new one"
                             multiple
                             chips
-                            deletable-chips=true
+                            deletable-chips
                           >
                             <template slot="no-data">
                               <v-list-tile>
@@ -157,7 +157,7 @@
                             label="Choose your categories"
                             multiple
                             chips
-                            deletable-chips=true
+                            deletable-chips
                           ></v-select>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
@@ -186,12 +186,17 @@ import axios from 'axios';
 
 export default {
   mounted() {
+    document.addEventListener("keydown", (enter) => {
+      if (enter.keycode == 13) {
 
+      }
+    });
   },
 
   data: () => ({
     e1: 0,
     step: 1,
+    errors: [],
     photos: {},
     newpost: {
       title: null,
@@ -287,6 +292,7 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error);
+          console.log(this.errors);
         });
     },
   },
@@ -326,5 +332,8 @@ export default {
 
 .modal-leave-active
   opacity: 0
+
+.pointer
+  cursor: pointer
 
 </style>
