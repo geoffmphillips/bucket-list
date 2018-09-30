@@ -41,7 +41,8 @@ export default {
         category4Posts,
         category5Posts,
         category6Posts,
-        category7Posts } = response.data;
+        category7Posts 
+      } = response.data;
       this.categories = categories;
       this.posts = [
         category1Posts,

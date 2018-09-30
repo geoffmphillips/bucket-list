@@ -41,10 +41,12 @@ export default {
           location4Posts,
         } = response.data;
         this.locations = locations;
-        this.posts = [ location1Posts,
-                       location2Posts,
-                       location3Posts,
-                       location4Posts ]
+        this.posts = [ 
+          location1Posts,
+          location2Posts,
+          location3Posts,
+          location4Posts 
+        ]
       })
       .catch((e) => {
         this.errors.push(e);

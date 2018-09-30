@@ -1,20 +1,21 @@
 <template lang="pug">
-  .panel-container(
-    v-masonry='', 
-    fit-width="true",
-    transition-duration="0.4s", 
-    percent-position: true,
-    item-selector='.item',
-    :origin-top="true",
-    :horizontal-order="false",
-  )
+  v-app
     h3 {{this.category.name}}
-    card.item(
-      v-masonry-tile='',
-      v-for='post in posts', 
-      :key='post.id', 
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
-      :post='post'
+    .panel-container(
+      v-masonry='', 
+      fit-width="true",
+      transition-duration="0.4s", 
+      percent-position: true,
+      item-selector='.item',
+      :origin-top="true",
+      :horizontal-order="false",
+    )
+      card.item(
+        v-masonry-tile='',
+        v-for='post in posts', 
+        :key='post.id', 
+        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+        :post='post'
       )
 
 </template>
@@ -48,7 +49,13 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .panel-container !important
-    width: 500px
+  h3
+    margin 0 auto
+    font-weight 600
+    margin 0 auto 1em
+    font-size 4em
+
+  .panel-container
+    width: 1000px
     height: 250px
 </style>
