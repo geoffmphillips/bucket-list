@@ -217,8 +217,6 @@ export default {
       .then((response) => {
         this.categories = response.data.categories;
         this.user = response.data.user;
-        console.log(this.user);
-        console.log(this.user.id);
         this.boards = response.data.boards.filter(obj => {
           return obj.user_id === this.user.id
         });
@@ -263,12 +261,7 @@ export default {
     goBack(){
       this.e1--
     },
-    /**
-    * When the location found
-    * @param {Object} addressData Data of the found location
-    * @param {Object} placeResultData PlaceResult object
-    * @param {String} id Input container ID
-    */
+    
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
@@ -276,16 +269,6 @@ export default {
     savePhoto(n) {
       this.newpost.photo_url = this.photos[n]
     },
-
-    // getPhotos() {
-    //   const photos = {}
-    //   for (let i=0; i<8; i++) {
-    //     photos[i] = this.address.photos[i].getUrl()
-    //   }
-    //   console.log(photos);
-    //   return photos
-    // },
-
     submit() {
       const submitPost = {
         post: {
@@ -308,7 +291,6 @@ export default {
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
           this.newpost = response.data;
-          console.log(this.newpost.post.id);
         })
         .catch((error) => {
           this.errors.push(error);
