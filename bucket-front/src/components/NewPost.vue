@@ -199,7 +199,6 @@ export default {
       categories: null,
     },
     search: null,
-    address: this.address,
 
     modalContainer: {
       maxWidth: '822px',
@@ -217,8 +216,11 @@ export default {
     })
       .then((response) => {
         this.categories = response.data.categories;
+        this.user = response.data.user;
+        console.log(this.user);
+        console.log(this.user.id);
         this.boards = response.data.boards.filter(obj => {
-          return obj.user_id === 2
+          return obj.user_id === this.user.id
         });
       })
       .catch((e) => {
@@ -290,7 +292,7 @@ export default {
           title: this.newpost.title,
           note: this.newpost.note,
           photo_url: this.newpost.photo_url,
-          user_id: 2,
+          user_id: this.user.id,
           location: {
             city: this.address.locality,
             location: this.address.name,
@@ -310,7 +312,6 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error);
-          console.log(this.errors);
         });
     },
   },
