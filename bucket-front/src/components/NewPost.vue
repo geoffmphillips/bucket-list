@@ -79,20 +79,20 @@
                               v-model="newpost.photo_url"
                             ></v-text-field>
                             <v-layout>
-                              <v-flex xs12 sm6 offset-sm3>
+                              <v-flex xs12 xl6 offset-md3>
                                 <v-card>
-                                  <v-container grid-list-sm fluid>
+                                  <v-container grid-list-sm align-content-centered="true" fluid>
                                     <v-layout row wrap>
                                       <v-flex
-                                        v-for="n in 9"
+                                        v-for="n in 6"
                                         :key="n"
                                         xs4
                                         d-flex
                                       >
                                         <v-card flat tile class="d-flex">
                                           <v-img
-                                            :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                                            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                                            :src= photos[n]
+                                            @click.native="savePhoto(n)"
                                             aspect-ratio="1"
                                             class="grey lighten-2"
                                           >
@@ -115,7 +115,7 @@
                             </v-layout>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
-                          <v-btn flat @click.native="goBack()">Previous</v-btn>
+                          <v-btn flat @click.native="getPhotos()">Previous</v-btn>
                           <v-btn color="primary" @click.native="submitForm('form2')">Continue</v-btn>
 
                         </form>
@@ -135,7 +135,7 @@
                             label="Choose your boards or type to create a new one"
                             multiple
                             chips
-                            deletable-chips="true"
+                            deletable-chips=true
                           >
                             <template slot="no-data">
                               <v-list-tile>
@@ -157,7 +157,7 @@
                             label="Choose your categories"
                             multiple
                             chips
-                            deletable-chips="true"
+                            deletable-chips=true
                           ></v-select>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
@@ -192,6 +192,7 @@ export default {
   data: () => ({
     e1: 0,
     step: 1,
+    photos: {},
     newpost: {
       title: null,
       note: null,
@@ -223,7 +224,14 @@ export default {
 
     submitForm(scope) {
       this.$validator.validateAll(scope).then(result => {
-        if (result) {
+        if (result && scope === "form2") {
+          this.e1++;
+          for (let i=0; i<8; i++) {
+            this.photos[i] = this.address.photos[i].getUrl();
+          }
+          return this.photos;
+        }
+        else if (result) {
           this.e1++;
         }
       });
@@ -240,6 +248,19 @@ export default {
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
+
+    savePhoto(n) {
+      this.newpost.photo_url = this.photos[n]
+    },
+
+    // getPhotos() {
+    //   const photos = {}
+    //   for (let i=0; i<8; i++) {
+    //     photos[i] = this.address.photos[i].getUrl()
+    //   }
+    //   console.log(photos);
+    //   return photos
+    // },
 
     submit() {
       const submitPost = {
@@ -259,10 +280,6 @@ export default {
           boards: this.newpost.boards,
         },
       };
-
-      const photoDetails = this.address.photos[0].getUrl()
-
-      console.log(photoDetails);
 
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
