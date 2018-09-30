@@ -131,12 +131,12 @@ import axios from 'axios';
       width: 300px
       position: absolute
       background-color: #30B887
-      background-image: url("../assets/sidebar-pic.jpg")
+      background-image: url("")
 
     &__avatar
       margin-top: 15px
       margin-left: 15px
-      
+
     &__list
       margin-top: 80px
 
