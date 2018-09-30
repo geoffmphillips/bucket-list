@@ -22,9 +22,11 @@
   >View comments</button>
     <comments-container
       v-if="this.displayComments"
+      id='fade-in'
       :comments="this.comments"
     ></comments-container>
     <new-comment
+      id='fade-in'
       v-if="this.displayComments"
       :post="this.post"
     ></new-comment>
@@ -112,6 +114,9 @@ export default {
 </script>
 
 <style scoped>
+#fade-in {
+  transition: all .75s ease;
+}
 .post-container {
   display: flex;
   justify-content: center;

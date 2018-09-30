@@ -31,5 +31,6 @@ export default {
 </script>
 
 <style lang="stylus">
-
+.application--wrap
+  margin-top: 100px
 </style>

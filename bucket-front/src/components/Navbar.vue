@@ -7,7 +7,7 @@
     router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
     v-autocomplete.navbar__search-field(
-      :items='Animals'
+      :items='animals'
       :component-item='template'
       @update-items="updateItems"
       @item-selected="itemSelected"
@@ -29,25 +29,19 @@
 <script>
 import ItemTemplate from './ItemTemplate'
 import NewPost from './NewPost'
-import Animals from './animals.js'
+import animals from './animals.js'
 
   export default {
     name: 'Navbar',
     inject: ['$validator'],
     components: {
-      NewPost
-    },
-    props: {
-      backButton: {
-        type: Boolean,
-        default: false
-      }
+      NewPost,
+      ItemTemplate,
     },
 
     mounted () {
       document.addEventListener("keydown", (e) => {
         if (e.keyCode == 27) {
-          console.log("closing!");
           this.showModal = false;
         }
       });
@@ -63,7 +57,7 @@ import Animals from './animals.js'
           name: 'Lion',
           description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
         },
-        items: [],
+        items: animals,
         template: ItemTemplate
       }
     },
@@ -75,7 +69,7 @@ import Animals from './animals.js'
         console.log("item clicked:", item.name)
       },
       updateItems (text) {
-        this.items = Animals.filter((item) => {
+        this.items = animals.filter((item) => {
           return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
         })
       },
