@@ -23,7 +23,10 @@
 
     v-spacer
     v-toolbar-items.navbar__list
-      router-link(:to="'/categories'" ripple)
+      .modal-button
+        button#show-modal(@click='showModal = true') New Post
+        new-post(v-if="showModal", @close='showModal = false')
+      router-link(:to="'/categories'")
         v-btn.navbar__list-item(flat='') Categories
       router-link(:to="'/locations'" ripple)
         v-btn.navbar__list-item(flat='') Locations
@@ -46,6 +49,7 @@
 
   export default {
     name: 'Navbar',
+    inject: ['$validator'],
     components: {
       NewPost,
     },
@@ -55,6 +59,16 @@
         default: false
       }
     },
+
+    mounted () {
+      document.addEventListener("keydown", (e) => {
+        if (e.keyCode == 27) {
+          console.log("closing!");
+          this.showModal = false;
+        }
+      });
+    },
+
     data() {
       return {
         autoUpdate: true,

@@ -2,7 +2,7 @@
   router-link.panel(:to="'/locations/' + location.id")
     h3.panel__text {{location.location}}
     card-no-link(
-      :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", 
+      :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }",
       :post='post[0]'
       )
 </template>
@@ -27,5 +27,7 @@ export default {
 </script>
 
 <style scoped>
-
+p {
+  z-index: 2;
+}
 </style>

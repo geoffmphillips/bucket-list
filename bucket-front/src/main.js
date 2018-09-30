@@ -7,6 +7,8 @@ import { sync } from 'vuex-router-sync';
 import Vuetify from 'vuetify';
 
 import App from './App';
+
+import VeeValidate from 'vee-validate';
 import router from './router';
 import VueMasonryPlugin from 'vue-masonry'
 import Autocomplete from 'v-autocomplete'
@@ -37,8 +39,8 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false;
-
-
+Vue.use(Vuetify);
+Vue.use(VeeValidate, {errorBagName: 'vErrors'});
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });
