@@ -21,7 +21,7 @@
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
-                          <form data-vv-scope="form1">
+                          <form data-vv-scope="form1" @keydown.enter.prevent.self>
 
                           <vuetify-google-autocomplete
                             label="Location (Required)"
@@ -31,7 +31,6 @@
                             types=""
                             name="location"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('location')"
                             data-vv-name="location" required data-vv-scope="form1"
                             placeholder="Start typing"
                             v-on:placechanged="getAddressData"
@@ -43,19 +42,17 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="2">
-                          <form data-vv-scope="form2">
+                          <form data-vv-scope="form2" @keydown.enter.prevent.self>
 
                             <v-text-field
                               label="Title"
                               name="title"
                               v-model="newpost.title"
-                              :error-messages="vErrors.first('title')"
                               :class="{ 'is-danger': vErrors.has('title') }"
                               v-validate="'required'"
                               data-vv-name="title" required data-vv-scope="form2"
                               >
                               </v-text-field>
-                              <span class="help is-danger">{{ vErrors.first('title') }}</span>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
@@ -69,13 +66,12 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="3">
-                          <form data-vv-scope="form3">
+                          <form data-vv-scope="form3" @keydown.enter.prevent.self>
 
                             <span><h3>Please either choose a image from Google Places, or input a custom image URL</h3></span>
                             <v-text-field
                               label="Photo URL (Optional)"
                               v-validate="'url:require_protocol'"
-                              :error-messages="vErrors.first('photo_url')"
                               data-vv-name="photo_url" data-vv-scope="form3"
                               v-model="newpost.photo_url"
                             ></v-text-field>
@@ -130,7 +126,6 @@
                             item-text="name"
                             :search-input.sync="search"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('boards')"
                             data-vv-name="boards" required data-vv-scope="form3"
                             hide-selected
                             label="Choose your boards or type to create a new one"
@@ -153,7 +148,6 @@
                             v-model="newpost.categories"
                             item-text="name"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('categories')"
                             data-vv-name="categories" required data-vv-scope="form3"
                             label="Choose your categories"
                             multiple
@@ -187,11 +181,7 @@ import axios from 'axios';
 
 export default {
   mounted() {
-    document.addEventListener("keydown", (enter) => {
-      if (enter.keycode == 13) {
 
-      }
-    });
   },
 
   data: () => ({
@@ -209,7 +199,6 @@ export default {
       categories: null,
     },
     search: null,
-    address: this.address,
 
     modalContainer: {
       maxWidth: '822px',
@@ -227,8 +216,9 @@ export default {
     })
       .then((response) => {
         this.categories = response.data.categories;
+        this.user = response.data.user;
         this.boards = response.data.boards.filter(obj => {
-          return obj.user_id === 2
+          return obj.user_id === this.user.id
         });
       })
       .catch((e) => {
@@ -271,12 +261,7 @@ export default {
     goBack(){
       this.e1--
     },
-    /**
-    * When the location found
-    * @param {Object} addressData Data of the found location
-    * @param {Object} placeResultData PlaceResult object
-    * @param {String} id Input container ID
-    */
+    
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
@@ -284,23 +269,13 @@ export default {
     savePhoto(n) {
       this.newpost.photo_url = this.photos[n]
     },
-
-    // getPhotos() {
-    //   const photos = {}
-    //   for (let i=0; i<8; i++) {
-    //     photos[i] = this.address.photos[i].getUrl()
-    //   }
-    //   console.log(photos);
-    //   return photos
-    // },
-
     submit() {
       const submitPost = {
         post: {
           title: this.newpost.title,
           note: this.newpost.note,
           photo_url: this.newpost.photo_url,
-          user_id: 2,
+          user_id: this.user.id,
           location: {
             city: this.address.locality,
             location: this.address.name,
@@ -319,7 +294,6 @@ export default {
         })
         .catch((error) => {
           this.errors.push(error);
-          console.log(this.errors);
         });
     },
   },
