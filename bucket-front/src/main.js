@@ -6,15 +6,16 @@ import axios from 'axios';
 import { sync } from 'vuex-router-sync';
 import Vuetify from 'vuetify';
 import VeeValidate from 'vee-validate';
+import Autocomplete from 'v-autocomplete';
 
 import App from './App';
 import router from './router';
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
 import store from './store/index';
 import NewPost from './components/NewPost';
 
 Vue.use(VueAxios, axios);
+Vue.use(Autocomplete);
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -47,7 +48,6 @@ require('./styles/stylus/main.styl');
 
 // Global Components
 Vue.component('Navbar', Navbar);
-Vue.component('Sidebar', Sidebar);
 Vue.component('NewPost', NewPost);
 
 /* eslint-disable no-new */

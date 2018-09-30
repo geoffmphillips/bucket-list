@@ -1,7 +1,5 @@
 <template lang="pug">
   v-toolbar.navbar(
-    color="$vuetify.breakpoint.smAndDown ? 'primary' : 'secondary'"
-    :dark="$vuetify.breakpoint.smAndDown"
     fixed
     app
     dense
@@ -10,6 +8,7 @@
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
     v-autocomplete.navbar__search-field(
       :items='animals'
+      :get-label="getLabel"
       :component-item='template'
       @update-items="updateItems"
       @item-selected="itemSelected"
@@ -62,11 +61,14 @@ import animals from './animals.js'
           name: 'Lion',
           description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
         },
-        items: animals,
+        items: [],
         template: ItemTemplate
       }
     },
     methods: {
+      getLabel (item) {
+        return item.name
+      },
       itemSelected(item) {
         console.log("item selected:", item.name)
       },
