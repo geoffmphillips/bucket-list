@@ -13,6 +13,11 @@ import axios from 'axios';
 
 export default {
   name: "NewComment",
+  props: {
+    post: {
+      type: Object,
+    }
+  },
   data() {
     return {
       text: "",
@@ -20,6 +25,13 @@ export default {
     }
   },
   methods: {
+    redirectToPost() {
+      let param = this.post.id;
+      this.$router.push({
+        name: 'Post',
+        params: { param },
+      });
+    },
     submit(event) {
       if(this.text !== '') {
         axios.post('http://localhost:3000/comments', {
@@ -29,7 +41,7 @@ export default {
         })
         .then((response) => {
           this.text = '';
-          this.$router.push({ name: 'Post', params: { id: 1 }});
+          redirectToPost();
         })
         .catch((error) => {
           this.errors.push(error);

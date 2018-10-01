@@ -4,17 +4,14 @@ class LocationsController < ApplicationController
   # GET /locations
   def index
     @locations = Location.all
-    @location1Posts = Location.find(1).posts
-    @location2Posts = Location.find(2).posts
-    @location3Posts = Location.find(3).posts
-    @location4Posts = Location.find(4).posts
+    @locationPosts = []
+    @locations.each do |location|
+      @locationPosts << location.posts.first
+    end
 
     render json: {
       locations: @locations,
-      location1Posts: @location1Posts,
-      location2Posts: @location2Posts,
-      location3Posts: @location3Posts,
-      location4Posts: @location4Posts,
+      locationPosts: @locationPosts
     }
   end
 
