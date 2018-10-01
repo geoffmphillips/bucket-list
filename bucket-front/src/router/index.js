@@ -5,7 +5,6 @@ import Vuetify from 'vuetify';
 import Login from '@/components/Login';
 import Boards from '@/components/Boards';
 import CardContainer from '@/components/cards/CardContainer';
-import Users from '@/components/Users';
 import UserProfile from '@/components/UserProfile';
 import Post from '@/components/layouts/Post';
 import NewPost from '@/components/NewPost';
@@ -22,13 +21,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'CardContainer',
+      name: 'Home',
       component: CardContainer,
-    },
-    {
-      path: '/users',
-      name: 'Users',
-      component: Users,
     },
     {
       path: '/userprofile',
@@ -79,4 +73,3 @@ export default new Router({
     { path: '*', redirect: '/' },
   ],
 });
-
