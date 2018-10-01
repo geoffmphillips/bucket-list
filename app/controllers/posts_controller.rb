@@ -32,10 +32,11 @@ class PostsController < ApplicationController
     @categories = post_params[:categories]
     @boards = post_params[:boards]
 
+    pp @boards
+
     if @post.save
       create_post_categories
       create_board_items
-
       render json: @post, status: :created, location: @post
     else
       render json: @post.errors, status: :unprocessable_entity
@@ -52,7 +53,7 @@ class PostsController < ApplicationController
 
     def create_board_items
       @boards.each do |board|
-        BoardItem.create!(post_id: @post[:id], board_id: board[:id], user_id: post_params[:user_id])
+        BoardItem.create!(post_id: @post[:id], board_id: board[:id])
       end
     end
 
@@ -63,17 +64,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(
-        :google_id,
-        :title,
-        :note,
-        :lat,
-        :long,
-        :user_id,
-        :photo_url,
-        :city,
-        boards_attributes: {},
-        location: {},
-        categories: [])
+      params.require(:post).permit!
     end
 end

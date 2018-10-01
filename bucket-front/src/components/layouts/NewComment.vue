@@ -33,7 +33,6 @@ export default {
         axios.post('http://localhost:3000/comments', {
           post_id: this.post.id,
           text: this.text,
-          user_id: 1,
         })
         .then((response) => {
           this.text = '';
