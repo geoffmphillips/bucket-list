@@ -6,16 +6,12 @@
   )
     router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
-    v-autocomplete.navbar__search-field(
-      :items='animals'
-      :get-label="getLabel"
-      :component-item='template'
-      @update-items="updateItems"
-      @item-selected="itemSelected"
-      @item-clicked="itemClicked"
-      placeholder='Search for inspiration...',
-      :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}"
-    )
+    basic-select(
+      :options="options"
+      :selected-option="item"
+      placeholder="select item"
+      @select="onSelect"
+      )
     v-spacer
     v-toolbar-items.navbar__list
       router-link(:to="'/categories'" ripple)
@@ -31,16 +27,15 @@
 </template>
 
 <script>
-import ItemTemplate from './ItemTemplate'
 import NewPost from './NewPost'
-import animals from './animals.js'
+import { BasicSelect } from 'vue-search-select'
 
   export default {
     name: 'Navbar',
     inject: ['$validator'],
     components: {
       NewPost,
-      ItemTemplate,
+      BasicSelect,
     },
 
     mounted () {
@@ -54,31 +49,25 @@ import animals from './animals.js'
     data() {
       return {
         showModal: false,
-        model: '',
-        posts: [],
+        options: [],
+        searchText: '', // If value is falsy, reset searchText & searchItem
         item: {
-          id: 9,
-          name: 'Lion',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+          value: '',
+          text: ''
         },
-        items: [],
-        template: ItemTemplate
+        posts: [],
       }
     },
     methods: {
-      getLabel (item) {
-        return item.name
+      onSelect (item) {
+        console.log(item.value);
+        this.$router.push({ path: `/posts/${item.value}`});
       },
-      itemSelected(item) {
-        console.log("item selected:", item.name)
+      reset () {
+        this.item = {};
       },
-      itemClicked(item) {
-        console.log("item clicked:", item.name)
-      },
-      updateItems (text) {
-        this.items = animals.filter((item) => {
-          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
-        })
+      selectOption () {
+        this.item = this.options[0];
       },
     },
     created() {
@@ -95,17 +84,16 @@ import animals from './animals.js'
             return 0;
           }
         });
+        this.posts.forEach((post) => {
+          this.options.push({
+            value: post.id,
+            text: post.title,
+          })
+        });
       })
       .catch(e => {
         this.errors.push(e)
       })
-    },
-    computed: {
-      filteredPosts: function() {
-        return this.posts.filter((post) => {
-          return post.title.match(this.search)
-        });
-      }
     },
   };
 </script>
