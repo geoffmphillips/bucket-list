@@ -17,9 +17,8 @@ class BoardsController < ApplicationController
   # GET /boards/1
   def show
     @board = Board.find(params[:id])
-    @posts = Post.joins(board_item: :board).where(boards: {id: params[:id]})
+    @posts = Post.joins(:boards).where(["board_items.board_id = ?", @board.id])
     render json: { posts: @posts, board: @board }
-    render json: @board
   end
 
   # POST /boards

@@ -1,8 +1,5 @@
 <template>
   <div>
-    <h1>Here are your Boards</h1>
-    <h1>Here are your Boards</h1>
-    <h1>Here are your Boards</h1>
     <div class="panel-container"
       fit-width="true" 
       item-selector=".item" 

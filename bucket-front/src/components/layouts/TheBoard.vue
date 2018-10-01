@@ -34,6 +34,7 @@ export default {
   created() {
     axios.get(`http://localhost:3000/boards/${this.$route.params.id}`)
       .then((response) => {
+        console.log("Res DATA!!!!: ", response.data)
         this.posts = response.data.posts;
         this.board = response.data.board;
       })

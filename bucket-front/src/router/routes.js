@@ -1,6 +1,5 @@
 import Login from '@/components/Login';
 import CardContainer from '@/components/cards/CardContainer';
-import Users from '@/components/Users';
 import UserProfile from '@/components/UserProfile';
 import Post from '@/components/layouts/Post';
 import NewPost from '@/components/NewPost';
@@ -17,11 +16,6 @@ export default [
     path: '/',
     name: 'CardContainer',
     component: CardContainer,
-  },
-  {
-    path: '/users',
-    name: 'Users',
-    component: Users,
   },
   {
     path: '/userprofile',
