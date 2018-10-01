@@ -1,18 +1,15 @@
 <template lang="pug">
   .panel-container(
-    v-masonry='', 
     fit-width="true",
-    transition-duration='0.4s', 
     item-selector='.item',
     :origin-top="true",
     :horizontal-order="false",
   )
     category-card.item(
-      v-masonry-tile='',
-      v-for='(category, index) in categories', 
+      v-for='(category, index) in categories',
       :key='index',
-      :category='category', 
-      :post='posts[index]', 
+      :category='category',
+      :post='posts[index]',
     )
 </template>
 
@@ -34,24 +31,9 @@ export default {
   created() {
     axios.get('http://localhost:3000/categories')
     .then((response) => {
-      const { categories,
-        category1Posts,
-        category2Posts,
-        category3Posts,
-        category4Posts,
-        category5Posts,
-        category6Posts,
-        category7Posts } = response.data;
+      const { categories, categoryPosts } = response.data;
       this.categories = categories;
-      this.posts = [
-        category1Posts,
-        category2Posts,
-        category3Posts,
-        category4Posts,
-        category5Posts,
-        category6Posts,
-        category7Posts
-      ]
+      this.posts = categoryPosts
     })
     .catch((e) => {
       this.errors.push(e);
