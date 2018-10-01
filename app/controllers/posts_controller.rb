@@ -16,8 +16,13 @@ class PostsController < ApplicationController
     categories = @post.categories.order(:name)
     location = @post.location
     comments = @post.comments.order(created_at: :desc)
+    users = []
 
-    render json: { post: @post, categories: categories, location: location, comments: comments }
+    comments.each do |comment|
+      users << comment.user
+    end
+
+    render json: { post: @post, categories: categories, location: location, comments: comments, users: users }
   end
 
   # POST /posts
@@ -26,8 +31,6 @@ class PostsController < ApplicationController
     @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
     @boards = post_params[:boards]
-    puts "=========== BOARDS ============="
-    pp @boards
 
     if @post.save
       create_post_categories

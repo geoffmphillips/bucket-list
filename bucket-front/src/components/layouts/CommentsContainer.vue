@@ -2,9 +2,10 @@
 <div class="card">
   <ul class="list-group list-group-flush">
     <comment-card
-      v-for="comment in this.comments"
+      v-for="(comment, index) in comments"
       :key="comment.id"
       :comment="comment"
+      :users="users[index]"
     ></comment-card>
   </ul>
 </div>
@@ -20,6 +21,9 @@ export default {
     comments: {
       type: Array,
     },
+    users: {
+      type: Array,
+    }
   },
   components: {
     CommentCard

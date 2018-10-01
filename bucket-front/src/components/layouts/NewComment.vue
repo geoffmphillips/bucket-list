@@ -2,7 +2,7 @@
   <form @submit.prevent="submit">
     <div class="form-group">
       <label for="new-commment">New comment</label>
-      <textarea v-model="text" class="form-control" id="new-cmment" placeholder="Say something" rows="3"/>
+      <textarea v-model="text" class="form-control" placeholder="Say something" rows="3"/>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
@@ -25,12 +25,8 @@ export default {
     }
   },
   methods: {
-    redirectToPost() {
-      let param = this.post.id;
-      this.$router.push({
-        name: 'Post',
-        params: { param },
-      });
+    newComment() {
+      this.$emit('newComment');
     },
     submit(event) {
       if(this.text !== '') {
@@ -41,7 +37,7 @@ export default {
         })
         .then((response) => {
           this.text = '';
-          redirectToPost();
+          newComment();
         })
         .catch((error) => {
           this.errors.push(error);
