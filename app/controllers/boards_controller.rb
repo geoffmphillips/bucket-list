@@ -3,13 +3,22 @@ class BoardsController < ApplicationController
 
   # GET /boards
   def index
-    @boards = Board.all.board_items.first
-    render json: @boards
+    @user = current_user
+
+    @boards = @user.boards
+    @boardposts = []
+    @user.boards.each do |board|
+      @boardposts << Post.joins(:boards).where(["board_items.board_id = ?", board.id]).first
+    end
+
+    render json: { posts: @boardposts, boards: @boards }
   end
 
   # GET /boards/1
   def show
-    render json: @board
+    @board = Board.find(params[:id])
+    @posts = Post.joins(:boards).where(["board_items.board_id = ?", @board.id])
+    render json: { posts: @posts, board: @board }
   end
 
   # POST /boards

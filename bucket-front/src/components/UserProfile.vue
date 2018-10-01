@@ -1,14 +1,19 @@
 <template>
 <div id="profile">
-  <h1>{{ user.first_name }}</h1>
-
+  <h1>User Profile - {{ user.first_name }}</h1>
+  <h1>Your boards</h1>
+  <TheBoards></TheBoards>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
+import TheBoards from './layouts/TheBoards';
 
 export default {
+  components: {
+    TheBoards,
+  },
   data() {
     return {
       user: {
