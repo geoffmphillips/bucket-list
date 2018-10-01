@@ -6,8 +6,9 @@ class PostsController < ApplicationController
     @posts = Post.all
     @categories = Category.all
     @boards = Board.all
+    @user = current_user
 
-    render json: { posts: @posts, categories: @categories, boards: @boards }
+    render json: { posts: @posts, categories: @categories, boards: @boards, user: @user }
   end
 
   # GET /posts/1
@@ -48,7 +49,7 @@ class PostsController < ApplicationController
 
     def create_board_items
       @boards.each do |board|
-        BoardItem.create!(post_id: @post[:id], board_id: board[:id])
+        BoardItem.create!(post_id: @post[:id], board_id: board[:id], user_id: post_params[:user_id])
       end
     end
 

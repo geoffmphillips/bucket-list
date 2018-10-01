@@ -5,11 +5,10 @@
         <div class="modal-wrapper" :style="{ boxShadow: removeBoxShadow }">
           <div class="modal-container">
             <v-app :style="{ height: calcHeight }">
-
               <v-content :style="{ boxShadow: removeBoxShadow }">
 
                   <v-container>
-                    <v-stepper v-model="e1" :style='modalContainer'>
+                    <v-stepper v-model="e1" :style='{ modalContainer }'>
                       <v-stepper-header :style="{ boxShadow: removeBoxShadow }">
                         <v-stepper-step step="1" :complete="e1 > 1">Locate it</v-stepper-step>
                         <v-divider></v-divider>
@@ -21,7 +20,7 @@
                       </v-stepper-header>
                       <v-stepper-items>
                         <v-stepper-content step="1">
-                          <form data-vv-scope="form1">
+                          <form data-vv-scope="form1" @keydown.enter.prevent.self>
 
                           <vuetify-google-autocomplete
                             label="Location (Required)"
@@ -31,9 +30,8 @@
                             types=""
                             name="location"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('location')"
                             data-vv-name="location" required data-vv-scope="form1"
-                            placeholder="Start typing"
+                            placeholder='Try "Eiffel Tower"...'
                             v-on:placechanged="getAddressData"
                           >
                           </vuetify-google-autocomplete>
@@ -43,19 +41,17 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="2">
-                          <form data-vv-scope="form2">
+                          <form data-vv-scope="form2" @keydown.enter.prevent.self>
 
                             <v-text-field
                               label="Title"
                               name="title"
                               v-model="newpost.title"
-                              :error-messages="vErrors.first('title')"
                               :class="{ 'is-danger': vErrors.has('title') }"
                               v-validate="'required'"
                               data-vv-name="title" required data-vv-scope="form2"
                               >
                               </v-text-field>
-                              <span class="help is-danger">{{ vErrors.first('title') }}</span>
                             <v-textarea label="Note" v-model="newpost.note">
                               <div slot="label">
                                 Note <small>(Optional)</small>
@@ -69,18 +65,18 @@
                         </form>
                         </v-stepper-content>
                         <v-stepper-content step="3">
-                          <form data-vv-scope="form3">
+                          <form data-vv-scope="form3" @keydown.enter.prevent.self>
 
+                            <span><h3>Please either choose a image from Google Places, or input a custom image URL</h3></span>
                             <v-text-field
                               label="Photo URL (Optional)"
                               v-validate="'url:require_protocol'"
-                              :error-messages="vErrors.first('photo_url')"
                               data-vv-name="photo_url" data-vv-scope="form3"
                               v-model="newpost.photo_url"
                             ></v-text-field>
                             <v-layout>
                               <v-flex xs12 xl6 offset-md3>
-                                <v-card>
+                                <v-card :style="{ modalImages }">
                                   <v-container grid-list-sm align-content-centered="true" fluid>
                                     <v-layout row wrap>
                                       <v-flex
@@ -88,13 +84,14 @@
                                         :key="n"
                                         xs4
                                         d-flex
+                                        :style="{ cursor: calcPointer }"
                                       >
                                         <v-card flat tile class="d-flex">
                                           <v-img
                                             :src= photos[n]
                                             @click.native="savePhoto(n)"
                                             aspect-ratio="1"
-                                            class="grey lighten-2"
+                                            class="grey lighten-2 pointer"
                                           >
                                             <v-layout
                                               slot="placeholder"
@@ -129,13 +126,12 @@
                             item-text="name"
                             :search-input.sync="search"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('boards')"
                             data-vv-name="boards" required data-vv-scope="form3"
                             hide-selected
                             label="Choose your boards or type to create a new one"
                             multiple
                             chips
-                            deletable-chips=true
+                            deletable-chips
                           >
                             <template slot="no-data">
                               <v-list-tile>
@@ -152,12 +148,11 @@
                             v-model="newpost.categories"
                             item-text="name"
                             v-validate="'required'"
-                            :error-messages="vErrors.first('categories')"
                             data-vv-name="categories" required data-vv-scope="form3"
                             label="Choose your categories"
                             multiple
                             chips
-                            deletable-chips=true
+                            deletable-chips
                           ></v-select>
 
                           <v-btn color="error" @click="$emit('close')">Cancel</v-btn>
@@ -192,6 +187,7 @@ export default {
   data: () => ({
     e1: 0,
     step: 1,
+    errors: [],
     photos: {},
     newpost: {
       title: null,
@@ -203,7 +199,6 @@ export default {
       categories: null,
     },
     search: null,
-    address: this.address,
 
     modalContainer: {
       maxWidth: '822px',
@@ -212,7 +207,9 @@ export default {
       top: '100px',
       padding: '33px',
       borderRadius: '6px'
-
+    },
+    modalImages: {
+      margin: '27px auto'
     }
   }),
 
@@ -221,8 +218,9 @@ export default {
     })
       .then((response) => {
         this.categories = response.data.categories;
+        this.user = response.data.user;
         this.boards = response.data.boards.filter(obj => {
-          return obj.user_id === 2
+          return obj.user_id === this.user.id
         });
       })
       .catch((e) => {
@@ -244,6 +242,9 @@ export default {
     },
     calcBoxShadow: function() {
       return "3px 0px 5px 0px rgba(0,0,0,0.75)"
+    },
+    calcPointer: function() {
+      return "pointer"
     }
   },
   methods: {
@@ -265,12 +266,7 @@ export default {
     goBack(){
       this.e1--
     },
-    /**
-    * When the location found
-    * @param {Object} addressData Data of the found location
-    * @param {Object} placeResultData PlaceResult object
-    * @param {String} id Input container ID
-    */
+    
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
@@ -278,23 +274,13 @@ export default {
     savePhoto(n) {
       this.newpost.photo_url = this.photos[n]
     },
-
-    // getPhotos() {
-    //   const photos = {}
-    //   for (let i=0; i<8; i++) {
-    //     photos[i] = this.address.photos[i].getUrl()
-    //   }
-    //   console.log(photos);
-    //   return photos
-    // },
-
     submit() {
       const submitPost = {
         post: {
           title: this.newpost.title,
           note: this.newpost.note,
           photo_url: this.newpost.photo_url,
-          user_id: 2,
+          user_id: this.user.id,
           location: {
             city: this.address.locality,
             location: this.address.name,
@@ -350,5 +336,8 @@ export default {
 
 .modal-leave-active
   opacity: 0
+
+.pointer
+  cursor: pointer
 
 </style>

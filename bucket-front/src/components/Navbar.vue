@@ -122,6 +122,7 @@ import animals from './animals.js'
     background: #0074c6
     height: 90px
     display: block
+    top: 0
 
     &__logo
       height: 70px

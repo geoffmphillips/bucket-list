@@ -1,17 +1,18 @@
 <template lang="pug">
-  .panel-container(
-    fit-width="true",
-    percent-position: true,
-    item-selector='.item',
-    :origin-top="true",
-    :horizontal-order="false",
-  )
-    h3 {{this.category.name}}
-    card.item(
-      v-for='post in posts',
-      :key='post.id',
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
-      :post='post'
+  div
+    h3.category-name {{this.category.name}}
+    .panel-container(
+      fit-width="true",
+      percent-position: true,
+      item-selector='.item',
+      :origin-top="true",
+      :horizontal-order="false",
+    )
+      card.item(
+        v-for='post in posts',
+        :key='post.id',
+        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
+        :post='post'
       )
 
 </template>
@@ -45,7 +46,15 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .panel-container !important
-    width: 500px
-    height: 250px
+  div
+    margin-top: 45px
+
+    .category-name
+      margin-top: 90px
+      text-align: center
+      font-weight: bold
+
+    .panel-container !important
+      width: 500px
+      height: 250px
 </style>
