@@ -1,5 +1,5 @@
-<template lang="pug">
-  router-link.panel(:to="'/posts/' + post.id")
+<template>
+  <router-link class="panel" :to="'/posts/' + post.id"></router-link>
 </template>
 
 <script>

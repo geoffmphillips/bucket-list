@@ -1,5 +1,5 @@
-<template lang="pug">
-  a.panel
+<template>
+  <a class="panel"></a>
 </template>
 
 <script>
