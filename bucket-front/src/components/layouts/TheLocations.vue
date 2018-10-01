@@ -1,19 +1,19 @@
-<template lang="pug">
-  .panel-container(
-    v-masonry='', 
-    fit-width="true",
-    transition-duration='0.4s', 
-    item-selector='.item',
-    :origin-top="true",
-    :horizontal-order="false",
-  )
-    location-card.item(
-      v-masonry-tile='',
-      v-for='(location, index) in locations', 
-      :key='index',
-      :location='location', 
-      :post='posts[index]', 
-    )
+
+<template>
+  <div class="panel-container"
+    fit-width="true" 
+    transition-duration="0.4s" 
+    item-selector=".item" 
+    :origin-top="true" 
+    :horizontal-order="false">
+    <location-card 
+      class="item"
+      v-for="(location, index) in locations"
+      :key="index"
+      :location="location"
+      :post="posts[index]">
+    </location-card>
+  </div>
 </template>
 
 <script>
@@ -34,17 +34,20 @@ export default {
   created() {
     axios.get('http://localhost:3000/locations')
       .then((response) => {
-        const { locations,
+        const { 
+          locations,
           location1Posts,
           location2Posts,
           location3Posts,
           location4Posts,
         } = response.data;
         this.locations = locations;
-        this.posts = [ location1Posts,
-                       location2Posts,
-                       location3Posts,
-                       location4Posts ]
+        this.posts = [ 
+          location1Posts,
+          location2Posts,
+          location3Posts,
+          location4Posts 
+          ]
       })
       .catch((e) => {
         this.errors.push(e);

@@ -8,7 +8,6 @@ class LocationsController < ApplicationController
     @location2Posts = Location.find(2).posts
     @location3Posts = Location.find(3).posts
     @location4Posts = Location.find(4).posts
-    @location5Posts = Location.find(5).posts
 
     render json: {
       locations: @locations,
@@ -16,7 +15,6 @@ class LocationsController < ApplicationController
       location2Posts: @location2Posts,
       location3Posts: @location3Posts,
       location4Posts: @location4Posts,
-      location5Posts: @location5Posts,
     }
   end
 
