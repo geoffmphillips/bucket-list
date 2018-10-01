@@ -14,31 +14,33 @@
       <p>{{this.post.note}}</p>
     </div>
   </div>
-  <button
-    @click="this.toggleComments"
-    v-if="!this.displayComments"
-    type="button" name="button"
-    class="btn btn-primary"
-  >View comments</button>
-    <comments-container
-      @newComment="updateComments"
+  <div class="comments-container">
+    <button
+      @click="this.toggleComments"
+      v-if="!this.displayComments"
+      type="button" name="button"
+      class="btn btn-outline-primary"
+    >View comments</button>
+      <comments-container
+        @newComment="updateComments"
+        v-if="this.displayComments"
+        id='fade-in'
+        :comments="this.comments"
+        :users="this.users"
+      ></comments-container>
+      <new-comment
+        id='fade-in'
+        v-if="this.displayComments"
+        :post="this.post"
+      ></new-comment>
+    <button
+      @click="this.toggleComments"
       v-if="this.displayComments"
-      id='fade-in'
-      :comments="this.comments"
-      :users="this.users"
-    ></comments-container>
-    <new-comment
-      id='fade-in'
-      v-if="this.displayComments"
-      :post="this.post"
-    ></new-comment>
-  <button
-    @click="this.toggleComments"
-    v-if="this.displayComments"
-    type="button"
-    name="button"
-    class="btn btn-primary"
-  >Hide comments</button>
+      type="button"
+      name="button"
+      class="btn btn-outline-primary"
+    >Hide comments</button>
+  </div>
   <div class="map-container">
     <GmapMap
       :center="{
@@ -157,6 +159,9 @@ div.categories-container {
 }
 div.map-container {
   display: flex;
+  justify-content: center;
+}
+div.comments-container {
   justify-content: center;
 }
 

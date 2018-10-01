@@ -6,9 +6,10 @@ class PostsController < ApplicationController
     @posts = Post.all
     @categories = Category.all
     @boards = Board.all
+    @locations = Location.all
     @user = current_user
 
-    render json: { posts: @posts, categories: @categories, boards: @boards, user: @user }
+    render json: { posts: @posts, categories: @categories, boards: @boards, user: @user, locations: @locations }
   end
 
   # GET /posts/1
@@ -31,8 +32,6 @@ class PostsController < ApplicationController
     @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
     @boards = post_params[:boards]
-
-    pp @boards
 
     if @post.save
       create_post_categories

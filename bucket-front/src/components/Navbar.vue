@@ -50,6 +50,8 @@ import { BasicSelect } from 'vue-search-select'
       return {
         showModal: false,
         options: [],
+        categories: [],
+        locations: [],
         searchText: '',
         item: {
           value: '',
@@ -59,14 +61,8 @@ import { BasicSelect } from 'vue-search-select'
       }
     },
     methods: {
-      onSelect (item) {
-        this.$router.push({ path: `/posts/${item.value}`});
-      },
-      reset () {
-        this.item = {};
-      },
-      selectOption () {
-        this.item = this.options[0];
+      onSelect(item) {
+        this.$router.push({ path: `/${item.type}/${item.value}`});
       },
     },
     created() {
@@ -87,7 +83,24 @@ import { BasicSelect } from 'vue-search-select'
           this.options.push({
             value: post.id,
             text: post.title,
-          })
+            type: 'posts',
+          });
+        });
+        this.categories = response.data.categories;
+        this.categories.forEach((category) => {
+          this.options.push({
+            value: category.id,
+            text: 'Category: ' + category.name,
+            type: 'categories',
+          });
+        });
+        this.locations = response.data.locations;
+        this.locations.forEach((location) => {
+          this.options.push({
+            value: location.id,
+            text: 'Location: ' + location.location,
+            type: 'locations',
+          });
         });
       })
       .catch(e => {
