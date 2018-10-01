@@ -50,7 +50,7 @@ import { BasicSelect } from 'vue-search-select'
       return {
         showModal: false,
         options: [],
-        searchText: '', // If value is falsy, reset searchText & searchItem
+        searchText: '',
         item: {
           value: '',
           text: ''
@@ -60,7 +60,6 @@ import { BasicSelect } from 'vue-search-select'
     },
     methods: {
       onSelect (item) {
-        console.log(item.value);
         this.$router.push({ path: `/posts/${item.value}`});
       },
       reset () {
@@ -103,11 +102,9 @@ import { BasicSelect } from 'vue-search-select'
   font-family: 'Montserrat', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  // color: #2c3e50
   box-sizing: border-box
 
   .navbar
-    // background: #0074c6
     background white
     height: 90px
     display: block

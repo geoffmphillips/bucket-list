@@ -16,16 +16,10 @@ export default {
   },
   data() {
     return {
-      user: {
-      },
+      user: {},
       errors: [],
     };
   },
-  // computed: {
-  //   user () {
-  //     return this.$store.state.user;
-  //   },
-  // },
   created() {
     axios.get('http://localhost:3000/users/1')
       .then((response) => {
@@ -36,7 +30,7 @@ export default {
       });
   },
 
-    
+
 };
 
 </script>
