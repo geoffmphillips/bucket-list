@@ -7,6 +7,8 @@ import { sync } from 'vuex-router-sync';
 import Vuetify from 'vuetify';
 
 import App from './App';
+
+import VeeValidate from 'vee-validate';
 import router from './router';
 import VueMasonryPlugin from 'vue-masonry'
 // const VueMasonryPlugin = require('vue-masonry');
@@ -26,7 +28,6 @@ Vue.use(VueGoogleMaps, {
 });
 
 Vue.config.productionTip = false;
-
 Vue.use(Vuetify, {
   theme: {
     primary: '#21CE99',
@@ -34,7 +35,7 @@ Vue.use(Vuetify, {
     accent: '#805441',
   },
 });
-
+Vue.use(VeeValidate, {errorBagName: 'vErrors'});
 Vue.use(VuetifyGoogleAutocomplete, {
   apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
 });
