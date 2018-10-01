@@ -42,7 +42,7 @@ export default {
     margin 0 auto
 
     &--wrap
-      box-shadow -3px 3px 16px 1px rgba(66,66,66, 1)
+      // box-shadow -3px 3px 16px 1px rgba(66,66,66, 1)
 
     .v-jumbotron
       padding 24px

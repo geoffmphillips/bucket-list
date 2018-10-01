@@ -107,7 +107,8 @@ import { BasicSelect } from 'vue-search-select'
   box-sizing: border-box
 
   .navbar
-    background: #0074c6
+    // background: #0074c6
+    background white
     height: 90px
     display: block
     top: 0
@@ -117,6 +118,15 @@ import { BasicSelect } from 'vue-search-select'
       float: left
       margin-top: 40px; margin-right: 10px; margin-left: 10px
       cursor: pointer
+      margin-right 30px
+
+    .selection
+      width 38em
+      margin-top: 30px
+      background #f7f7f7
+
+      .dropdown
+        color #0074c6
 
     &__list
       float: right
@@ -129,9 +139,8 @@ import { BasicSelect } from 'vue-search-select'
         font-size: 1.2em
         margin-left: 30px
         margin-right: 30px
-
-        .add-icon
-          margin-left: 10px
+        color #0074c6
+        font-weight: bold
 
     &__sidebar-btn
       font-size: 4em
