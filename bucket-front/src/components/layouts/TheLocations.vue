@@ -32,16 +32,10 @@ export default {
     axios.get('http://localhost:3000/locations')
       .then((response) => {
         const { locations,
-          location1Posts,
-          location2Posts,
-          location3Posts,
-          location4Posts,
+          locationPosts,
         } = response.data;
         this.locations = locations;
-        this.posts = [ location1Posts,
-                       location2Posts,
-                       location3Posts,
-                       location4Posts ]
+        this.posts = locationPosts
       })
       .catch((e) => {
         this.errors.push(e);

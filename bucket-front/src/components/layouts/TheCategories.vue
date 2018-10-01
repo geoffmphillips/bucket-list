@@ -31,24 +31,9 @@ export default {
   created() {
     axios.get('http://localhost:3000/categories')
     .then((response) => {
-      const { categories,
-        category1Posts,
-        category2Posts,
-        category3Posts,
-        category4Posts,
-        category5Posts,
-        category6Posts,
-        category7Posts } = response.data;
+      const { categories, categoryPosts } = response.data;
       this.categories = categories;
-      this.posts = [
-        category1Posts,
-        category2Posts,
-        category3Posts,
-        category4Posts,
-        category5Posts,
-        category6Posts,
-        category7Posts
-      ]
+      this.posts = categoryPosts
     })
     .catch((e) => {
       this.errors.push(e);

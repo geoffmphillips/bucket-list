@@ -4,23 +4,16 @@ class CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
-    @category1Posts = Post.joins(post_categories: :category).where(categories: { id: 1})
-    @category2Posts = Post.joins(post_categories: :category).where(categories: { id: 2})
-    @category3Posts = Post.joins(post_categories: :category).where(categories: { id: 3})
-    @category4Posts = Post.joins(post_categories: :category).where(categories: { id: 4})
-    @category5Posts = Post.joins(post_categories: :category).where(categories: { id: 5})
-    @category6Posts = Post.joins(post_categories: :category).where(categories: { id: 6})
-    @category7Posts = Post.joins(post_categories: :category).where(categories: { id: 7})
+    @categoryPosts = []
+    @categories.each do |category|
+      @categoryPosts << category.posts.first
+    end
+
+    @categoryPosts = Post.joins(post_categories: :category).where(categories: { id: 1})
 
     render json: {
       categories: @categories,
-      category1Posts: @category1Posts,
-      category2Posts: @category2Posts,
-      category3Posts: @category3Posts,
-      category4Posts: @category4Posts,
-      category5Posts: @category5Posts,
-      category6Posts: @category6Posts,
-      category7Posts: @category7Posts,
+      categoryPosts: @categoryPosts,
     }
   end
 

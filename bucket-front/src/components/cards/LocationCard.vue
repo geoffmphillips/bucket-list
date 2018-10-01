@@ -4,8 +4,8 @@
     )
     p.panel__text {{location.location}}
     card-no-link(
-      :style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }",
-      :post='post[0]'
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
+      :post='post'
       )
 
 </template>
