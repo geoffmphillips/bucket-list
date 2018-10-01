@@ -20,14 +20,16 @@
     type="button" name="button"
     class="btn btn-primary"
   >View comments</button>
-  <comments-container
-    v-if="this.displayComments"
-    :comments="this.comments"
-  ></comments-container>
-  <new-comment
-    v-if="this.displayComments"
-    :post="this.post"
-  ></new-comment>
+    <comments-container
+      v-if="this.displayComments"
+      id='fade-in'
+      :comments="this.comments"
+    ></comments-container>
+    <new-comment
+      id='fade-in'
+      v-if="this.displayComments"
+      :post="this.post"
+    ></new-comment>
   <button
     @click="this.toggleComments"
     v-if="this.displayComments"

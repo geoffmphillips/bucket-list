@@ -1,7 +1,7 @@
 <template lang="pug">
   router-link.panel(:to="'/categories/' + category.id")
     p.panel__text {{category.name}}
-    card-no-link(:style="{ backgroundImage: 'url(' + post[0].photo_url + ')' }", :post='post[0]')
+    card-no-link(:style="{ backgroundImage: 'url(' + post.photo_url + ')' }", :post='post')
 </template>
 
 <script>

@@ -1,18 +1,15 @@
 <template lang="pug">
   .panel-container(
-    v-masonry='', 
     fit-width="true",
-    transition-duration="0.4s", 
     percent-position: true,
     item-selector='.item',
     :origin-top="true",
     :horizontal-order="false",
   )
     card.item(
-      v-masonry-tile='',
-      v-for='(post, index) in posts', 
-      :key='post.id', 
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }", 
+      v-for='(post, index) in posts',
+      :key='post.id',
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
       :post='post',
     )
 </template>

@@ -1,7 +1,5 @@
 <template lang="pug">
   v-toolbar.navbar(
-    color="$vuetify.breakpoint.smAndDown ? 'primary' : 'secondary'"
-    :dark="$vuetify.breakpoint.smAndDown"
     fixed
     app
     dense
@@ -9,12 +7,14 @@
     router-link(:to="'/'")
       img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
     v-autocomplete.navbar__search-field(
-      v-model='model',
-      :items='stuff',
-      item-text='name',
-      :label='`Search for buckets...`',
-      return-object='',
-      color="darkslategrey",
+      :items='animals'
+      :get-label="getLabel"
+      :component-item='template'
+      @update-items="updateItems"
+      @item-selected="itemSelected"
+      @item-clicked="itemClicked"
+      placeholder='Search for inspiration...',
+      :input-attrs="{name: 'input-test', id: 'v-my-autocomplete'}"
     )
     v-spacer
     v-toolbar-items.navbar__list
@@ -28,32 +28,24 @@
           v-if="showModal",
           @close='showModal = false'
         )
-
-    v-toolbar-side-icon.navbar__sidebar-btn(v-show="!backButton" @click.stop="toggleSidebar()")
-    v-btn(icon v-show="backButton" @click.stop="$router.back()")
-      v-icon arrow_back
 </template>
 
 <script>
+import ItemTemplate from './ItemTemplate'
 import NewPost from './NewPost'
+import animals from './animals.js'
 
   export default {
     name: 'Navbar',
     inject: ['$validator'],
     components: {
-      NewPost
-    },
-    props: {
-      backButton: {
-        type: Boolean,
-        default: false
-      }
+      NewPost,
+      ItemTemplate,
     },
 
     mounted () {
       document.addEventListener("keydown", (e) => {
         if (e.keyCode == 27) {
-          console.log("closing!");
           this.showModal = false;
         }
       });
@@ -61,33 +53,48 @@ import NewPost from './NewPost'
 
     data() {
       return {
-        autoUpdate: true,
         showModal: false,
-        friends: [],
-        isUpdating: false,
-        name: 'Midnight Crew',
-        stuff: [
-          {
-            name: "kyle",
-            group: "tycholiz"
-          },
-          {
-            name: "Eli",
-            group: "Arias"
-          }
-        ],
         model: '',
+        posts: [],
+        item: {
+          id: 9,
+          name: 'Lion',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.'
+        },
+        items: [],
+        template: ItemTemplate
       }
     },
     methods: {
-      toggleSidebar () {
-        this.$store.dispatch('common/updateSidebar', { visible: !this.$store.state.common.sidebar.visible })
-      }
+      getLabel (item) {
+        return item.name
+      },
+      itemSelected(item) {
+        console.log("item selected:", item.name)
+      },
+      itemClicked(item) {
+        console.log("item clicked:", item.name)
+      },
+      updateItems (text) {
+        this.items = animals.filter((item) => {
+          return (new RegExp(text.toLowerCase())).test(item.name.toLowerCase())
+        })
+      },
     },
     created() {
       axios.get(`http://localhost:3000/posts`)
       .then(response => {
-        this.posts = response.data
+        this.posts = response.data.posts.sort((a, b) => {
+          let nameA = a.title.toUpperCase()
+          let nameB = b.title.toUpperCase()
+          if (nameA < nameB) {
+            return -1;
+          } else if (nameB < nameA) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
       })
       .catch(e => {
         this.errors.push(e)
@@ -100,26 +107,19 @@ import NewPost from './NewPost'
         });
       }
     },
-    watch: {
-      isUpdating (val) {
-        if (val) {
-          setTimeout(() => (this.isUpdating = false), 3000)
-        }
-      }
-    }
   };
 </script>
 
 <style lang="stylus">
 #app
-  font-family: 'Avenir', Helvetica, Arial, sans-serif
+  font-family: 'Montserrat', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
   // color: #2c3e50
   box-sizing: border-box
 
   .navbar
-    background: #39B885
+    background: #0074c6
     height: 90px
     display: block
     top: 0
@@ -129,15 +129,6 @@ import NewPost from './NewPost'
       float: left
       margin-top: 40px; margin-right: 10px; margin-left: 10px
       cursor: pointer
-
-    &__search-field
-      height: 40px
-      width: 500px
-      position: relative
-      top: 50%
-      font-size: 1.3em
-      margin-left: 20px; margin-bottom: 15px
-      border-radius: 15px
 
     &__list
       float: right
