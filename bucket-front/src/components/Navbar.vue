@@ -1,29 +1,26 @@
-<template lang="pug">
-  v-toolbar.navbar(
-    fixed
-    app
-    dense
-  )
-    router-link(:to="'/'")
-      img.navbar__logo(src='../assets/path862.png', alt='BucketList logo')
-    basic-select(
-      :options="options"
-      :selected-option="item"
-      placeholder="select item"
-      @select="onSelect"
-    )
-    v-spacer
-    v-toolbar-items.navbar__list
-      router-link(:to="'/categories'" ripple)
-        v-btn.navbar__list-item(flat='') Categories
-      router-link(:to="'/locations'" ripple)
-        v-btn.navbar__list-item(flat='') Locations
-      .modal-button.navbar__list-item
-        button#show-modal(@click='showModal = true') NEW POST
-        new-post(
-          v-if="showModal",
-          @close='showModal = false'
-        )
+<template>
+  <v-toolbar class="navbar" fixed="fixed" app="app" dense="dense">
+    <router-link :to="'/'"><img class="navbar__logo" src="../assets/path862.png" alt="BucketList logo" /></router-link>
+    <basic-select :options="options" :selected-option="item" placeholder="select item" @select="onSelect"></basic-select>
+    <v-spacer></v-spacer>
+    <v-toolbar-items class="navbar__list">
+      <div class="modal-button navbar__list-item">
+        <button id="show-modal" @click="showModal = true">NEW POST</button>
+        <new-post v-if="showModal" @close="showModal = false"></new-post>
+      </div>
+    </v-toolbar-items>
+    <v-spacer></v-spacer>
+    <v-menu bottom="" left="">
+      <v-btn slot="activator" icon="">
+        <v-icon>more_vert</v-icon>
+      </v-btn>
+      <v-list>
+        <v-list-tile v-for="(item, i) in items" :key="i" @click="" :to="item.route">
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+  </v-toolbar>
 </template>
 
 <script>
@@ -58,6 +55,24 @@ import { BasicSelect } from 'vue-search-select'
           text: ''
         },
         posts: [],
+        items: [
+        {
+          title: 'Login',
+          route: '/login',
+        },
+        {
+          title: 'Locations',
+          route: '/locations',
+        },
+        {
+          title: 'Categories',
+          route: '/categories',
+        },
+        {
+          title: 'Register',
+          route: '/register',
+        }
+      ],
       }
     },
     methods: {
@@ -129,7 +144,6 @@ import { BasicSelect } from 'vue-search-select'
       margin-top: 30px; margin-right: 10px; margin-left: 10px
       cursor: pointer
       margin-right 30px
-
 
     .selection
       width 38em
