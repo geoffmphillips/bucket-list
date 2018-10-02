@@ -1,12 +1,12 @@
 <template lang="pug">
   router-link.location-container.panel(
     :to="'/locations/' + location.id"
-    )
-    p.panel__text {{location.location}}
+  )
+    h3.panel__text {{location.location}}
     card-no-link(
       :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }",
       :post='post'
-      )
+    )
 
 </template>
 
@@ -30,7 +30,5 @@ export default {
 </script>
 
 <style scoped>
-p {
-  z-index: 2;
-}
+
 </style>
