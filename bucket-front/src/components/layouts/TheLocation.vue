@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    h3.location-name {{this.location.location}}
+    h5.location-name {{this.location.location}}
     .panel-container(
       fit-width="true",
       percent-position: true,
@@ -11,7 +11,8 @@
       card.item(
         v-for='post in posts',
         :key='post.id',
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
+        :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }",
+
         :post='post'
       )
 
@@ -47,10 +48,10 @@ export default {
 
 <style scoped lang="stylus">
   div
-    margin-top: 10px
+    margin-top: 45px
 
     .location-name
-      margin-top: 20px
+      margin-top: 90px
       text-align: center
       font-weight: bold
 

@@ -7,11 +7,11 @@
     item-selector=".item"
     :origin-top="true"
     :horizontal-order="false">
-    <h3>{{this.board.name}}</h3>
+    <h5>{{this.board.name}}</h5>
     <card class="item"
       v-for="post in posts" :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post">
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }"
+      :post="post">
     </card>
   </div>
 </template>

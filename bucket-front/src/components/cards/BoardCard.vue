@@ -1,7 +1,7 @@
 <template>
   <router-link class="panel" :to="'/boards/' + board.id">
     <p class="panel__text">{{ board.name }}</p>
-    <card-no-link :style="{ backgroundImage: 'url(' + post.photo_url + ')' }" :post='post'>
+    <card-no-link :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }" :post='post'>
     </card-no-link>
   </router-link>
 </template>

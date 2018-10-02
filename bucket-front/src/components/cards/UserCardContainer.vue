@@ -9,7 +9,7 @@
     card.item(
       v-for='(post, index) in posts',
       :key='post.id',
-      :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }",
       :post='post',
     )
 </template>
