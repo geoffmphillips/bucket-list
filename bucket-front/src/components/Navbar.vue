@@ -139,12 +139,11 @@ import { BasicSelect } from 'vue-search-select'
     top: 0
 
     &__logo
-      height: 50%
+      height: 70px
       float: left
       margin-top: 30px; margin-right: 10px; margin-left: 10px
       cursor: pointer
-      margin-right 10%
-
+      margin-right 30px
 
     .selection
       width 38em
