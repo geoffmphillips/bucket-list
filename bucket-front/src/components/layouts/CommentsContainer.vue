@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped>
-#card-container {
+div.card {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;

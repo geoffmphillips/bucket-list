@@ -11,7 +11,8 @@
       card.item(
         v-for='post in posts',
         :key='post.id',
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }",
+        :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }",
+
         :post='post'
       )
 
@@ -50,12 +51,9 @@ export default {
     margin-top: 45px
 
     .location-name
-      margin-top: 90px
+      margin-top: 40px
       text-align: center
       font-weight: bold
-
-    .panel-container !important
-      width: 500px
-      height: 250px
+      font-size: 3.4em
 
 </style>

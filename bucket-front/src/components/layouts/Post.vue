@@ -2,7 +2,9 @@
 <div>
   <div class="post-container">
     <div class="card">
-      <p>{{this.post.title}}</p>
+      <div class="header-container">
+        <h3>{{this.post.title}}</h3>
+      </div>
       <img :src="this.post.photo_url" :alt="this.post.note">
       <div class="categories-container">
         <category-tag
@@ -144,9 +146,16 @@ export default {
 		opacity: 1;
 	}
 }
+div.header-container {
+  display: flex;
+  justify-content: center;
+}
+h3 {
+}
 .post-container {
   display: flex;
   justify-content: center;
+  margin-top: 45px;
 }
 div.card {
   width: max-content;
@@ -162,6 +171,9 @@ div.map-container {
   justify-content: center;
 }
 div.comments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 

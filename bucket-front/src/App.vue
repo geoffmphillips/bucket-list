@@ -1,7 +1,11 @@
 <template lang="pug">
   v-app(v-if="isSessionReady")
     navbar
-    router-view
+    transition(
+      name="slide"
+      mode="in-out"
+      )
+      router-view
 </template>
 
 <script>
@@ -32,7 +36,7 @@ export default {
 
 <style lang="stylus">
 .application--wrap
-  margin-top: 100px
+  margin-top: 70px
 
   body
     background #fcfcfc
@@ -42,11 +46,9 @@ export default {
     margin 0 auto
 
     &--wrap
-      // box-shadow -3px 3px 16px 1px rgba(66,66,66, 1)
 
     .v-jumbotron
       padding 24px
-      box-shadow inset 0px 7px 13px -3px #42422F //I'm ok to take this one out. it is a bit unconventional.
 
       &__wrapper
         border-radius 3px

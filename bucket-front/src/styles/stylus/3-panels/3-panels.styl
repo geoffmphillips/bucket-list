@@ -1,30 +1,29 @@
-random(min,max)
-  return floor(math(0, 'random')*(max - min + 1) + min)
-
 .panel-container
   display: flex
   flex-flow: row wrap
   justify-content: center
   align-items: flex-start
   margin: 44px auto 30px
-  // box-shadow -3px 3px 16px 1px rgba(66,66,66, 1)
 
   .panel
-    border-radius: 0.75em
+    border-radius: 0.5em
     display: inline-block
     position: relative
     width: 350px
     height: 200px
-    margin: 0 10px 20px
+    margin: 0 7.5px 15px
     background-position: center
     float: left
 
     &__text
-      font-weight: 300px
+      font-weight: bold
       position: absolute
       color: white
-      font-size: 4em
-      width: max-content
-      top: 2em
+      font-size: 3em
+      line-height 43px
       text-decoration: none
       margin-left: 31px
+      bottom 0
+      left 0
+      z-index 1
+

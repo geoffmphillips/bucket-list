@@ -7,11 +7,11 @@
     item-selector=".item"
     :origin-top="true"
     :horizontal-order="false">
-    <h3>{{this.board.name}}</h3>
+    <h3 class="panel-container__text">{{this.board.name}}</h3>
     <card class="item"
       v-for="post in posts" :key="post.id"
-        :style="{ backgroundImage: 'url(' + post.photo_url + ')' }"
-        :post="post">
+      :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }"
+      :post="post">
     </card>
   </div>
 </template>
@@ -45,7 +45,5 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .panel-container !important
-    width: 500px
-    height: 250px
+
 </style>

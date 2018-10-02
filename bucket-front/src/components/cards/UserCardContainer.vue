@@ -15,27 +15,16 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Card from './Card';
 
 export default {
+  props: {
+    posts: {
+      type: Array,
+    },
+  },
   components: {
     Card
-  },
-  data() {
-    return {
-      posts: [],
-      errors: [],
-    };
-  },
-  created() {
-    axios.get('http://localhost:3000/posts')
-      .then((response) => {
-        this.posts = response.data.posts;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
   },
 };
 </script>

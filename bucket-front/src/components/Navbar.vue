@@ -5,7 +5,7 @@
     dense
   )
     router-link(:to="'/'")
-      img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
+      img.navbar__logo(src='../assets/path862.png', alt='BucketList logo')
     basic-select(
       :options="options"
       :selected-option="item"
@@ -126,9 +126,10 @@ import { BasicSelect } from 'vue-search-select'
     &__logo
       height: 70px
       float: left
-      margin-top: 40px; margin-right: 10px; margin-left: 10px
+      margin-top: 30px; margin-right: 10px; margin-left: 10px
       cursor: pointer
       margin-right 30px
+
 
     .selection
       width 38em
@@ -142,6 +143,9 @@ import { BasicSelect } from 'vue-search-select'
       float: right
       margin-top: 3%
 
+      & > a
+        padding-top 10px
+
       &-item
         display: inline-block
         list-style: none
@@ -151,6 +155,21 @@ import { BasicSelect } from 'vue-search-select'
         margin-right: 30px
         color #0074c6
         font-weight: bold
+
+        #show-modal
+          background #0074c6
+          color white
+          padding 7px
+          border 1px solid grey
+          border-radius 9px
+          white-space nowrap 
+          overflow hidden
+
+          &:hover
+            background #979797
+
+          &:active
+            background #878787
 
     &__sidebar-btn
       font-size: 4em
