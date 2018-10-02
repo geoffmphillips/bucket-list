@@ -50,7 +50,9 @@ import { BasicSelect } from 'vue-search-select'
       return {
         showModal: false,
         options: [],
-        searchText: '', // If value is falsy, reset searchText & searchItem
+        categories: [],
+        locations: [],
+        searchText: '',
         item: {
           value: '',
           text: ''
@@ -59,15 +61,8 @@ import { BasicSelect } from 'vue-search-select'
       }
     },
     methods: {
-      onSelect (item) {
-        console.log(item.value);
-        this.$router.push({ path: `/posts/${item.value}`});
-      },
-      reset () {
-        this.item = {};
-      },
-      selectOption () {
-        this.item = this.options[0];
+      onSelect(item) {
+        this.$router.push({ path: `/${item.type}/${item.value}`});
       },
     },
     created() {
@@ -88,7 +83,24 @@ import { BasicSelect } from 'vue-search-select'
           this.options.push({
             value: post.id,
             text: post.title,
-          })
+            type: 'posts',
+          });
+        });
+        this.categories = response.data.categories;
+        this.categories.forEach((category) => {
+          this.options.push({
+            value: category.id,
+            text: 'Category: ' + category.name,
+            type: 'categories',
+          });
+        });
+        this.locations = response.data.locations;
+        this.locations.forEach((location) => {
+          this.options.push({
+            value: location.id,
+            text: 'Location: ' + location.location,
+            type: 'locations',
+          });
         });
       })
       .catch(e => {
@@ -103,11 +115,9 @@ import { BasicSelect } from 'vue-search-select'
   font-family: 'Montserrat', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  // color: #2c3e50
   box-sizing: border-box
 
   .navbar
-    // background: #0074c6
     background white
     height: 90px
     display: block

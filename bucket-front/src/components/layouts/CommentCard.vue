@@ -1,7 +1,6 @@
 <template>
     <li class="list-group-item">
-      <p><strong>{{this.user.first_name}} {{this.user.last_name}}</strong></p>
-      <br>
+      <p><strong>{{user.first_name}} {{user.last_name}}</strong></p>
       <p>{{comment.text}}</p>
     </li>
 </template>

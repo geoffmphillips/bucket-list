@@ -1,6 +1,6 @@
 <template>
   <router-link :to="'/categories/' + category.id" class="card">
-    <p>{{category.name}}</p>
+    <button class="btn btn-primary">{{category.name}}</button>
   </router-link>
 </template>
 

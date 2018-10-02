@@ -47,7 +47,7 @@ export default {
     signinSuccessful(response) {
       this.$store.dispatch('logIn', response.data.jwt);
       this.error = '';
-      this.$router.replace('/userprofile');
+      this.$router.replace('/profile');
     },
     signinFailed(error) {
       this.error = (error.response && error.response.data && error.response.data.error) || '';
