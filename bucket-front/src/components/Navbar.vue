@@ -4,22 +4,31 @@
     <basic-select :options="options" :selected-option="item" placeholder="select item" @select="onSelect"></basic-select>
     <v-spacer></v-spacer>
     <v-toolbar-items class="navbar__list">
-      <div class="modal-button navbar__list-item">
-        <button id="show-modal" @click="showModal = true">NEW POST</button>
-        <new-post v-if="showModal" @close="showModal = false"></new-post>
-      </div>
+        <div class="modal-button navbar__list-item">
+          <button id="show-modal" @click="showModal = true">NEW POST</button>
+          <new-post v-if="showModal" @close="showModal = false"></new-post>
+        </div>
+        <!-- <div v-if="this.isLoggedIn === true" id="user avatar">
+            <v-avatar color="grey">
+              <span class="white--text headline">U</span>
+            </v-avatar>
+            <v-btn flat>Username</v-btn>
+        </div>
+        <div v-else id="Login">
+          <v-btn flat :to="'/login'">Login</v-btn>
+          <v-btn flat :to="'/register'">Register</v-btn>
+        </div> -->
+        <v-menu bottom="" left="">
+          <v-btn slot="activator" icon="">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-for="(item, i) in items" :key="i" @click="" :to="item.route">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
     </v-toolbar-items>
-    <v-spacer></v-spacer>
-    <v-menu bottom="" left="">
-      <v-btn slot="activator" icon="">
-        <v-icon>more_vert</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" @click="" :to="item.route">
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
   </v-toolbar>
 </template>
 
@@ -44,6 +53,7 @@ import { BasicSelect } from 'vue-search-select'
     },
 
     data() {
+      isLoggedIn: this.$store.state.isLoggedIn;
       return {
         showModal: false,
         options: [],

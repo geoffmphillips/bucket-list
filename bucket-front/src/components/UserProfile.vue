@@ -21,11 +21,22 @@ export default {
     UserCardContainer,
   },
   data() {
+    isLoggedIn: this.$store.state.isLoggedIn;
     return {
       user: {},
       posts: [],
       errors: [],
     };
+  },
+  beforeMount () {
+    this.checkSignedIn();
+  },
+  methods: {
+    checkSignedIn() {
+      if (!this.isLoggedIn) {
+        this.$router.replace('/login');
+      }
+    },
   },
   created() {
     axios.get('http://localhost:3000/users/1')
