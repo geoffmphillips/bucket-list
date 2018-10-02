@@ -47,10 +47,10 @@ export default {
 
 <style scoped lang="stylus">
   div
-    margin-top: 45px
+    margin-top: 10px
 
     .location-name
-      margin-top: 90px
+      margin-top: 20px
       text-align: center
       font-weight: bold
 

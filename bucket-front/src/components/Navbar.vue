@@ -5,7 +5,7 @@
     dense
   )
     router-link(:to="'/'")
-      img.navbar__logo(src='../assets/bucket-logo.png', alt='BucketList logo')
+      img.navbar__logo(src='../assets/logo.png', alt='BucketList logo')
     basic-select(
       :options="options"
       :selected-option="item"

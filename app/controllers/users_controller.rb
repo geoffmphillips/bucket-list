@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = current_user
-    render json: @user
+    @posts = @user.posts
+    render json: { user: @user, posts: @posts }
   end
 
   # POST /users
