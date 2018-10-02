@@ -297,6 +297,7 @@ export default {
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
           this.newpost = response.data;
+          this.$router.push({ path: `/posts/${response.data.id}` });
         })
         .catch((error) => {
           this.errors.push(error);
