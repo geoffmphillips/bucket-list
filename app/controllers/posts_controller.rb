@@ -69,7 +69,7 @@ class PostsController < ApplicationController
         :user_id,
         :photo_url,
         :city,
-        boards_attributes: {},
+        boards: {},
         location: {},
         categories: [])
     end
