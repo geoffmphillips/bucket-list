@@ -8,7 +8,7 @@
           <button id="show-modal" @click="showModal = true">NEW POST</button>
           <new-post v-if="showModal" @close="showModal = false"></new-post>
         </div>
-        <!-- <div v-if="this.isLoggedIn === true" id="user avatar">
+        <div v-if="this.$store.state.user.isLoggedIn" id="user avatar">
             <v-avatar color="grey">
               <span class="white--text headline">U</span>
             </v-avatar>
@@ -17,7 +17,7 @@
         <div v-else id="Login">
           <v-btn flat :to="'/login'">Login</v-btn>
           <v-btn flat :to="'/register'">Register</v-btn>
-        </div> -->
+        </div>
         <v-menu bottom="" left="">
           <v-btn slot="activator" icon="">
             <v-icon>more_vert</v-icon>

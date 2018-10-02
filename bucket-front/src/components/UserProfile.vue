@@ -21,24 +21,23 @@ export default {
     UserCardContainer,
   },
   data() {
-    isLoggedIn: this.$store.state.isLoggedIn;
     return {
       user: {},
       posts: [],
       errors: [],
     };
   },
-  beforeMount () {
-    this.checkSignedIn();
-  },
+
   methods: {
     checkSignedIn() {
-      if (!this.isLoggedIn) {
+      if (!this.$store.state.user.isLoggedIn) {
         this.$router.replace('/login');
       }
     },
   },
+
   created() {
+    this.checkSignedIn();
     axios.get('http://localhost:3000/users/1')
       .then((response) => {
         const { user, posts } = response.data

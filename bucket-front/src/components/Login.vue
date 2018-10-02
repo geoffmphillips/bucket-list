@@ -68,9 +68,8 @@ export default {
       delete localStorage.jwt;
     },
     checkSignedIn() {
-      if (this.$store.state.isLoggedIn) {
-        console.log("REACHED!!!!")
-        this.$router.replace('/posts');
+      if (this.$store.state.user.isLoggedIn) {
+        this.$router.replace('/profile');
       }
     },
   },
