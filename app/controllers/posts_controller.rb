@@ -6,9 +6,8 @@ class PostsController < ApplicationController
     @posts = Post.all
     @categories = Category.all
     @boards = Board.all
-    @user = current_user
 
-    render json: { posts: @posts, categories: @categories, boards: @boards, user: @user }
+    render json: { posts: @posts, categories: @categories, boards: @boards }
   end
 
   # GET /posts/1
@@ -26,8 +25,6 @@ class PostsController < ApplicationController
     @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
     @boards = post_params[:boards]
-    puts "=========== BOARDS ============="
-    pp @boards
 
     if @post.save
       create_post_categories
@@ -49,7 +46,8 @@ class PostsController < ApplicationController
 
     def create_board_items
       @boards.each do |board|
-        BoardItem.create!(post_id: @post[:id], board_id: board[:id], user_id: post_params[:user_id])
+        b = Board.find_by(name: board)
+        BoardItem.create!(post_id: @post[:id], board_id: 1)
       end
     end
 
@@ -60,17 +58,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(
-        :google_id,
-        :title,
-        :note,
-        :lat,
-        :long,
-        :user_id,
-        :photo_url,
-        :city,
-        boards: {},
-        location: {},
-        categories: [])
+      params.require(:post).permit(:google_id, :title, :note, :lat, :long, :user_id, :photo_url, :city, location: {}, boards: [], categories: [])
     end
 end
