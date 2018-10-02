@@ -11,7 +11,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && vErrors.has('first_name') }"
           placeholder="First name"
-          required autofocus />
+          autofocus />
           <div v-if="submitted && vErrors.has('first_name')" class="invalid-feedback">{{ vErrors.first('first_name') }}</div>
       </div>
       <div class="form-group">
@@ -23,7 +23,7 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && vErrors.has('last_name') }"
           placeholder="Last name"
-          required autofocus />
+          autofocus />
           <div v-if="submitted && vErrors.has('last_name')" class="invalid-feedback">{{ vErrors.first('last_name') }}</div>
       </div>
       <div class="form-group">
@@ -35,31 +35,35 @@
           class="form-control"
           :class="{ 'is-invalid': submitted && vErrors.has('email') }"
           placeholder="Email address"
-          required autofocus />
+          autofocus />
       </div>
       <div class="form-group">
         <label for="password" class="sr-only">Password</label>
         <input v-model="user.password"
-          v-validate="{ required: true, min: 6 }"
+          v-validate="'required'"
           type="password"
           name="password"
           class="form-control"
           :class="{ 'is-invalid': submitted && vErrors.has('password') }"
-          placeholder="Password" required autofocus/>
+          placeholder="Password"
+          ref="password"
+          />
         <div v-if="submitted && vErrors.has('password')" class="invalid-feedback">{{ vErrors.first('password') }}</div>
       </div>
       <div class="form-group">
         <label for="password_confirmation" class="sr-only">Confirm password</label>
         <input v-model="user.password_confirmation"
-          v-validate="{ required: true, min: 6 }"
+          v-validate="'required|confirmed:password'"
           type="password"
           name="password_confirmation"
           class="form-control"
-          :class="{ 'is-invalid': submitted && vErrors.has('confirm_password') }"
-          placeholder="Confirm password" required autofocus />
-          <div v-if="submitted && vErrors.has('password_confirmation')" class="invalid-feedback">{{ vErrors.first('password_confirmation') }}</div>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+          :class="{ 'is-invalid': submitted && vErrors.has('password_confirmation') }"
+          placeholder="Confirm password"
+          data-vv-as="password"
+          />
+        <div v-if="submitted && vErrors.has('password_confirmation')" class="invalid-feedback">{{ vErrors.first('password_confirmation') }}</div>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </form>
   </div>
 </template>
@@ -92,24 +96,24 @@ export default {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
-            // this.register(this.user);
+            this.register(this.user);
         }
       });
     },
-    // register() {
-    //   axios.post('http://localhost:3000/users', { register: { user: this.user } })
-    //     .then(response => this.registrationSuccessful(response))
-    //     .catch(error => this.registrationFailed(error));
-    // },
-    // registrationSuccessful(response) {
-    //   this.$store.dispatch('logIn', response.data.jwt);
-    //   this.error = '';
-    //   this.$router.replace('/posts');
-    // },
-    // registrationFailed(error) {
-    //   this.error = (error.response && error.response.data && error.response.data.error) || '';
-    //   delete localStorage.jwt;
-    // },
+    register(param) {
+      axios.post('http://localhost:3000/users', { user: param })
+        .then(response => this.registrationSuccessful(response))
+        .catch(error => this.registrationFailed(error));
+    },
+    registrationSuccessful(response) {
+      this.$store.dispatch('logIn', response.data.jwt);
+      this.error = '';
+      this.$router.replace('/posts');
+    },
+    registrationFailed(error) {
+      this.error = (error.response && error.response.data && error.response.data.error) || '';
+      delete localStorage.jwt;
+    },
     checkSignedIn() {
       if (localStorage.signedIn === true) {
         this.$router.replace('/posts');

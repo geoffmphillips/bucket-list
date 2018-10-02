@@ -54,18 +54,22 @@ import { BasicSelect } from 'vue-search-select'
         },
         posts: [],
         items: [
-        { title: 'Login',
+        {
+          title: 'Login',
           route: '/login',
-          },
-        { title: 'Categories',
-          route: '/categories',
-          },
-        { title: 'Locations',
+        },
+        {
+          title: 'Locations',
           route: '/locations',
-          },
-        { title: 'Register',
+        },
+        {
+          title: 'Categories',
+          route: '/categories',
+        },
+        {
+          title: 'Register',
           route: '/register',
-          }
+        }
       ],
       }
     },
