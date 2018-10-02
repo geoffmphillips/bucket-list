@@ -11,7 +11,7 @@
       :selected-option="item"
       placeholder="select item"
       @select="onSelect"
-      )
+    )
     v-spacer
     v-toolbar-items.navbar__list
       router-link(:to="'/categories'" ripple)
