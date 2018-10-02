@@ -1,41 +1,65 @@
 <template>
   <div class="login-wrapper border border-light">
-    <form class="form-signin" @submit.prevent="register">
+    <form class="form-signin" @submit.prevent="handleSubmit">
       <h2 class="form-signin-heading">Registration</h2>
-      <label for="inputFirst_name" class="sr-only">First name</label>
-      <input v-model="first_name"
-        type="string"
-        id="inputFirst_name"
-        class="form-control"
-        placeholder="First name"
-        required autofocus>
-      <label for="inputLast_name" class="sr-only">Last name</label>
-      <input v-model="last_name"
-        type="string"
-        id="inputLast_name"
-        class="form-control"
-        placeholder="Last name"
-        required autofocus>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input v-model="email"
-        type="email"
-        id="inputEmail"
-        class="form-control"
-        placeholder="Email address"
-        required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input v-model="password"
-        type="password"
-        id="inputPassword"
-        class="form-control"
-        placeholder="Password" required>
-      <label for="inputPassword" class="sr-only">Confirm password</label>
-      <input v-model="password_confirmation"
-        type="password"
-        id="inputPassword"
-        class="form-control"
-        placeholder="Password" required>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+      <div class="form-group">
+        <label for="first_name" class="sr-only">First name</label>
+        <input v-model="user.first_name"
+          v-validate="'required'"
+          type="text"
+          name="first_name"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && vErrors.has('first_name') }"
+          placeholder="First name"
+          required autofocus />
+          <div v-if="submitted && vErrors.has('first_name')" class="invalid-feedback">{{ vErrors.first('first_name') }}</div>
+      </div>
+      <div class="form-group">
+        <label for="last_name" class="sr-only">Last name</label>
+        <input v-model="user.last_name"
+          v-validate="'required'"
+          type="text"
+          name="last_name"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && vErrors.has('last_name') }"
+          placeholder="Last name"
+          required autofocus />
+          <div v-if="submitted && vErrors.has('last_name')" class="invalid-feedback">{{ vErrors.first('last_name') }}</div>
+      </div>
+      <div class="form-group">
+        <label for="email" class="sr-only">Email address</label>
+        <input v-model="user.email"
+          v-validate="'required'"
+          type="email"
+          name="email"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && vErrors.has('email') }"
+          placeholder="Email address"
+          required autofocus />
+      </div>
+      <div class="form-group">
+        <label for="password" class="sr-only">Password</label>
+        <input v-model="user.password"
+          v-validate="{ required: true, min: 6 }"
+          type="password"
+          name="password"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && vErrors.has('password') }"
+          placeholder="Password" required autofocus/>
+        <div v-if="submitted && vErrors.has('password')" class="invalid-feedback">{{ vErrors.first('password') }}</div>
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation" class="sr-only">Confirm password</label>
+        <input v-model="user.password_confirmation"
+          v-validate="{ required: true, min: 6 }"
+          type="password"
+          name="password_confirmation"
+          class="form-control"
+          :class="{ 'is-invalid': submitted && vErrors.has('confirm_password') }"
+          placeholder="Confirm password" required autofocus />
+          <div v-if="submitted && vErrors.has('password_confirmation')" class="invalid-feedback">{{ vErrors.first('password_confirmation') }}</div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
     </form>
   </div>
 </template>
@@ -55,7 +79,6 @@ export default {
         password_confirmation: '',
       },
       submitted: false,
-      error: '',
     };
   },
   created() {
@@ -65,20 +88,28 @@ export default {
     this.checkSignedIn();
   },
   methods: {
-    register() {
-      axios.post('http://localhost:3000/users', { register: { user: this.user } })
-        .then(response => this.registrationSuccessful(response))
-        .catch(error => this.registrationFailed(error));
+    handleSubmit(e) {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+            // this.register(this.user);
+        }
+      });
     },
-    registrationSuccessful(response) {
-      this.$store.dispatch('logIn', response.data.jwt);
-      this.error = '';
-      this.$router.replace('/posts');
-    },
-    registrationFailed(error) {
-      this.error = (error.response && error.response.data && error.response.data.error) || '';
-      delete localStorage.jwt;
-    },
+    // register() {
+    //   axios.post('http://localhost:3000/users', { register: { user: this.user } })
+    //     .then(response => this.registrationSuccessful(response))
+    //     .catch(error => this.registrationFailed(error));
+    // },
+    // registrationSuccessful(response) {
+    //   this.$store.dispatch('logIn', response.data.jwt);
+    //   this.error = '';
+    //   this.$router.replace('/posts');
+    // },
+    // registrationFailed(error) {
+    //   this.error = (error.response && error.response.data && error.response.data.error) || '';
+    //   delete localStorage.jwt;
+    // },
     checkSignedIn() {
       if (localStorage.signedIn === true) {
         this.$router.replace('/posts');
