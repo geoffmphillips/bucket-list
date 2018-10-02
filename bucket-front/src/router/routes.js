@@ -18,7 +18,7 @@ export default [
     component: CardContainer,
   },
   {
-    path: '/userprofile',
+    path: '/profile',
     name: 'UserProfile',
     component: UserProfile,
   },

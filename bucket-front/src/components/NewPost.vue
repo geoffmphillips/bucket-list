@@ -180,38 +180,39 @@
 import axios from 'axios';
 
 export default {
-  mounted() {
 
-  },
+  data() {
+    return {
+      e1: 0,
+      step: 1,
+      boards: [],
+      categories: [],
+      errors: [],
+      photos: {},
+      newpost: {
+        title: null,
+        note: null,
+        location: null,
+        photo_url: null,
+        city: null,
+        board: null,
+        categories: null,
+      },
+      search: null,
 
-  data: () => ({
-    e1: 0,
-    step: 1,
-    errors: [],
-    photos: {},
-    newpost: {
-      title: null,
-      note: null,
-      location: null,
-      photo_url: null,
-      city: null,
-      board: null,
-      categories: null,
-    },
-    search: null,
-
-    modalContainer: {
-      maxWidth: '822px',
-      boxShadow: '3px 0px 5px 0px rgba(0,0,0,0.75)',
-      margin: '0 auto',
-      top: '100px',
-      padding: '33px',
-      borderRadius: '6px'
-    },
-    modalImages: {
-      margin: '27px auto'
+      modalContainer: {
+        maxWidth: '822px',
+        boxShadow: '3px 0px 5px 0px rgba(0,0,0,0.75)',
+        margin: '0 auto',
+        top: '100px',
+        padding: '33px',
+        borderRadius: '6px'
+      },
+      modalImages: {
+        margin: '27px auto'
+      }
     }
-  }),
+  },
 
   created() {
     axios.get(`http://localhost:3000/posts/`, {
@@ -266,7 +267,7 @@ export default {
     goBack(){
       this.e1--
     },
-    
+
     getAddressData: function (placeResultData) {
       this.address = placeResultData;
     },
@@ -296,6 +297,7 @@ export default {
       axios.post('http://localhost:3000/posts/', submitPost)
         .then((response) => {
           this.newpost = response.data;
+          this.$router.push({ path: `/posts/${response.data.id}` });
         })
         .catch((error) => {
           this.errors.push(error);

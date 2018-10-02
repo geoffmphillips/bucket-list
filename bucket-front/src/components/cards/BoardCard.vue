@@ -1,7 +1,7 @@
 <template>
   <router-link class="panel" :to="'/boards/' + board.id">
-    <p class="panel__text">{{ board.name }}</p>
-    <card-no-link :style="{ backgroundImage: 'url(' + post.photo_url + ')' }" :post='post'>
+    <h3 class="panel__text">{{ board.name }}</h3>
+    <card-no-link :style="{ backgroundImage: 'url(' + post.photo_url + ')', backgroundSize: 'cover' }" :post='post'>
     </card-no-link>
   </router-link>
 </template>
@@ -22,7 +22,5 @@ export default {
 </script>
 
 <style scoped>
-p {
-  z-index: 2;
-}
+
 </style>

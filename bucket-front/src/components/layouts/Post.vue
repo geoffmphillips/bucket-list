@@ -2,7 +2,9 @@
 <div>
   <div class="post-container">
     <div class="card">
-      <p>{{this.post.title}}</p>
+      <div class="header-container">
+        <h3>{{this.post.title}}</h3>
+      </div>
       <img :src="this.post.photo_url" :alt="this.post.note">
       <div class="categories-container">
         <category-tag
@@ -14,29 +16,33 @@
       <p>{{this.post.note}}</p>
     </div>
   </div>
-  <button
-    @click="this.toggleComments"
-    v-if="!this.displayComments"
-    type="button" name="button"
-    class="btn btn-primary"
-  >View comments</button>
-    <comments-container
+  <div class="comments-container">
+    <button
+      @click="this.toggleComments"
+      v-if="!this.displayComments"
+      type="button" name="button"
+      class="btn btn-outline-primary"
+    >View comments</button>
+      <comments-container
+        @newComment="updateComments"
+        v-if="this.displayComments"
+        id='fade-in'
+        :comments="this.comments"
+        :users="this.users"
+      ></comments-container>
+      <new-comment
+        id='fade-in'
+        v-if="this.displayComments"
+        :post="this.post"
+      ></new-comment>
+    <button
+      @click="this.toggleComments"
       v-if="this.displayComments"
-      id='fade-in'
-      :comments="this.comments"
-    ></comments-container>
-    <new-comment
-      id='fade-in'
-      v-if="this.displayComments"
-      :post="this.post"
-    ></new-comment>
-  <button
-    @click="this.toggleComments"
-    v-if="this.displayComments"
-    type="button"
-    name="button"
-    class="btn btn-primary"
-  >Hide comments</button>
+      type="button"
+      name="button"
+      class="btn btn-outline-primary"
+    >Hide comments</button>
+  </div>
   <div class="map-container">
     <GmapMap
       :center="{
@@ -77,12 +83,23 @@ export default {
   methods: {
     toggleComments() {
       this.displayComments = !this.displayComments;
+    },
+    updateComments() {
+      axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
+        .then((response) => {
+          const { comments, users } = response.data;
+          this.comments = comments;
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
     }
   },
   data() {
     return {
       displayComments: false,
       post: [],
+      users: [],
       comments: [],
       categories: [],
       markers: [{
@@ -98,11 +115,12 @@ export default {
   created() {
     axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
       .then((response) => {
-        const { post, categories, location, comments, } = response.data;
+        const { post, categories, location, comments, users, } = response.data;
         this.post = post;
         this.categories = categories;
         this.location = location;
-        this.comments = comments,
+        this.comments = comments;
+        this.users = users;
         this.markers[0].position.lat = (this.location.lat * (10 ** -4));
         this.markers[0].position.lng = (this.location.long * (10 ** -4));
       })
@@ -114,9 +132,30 @@ export default {
 </script>
 
 <style scoped>
+#fade-in {
+  transition-duration: 0.75s;
+  transition-delay: 0.5s;
+  transition-property: opacity;
+  transition-timing-function: ease-in-out;
+}
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+div.header-container {
+  display: flex;
+  justify-content: center;
+}
+h3 {
+}
 .post-container {
   display: flex;
   justify-content: center;
+  margin-top: 45px;
 }
 div.card {
   width: max-content;
@@ -129,6 +168,12 @@ div.categories-container {
 }
 div.map-container {
   display: flex;
+  justify-content: center;
+}
+div.comments-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 

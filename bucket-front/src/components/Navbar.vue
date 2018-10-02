@@ -1,6 +1,6 @@
 <template>
   <v-toolbar class="navbar" fixed="fixed" app="app" dense="dense">
-    <router-link :to="'/'"><img class="navbar__logo" src="../assets/bucket-logo.png" alt="BucketList logo" /></router-link>
+    <router-link :to="'/'"><img class="navbar__logo" src="../assets/path862.png" alt="BucketList logo" /></router-link>
     <basic-select :options="options" :selected-option="item" placeholder="select item" @select="onSelect"></basic-select>
     <v-spacer></v-spacer>
     <v-toolbar-items class="navbar__list">
@@ -47,7 +47,9 @@ import { BasicSelect } from 'vue-search-select'
       return {
         showModal: false,
         options: [],
-        searchText: '', // If value is falsy, reset searchText & searchItem
+        categories: [],
+        locations: [],
+        searchText: '',
         item: {
           value: '',
           text: ''
@@ -74,15 +76,8 @@ import { BasicSelect } from 'vue-search-select'
       }
     },
     methods: {
-      onSelect (item) {
-        console.log(item.value);
-        this.$router.push({ path: `/posts/${item.value}`});
-      },
-      reset () {
-        this.item = {};
-      },
-      selectOption () {
-        this.item = this.options[0];
+      onSelect(item) {
+        this.$router.push({ path: `/${item.type}/${item.value}`});
       },
     },
     created() {
@@ -103,7 +98,24 @@ import { BasicSelect } from 'vue-search-select'
           this.options.push({
             value: post.id,
             text: post.title,
-          })
+            type: 'posts',
+          });
+        });
+        this.categories = response.data.categories;
+        this.categories.forEach((category) => {
+          this.options.push({
+            value: category.id,
+            text: 'Category: ' + category.name,
+            type: 'categories',
+          });
+        });
+        this.locations = response.data.locations;
+        this.locations.forEach((location) => {
+          this.options.push({
+            value: location.id,
+            text: 'Location: ' + location.location,
+            type: 'locations',
+          });
         });
       })
       .catch(e => {
@@ -118,11 +130,9 @@ import { BasicSelect } from 'vue-search-select'
   font-family: 'Montserrat', sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
-  // color: #2c3e50
   box-sizing: border-box
 
   .navbar
-    // background: #0074c6
     background white
     height: 90px
     display: block
@@ -131,9 +141,10 @@ import { BasicSelect } from 'vue-search-select'
     &__logo
       height: 50%
       float: left
-      margin-top: 40%; margin-right: 2%; margin-left: 2%
+      margin-top: 30px; margin-right: 10px; margin-left: 10px
       cursor: pointer
       margin-right 10%
+
 
     .selection
       width 38em
@@ -147,6 +158,9 @@ import { BasicSelect } from 'vue-search-select'
       float: right
       margin-top: 3%
 
+      & > a
+        padding-top 10px
+
       &-item
         display: inline-block
         list-style: none
@@ -156,6 +170,21 @@ import { BasicSelect } from 'vue-search-select'
         margin-right: 30px
         color #0074c6
         font-weight: bold
+
+        #show-modal
+          background #0074c6
+          color white
+          padding 7px
+          border 1px solid grey
+          border-radius 9px
+          white-space nowrap 
+          overflow hidden
+
+          &:hover
+            background #979797
+
+          &:active
+            background #878787
 
     &__sidebar-btn
       font-size: 4em
