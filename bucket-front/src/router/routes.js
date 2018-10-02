@@ -9,7 +9,7 @@ import TheCategories from '@/components/layouts/TheCategories';
 import TheCategory from '@/components/layouts/TheCategory';
 import TheBoards from '@/components/layouts/TheBoards';
 import TheBoard from '@/components/layouts/TheBoard';
-
+import Registration from '@/components/Registration';
 
 export default [
   {
@@ -26,6 +26,11 @@ export default [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Registration,
   },
   {
     path: '/posts/:id',
