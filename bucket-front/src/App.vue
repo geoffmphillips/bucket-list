@@ -37,6 +37,7 @@ export default {
 <style lang="stylus">
 .application--wrap
   margin-top: 70px
+  background: #EEEEEE
 
   body
     background #fcfcfc
