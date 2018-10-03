@@ -1,17 +1,32 @@
-<template>
-  <div id="profile">
-    <h1 class="welcome-back">Welcome back, {{ user.first_name }}!</h1>
-    <div class="board-section">
-      <h1 class="section-text">My Boards</h1>
-      <TheBoards class="panel"></TheBoards>
-    </div>
-    <div class="post-section">
-      <h1 class="section-text">My Posts</h1>
-      <user-card-container
-        :posts="this.posts"
-      ></user-card-container>
-    </div>
-  </div>
+<template lang="pug">
+  #profile
+    h1.user-name {{ user.first_name }}
+    hr
+    .board-section
+      h1.section-text My Boards
+      TheBoards.panel
+      .new-board
+        h3 Add new board
+        v-form(
+          ref='newboard', 
+          v-model='valid', 
+          lazy-validation=''
+        )
+          v-text-field(
+            v-model='board', 
+            :rules='boardRules', 
+            label='Board Name', 
+            required=''
+          )
+          v-btn(
+            :disabled='!valid', 
+            @click='submit'
+          ) submit
+          v-btn(@click='clear') clear
+      h1.section-text My Posts
+      user-card-container(
+        :posts='this.posts'
+    )
 </template>
 
 <script>
@@ -57,18 +72,16 @@ export default {
     color: #2c3e50
     margin-top: 20px
 
-    .welcome-back
-      margin-top: 27px; margin-left: 20px
+    .user-name
+      margin-top: 27px; margin-left: 27px
       font-weight: bold
 
     .section-text
       text-align: center
       font-weight: bold
-      margin-top: 60px   
 
-    .panel > a
-      margin 0    
-      background red 
+      &:first-child
+        margin-top: 60px
   
 
 </style>

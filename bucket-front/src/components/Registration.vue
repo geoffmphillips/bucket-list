@@ -92,7 +92,7 @@ export default {
     this.checkSignedIn();
   },
   methods: {
-    handleSubmit(e) {
+    handleSubmit(event) {
       this.submitted = true;
       this.$validator.validate().then(valid => {
         if (valid) {
