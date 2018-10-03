@@ -1,6 +1,6 @@
 <template>
   <router-link :to="'/boards/' + board.id" class="card">
-    <strong>{{board.name}} </strong>
+    <button class="btn btn-outline-primary">{{board.name}}</button>
   </router-link>
 </template>
 
@@ -20,5 +20,8 @@ a {
   display: inline;
   color: black;
   border: 0;
+}
+button {
+  margin: 5px;
 }
 </style>

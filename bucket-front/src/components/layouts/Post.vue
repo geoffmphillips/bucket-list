@@ -119,7 +119,6 @@ export default {
     favorites() {
       axios.get(`http://localhost:3000/board_items/${this.$route.params.id}`)
       .then((response) => {
-        console.log(response.data);
         this.count = response.data.count;
         this.isFavorite = response.data.favorite;
       })

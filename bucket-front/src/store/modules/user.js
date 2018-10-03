@@ -32,10 +32,6 @@ export default {
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         commit('setJWT', token);
-        axios.get('http://localhost:3000/users/1')
-          .then((response) => {
-            commit('setUser', response.data.user.first_name);
-          });
       }
       commit('sessionReady');
     },
@@ -44,10 +40,13 @@ export default {
       // Calls the mutation defined to update the state's JWT.
       localStorage.setItem('jwt', token);
       localStorage.signedIn = true;
-      console.log('User state localstorage: ', localStorage);
 
       if (token) {
         axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+        axios.get('http://localhost:3000/users/1')
+          .then((response) => {
+            commit('setUser', response.data.user.first_name);
+          });
       }
       commit('setJWT', { jwt: token });
     },
