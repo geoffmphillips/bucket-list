@@ -28,10 +28,15 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @location = Location.find_or_create_by(post_params[:location].to_h)
+    @location = Location.find_or_create_by!(post_params[:location].to_h)
     @post = Post.new(title: post_params[:title], note: post_params[:note], photo_url: post_params[:photo_url], user_id: post_params[:user_id], location_id: @location[:id])
     @categories = post_params[:categories]
-    @boards = post_params[:boards]
+    boardNames = post_params[:boards]
+    @boards = []
+
+    boardNames.each do |board|
+      @boards << Board.find_or_create_by!(name: board, user_id: post_params[:user_id])
+    end
 
     if @post.save
       create_post_categories

@@ -164,6 +164,7 @@ div.card {
   border-radius: 0.75em;
   margin-bottom: 10px;
 }
+
 .post-img {
   max-width: 750px;
   max-height: 438px;

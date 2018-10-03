@@ -37,18 +37,28 @@ import TheBoards from './layouts/TheBoards';
 import UserCardContainer from './cards/UserCardContainer';
 
 export default {
+
   components: {
     TheBoards,
     UserCardContainer,
   },
+
   data() {
     return {
+      valid: true,
+      board: '',
+      boardRules: [
+        v => !!v || ' Board Name is required',
+        v => (v && v.length >= 5) || 'Board Name must be more than 5 characters'
+      ],
       user: {},
       posts: [],
       errors: [],
     };
   },
+
   created() {
+    this.checkSignedIn();
     axios.get('http://localhost:3000/users/1')
       .then((response) => {
         const { user, posts } = response.data
@@ -60,7 +70,29 @@ export default {
       });
   },
 
+  methods: {
+    checkSignedIn() {
+      if (!this.$store.state.user.isLoggedIn) {
+        this.$router.replace('/login');
+      }
+    },
+    submit() {
+      if (this.$refs.newboard.validate()) {
+        axios.post('http://localhost:3000/boards/', {
+          name: this.board,
+          user_id: this.user.id,
+        }).then(response => {
+          this.board = '';
+          this.$router.replace({ path: '/profile' });
+        }).catch(error => {
 
+        });
+      }
+    },
+    clear() {
+      this.$refs.newboard.reset()
+    }
+  },
 };
 
 </script>
