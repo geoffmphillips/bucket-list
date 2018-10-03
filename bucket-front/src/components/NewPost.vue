@@ -345,4 +345,10 @@ export default {
 .pointer
   cursor: pointer
 
+.v-content
+  .layout
+    margin-top 22px; margin-bottom 28px
+    .v-card
+      width 24vw
+
 </style>

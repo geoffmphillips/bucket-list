@@ -4,7 +4,7 @@
     transition(
       name="slide"
       mode="in-out"
-      )
+    )
       router-view
 </template>
 
@@ -35,12 +35,9 @@ export default {
 </script>
 
 <style lang="stylus">
-.application--wrap
+.v-menu__content ~ .application--wrap
   margin-top: 70px
-  background: #EEEEEE
-
-  body
-    background #fcfcfc
+  background: #fbfbfb
 
   div.application
     width 90%
