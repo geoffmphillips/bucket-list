@@ -46,5 +46,15 @@ export default {
 };
 </script>
 
-<style lang="css">
+<style scoped>
+form {
+  display: flex;
+  width: 500px;
+}
+textarea {
+  width: 425px;
+}
+button {
+  height: 75px;
+}
 </style>

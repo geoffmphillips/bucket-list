@@ -4,22 +4,41 @@
     <basic-select :options="options" :selected-option="item" placeholder="select item" @select="onSelect"></basic-select>
     <v-spacer></v-spacer>
     <v-toolbar-items class="navbar__list">
-      <div class="modal-button navbar__list-item">
-        <button id="show-modal" @click="showModal = true">NEW POST</button>
-        <new-post v-if="showModal" @close="showModal = false"></new-post>
-      </div>
+        <div class="modal-button navbar__list-item">
+          <button id="show-modal" @click="showModal = true">NEW POST</button>
+          <new-post v-if="showModal" @close="showModal = false"></new-post>
+        </div>
+        <div v-if="this.$store.state.user.isLoggedIn" id="user avatar">
+          <v-flex xs4 sm2 md1>
+            <v-avatar color="grey">
+              <span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span>
+            </v-avatar>
+          </v-flex>
+          <v-flex sm5 md3 hidden-xs-only>
+            <span class="grey--text">{{ this.$store.state.user.username }}</span>
+          </v-flex>
+        </div>
+        <div v-else id="Login">
+          <v-btn :to="'/login'">Login</v-btn>
+          <v-btn :to="'/register'">Register</v-btn>
+        </div>
+        <v-menu bottom="" left="">
+          <v-btn slot="activator" icon="">
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile v-if="this.$store.state.user.isLoggedIn" @click="" :to="'/profile'">
+              <v-list-tile-title>Profile</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-for="(item, i) in items" :key="i" @click="" :to="item.route">
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="this.$store.state.user.isLoggedIn" @click="logout()" >
+              <v-list-tile-title>Log out</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
     </v-toolbar-items>
-    <v-spacer></v-spacer>
-    <v-menu bottom="" left="">
-      <v-btn slot="activator" icon="">
-        <v-icon>more_vert</v-icon>
-      </v-btn>
-      <v-list>
-        <v-list-tile v-for="(item, i) in items" :key="i" @click="" :to="item.route">
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-menu>
   </v-toolbar>
 </template>
 
@@ -55,11 +74,11 @@ import { BasicSelect } from 'vue-search-select'
           text: ''
         },
         posts: [],
-        items: [
-        {
-          title: 'Login',
-          route: '/login',
+        user: {
+          name: 'Peter',
+          initial: 'P'
         },
+        items: [
         {
           title: 'Locations',
           route: '/locations',
@@ -68,10 +87,6 @@ import { BasicSelect } from 'vue-search-select'
           title: 'Categories',
           route: '/categories',
         },
-        {
-          title: 'Register',
-          route: '/register',
-        }
       ],
       }
     },
@@ -79,6 +94,11 @@ import { BasicSelect } from 'vue-search-select'
       onSelect(item) {
         this.$router.push({ path: `/${item.type}/${item.value}`});
       },
+      logout () {
+        this.$store.dispatch('logOut');
+        this.$router.replace('/');
+        this.user = {};
+      }
     },
     created() {
       axios.get(`http://localhost:3000/posts`)

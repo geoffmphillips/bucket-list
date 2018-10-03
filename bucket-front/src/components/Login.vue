@@ -1,21 +1,26 @@
 <template>
   <div class="login-wrapper border border-light">
-    <form class="form-signin" @submit.prevent="login">
+    <form class="form-signin" @submit.prevent="handleSubmit">
       <h2 class="form-signin-heading">Please sign in</h2>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input v-model="email"
         type="email"
         id="inputEmail"
         class="form-control"
+        :class="{ 'is-invalid': submitted && !email }"
         placeholder="Email address"
         required autofocus>
+        <div v-show="submitted && !email" class="invalid-feedback">Email is required</div>
       <label for="inputPassword" class="sr-only">Password</label>
       <input v-model="password"
         type="password"
         id="inputPassword"
         class="form-control"
+        :class="{ 'is-invalid': submitted && !password }"
         placeholder="Password" required>
+        <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <router-link to="/register" class="btn btn-link">Don't have an account? Register here.</router-link>
     </form>
   </div>
 </template>
@@ -30,17 +35,26 @@ export default {
       email: '',
       password: '',
       error: '',
+      submitted: false,
     };
   },
-  created() {
+  beforeMount () {
     this.checkSignedIn();
   },
   updated() {
     this.checkSignedIn();
   },
   methods: {
-    login() {
-      axios.post('http://localhost:3000/user_token', { auth: { email: this.email, password: this.password } })
+    handleSubmit(event) {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+            this.login({ email: this.email, password: this.password });
+        }
+      });
+    },
+    login(param) {
+      axios.post('http://localhost:3000/user_token', { auth: param })
         .then(response => this.signinSuccessful(response))
         .catch(error => this.signinFailed(error));
     },
@@ -54,8 +68,8 @@ export default {
       delete localStorage.jwt;
     },
     checkSignedIn() {
-      if (localStorage.signedIn === true) {
-        this.$router.replace('/posts');
+      if (this.$store.state.user.isLoggedIn) {
+        this.$router.replace('/profile');
       }
     },
   },

@@ -31,5 +31,11 @@ export default {
 </script>
 
 <style scoped>
+li {
+  width: 500px;
+}
+p {
+  margin: 5px 0
+}
 
 </style>

@@ -3,7 +3,7 @@
   <div class="post-container">
     <div class="card">
       <div class="header-container">
-        <h3>{{this.post.title}}</h3>
+        <h3><strong>{{this.post.title}}</strong></h3>
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note">
       <div class="categories-container">
@@ -151,6 +151,7 @@ div.header-container {
   justify-content: center;
 }
 h3 {
+  margin-top: 10px;
 }
 .post-container {
   display: flex;
@@ -161,12 +162,18 @@ div.card {
   width: max-content;
   height: auto;
   border-radius: 0.75em;
+  margin-bottom: 10px;
+}
+div.card p {
+  margin-left: 10px;
 }
 div.categories-container {
   display:flex;
   justify-content: center;
 }
 div.map-container {
+  margin-top: 10px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
 }
@@ -175,6 +182,9 @@ div.comments-container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+div.comments-container button {
+  margin-bottom: 5px;
 }
 
 </style>

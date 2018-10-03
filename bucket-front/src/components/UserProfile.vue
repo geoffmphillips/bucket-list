@@ -50,7 +50,17 @@ export default {
       errors: [],
     };
   },
+
+  methods: {
+    checkSignedIn() {
+      if (!this.$store.state.user.isLoggedIn) {
+        this.$router.replace('/login');
+      }
+    },
+  },
+
   created() {
+    this.checkSignedIn();
     axios.get('http://localhost:3000/users/1')
       .then((response) => {
         const { user, posts } = response.data
