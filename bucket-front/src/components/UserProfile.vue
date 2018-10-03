@@ -2,6 +2,23 @@
 <div id="profile">
   <h1>Hi, {{ user.first_name }}!</h1>
   <h1>Your boards</h1>
+  <h3> Create a new board:</h3><br>
+  <v-form ref="newboard" v-model="valid" lazy-validation>
+   <v-text-field
+     v-model="board"
+     :rules="boardRules"
+     :counter="5"
+     label="Board Name"
+     required
+   ></v-text-field>
+   <v-btn
+     :disabled="!valid"
+     @click="submit"
+   >
+     submit
+   </v-btn>
+   <v-btn @click="clear">clear</v-btn>
+ </v-form>
   <TheBoards></TheBoards>
   <h1>Your posts</h1>
   <user-card-container
@@ -22,6 +39,12 @@ export default {
   },
   data() {
     return {
+      valid: true,
+      board: '',
+      boardRules: [
+        v => !!v || ' Board Name is required',
+        v => (v && v.length <= 5) || 'Board Name must be more than 5 characters'
+      ],
       user: {},
       posts: [],
       errors: [],
@@ -37,6 +60,20 @@ export default {
       .catch((e) => {
         this.errors.push(e);
       });
+  },
+  methods: {
+    submit () {
+      if (this.$refs.newboard.validate()) {
+        // Native form submission is not yet supported
+        axios.post('http://localhost:3000/boards/', {
+          name: this.board,
+          user_id: this.user.id
+        })
+      }
+    },
+    clear () {
+      this.$refs.newboard.reset()
+    }
   },
 
 
