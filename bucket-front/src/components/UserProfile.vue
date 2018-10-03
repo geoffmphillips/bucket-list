@@ -1,8 +1,5 @@
 <template lang="pug">
   #profile
-    h1.user-name {{ user.first_name }}
-    hr
-    
     .new-board
       h3 Add new board
       v-form(

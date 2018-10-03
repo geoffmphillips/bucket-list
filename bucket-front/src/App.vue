@@ -4,7 +4,7 @@
     transition(
       name="slide"
       mode="in-out"
-      )
+    )
       router-view
 </template>
 
@@ -38,9 +38,6 @@ export default {
 .application--wrap
   margin-top: 70px
   background: #fbfbfb
-
-  body
-    background green
 
   div.application
     width 90%
