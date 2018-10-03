@@ -352,8 +352,8 @@ export default {
       width 35vw
 
       .d-flex
-        filter brightness(70%)
+        filter brightness(100%)
         &:hover
-          filter brightness(100%)
+          filter brightness(70%)
 
 </style>

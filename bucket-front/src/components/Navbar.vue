@@ -170,6 +170,7 @@ import { BasicSelect } from 'vue-search-select'
     &__list
       float: right
       margin-top: 3%
+      padding-bottom 50px
 
       & > a
         padding-top 10px
