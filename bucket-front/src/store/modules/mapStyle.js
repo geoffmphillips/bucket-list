@@ -1,7 +1,7 @@
 export default {
   state: {
     mapStyle: [
-      { elementType: 'geometry', stylers: [{ color: '#0074C6' }] },
+      { elementType: 'geometry', stylers: [{ color: '#242F3E' }] },
       { elementType: 'labels.text.stroke', stylers: [{ color: '#242F3E' }] },
       { elementType: 'labels.text.fill', stylers: [{ color: '#FFD700' }] },
       {
