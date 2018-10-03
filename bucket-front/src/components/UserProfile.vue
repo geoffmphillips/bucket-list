@@ -1,30 +1,33 @@
-<template>
-<div id="profile">
-  <h1>Hi, {{ user.first_name }}!</h1>
-  <h1>Your boards</h1>
-  <h3> Create a new board:</h3><br>
-  <v-form ref="newboard" v-model="valid" lazy-validation>
-   <v-text-field
-     v-model="board"
-     :rules="boardRules"
-     :counter="5"
-     label="Board Name"
-     required
-   ></v-text-field>
-   <v-btn
-     :disabled="!valid"
-     @click="submit"
-   >
-     submit
-   </v-btn>
-   <v-btn @click="clear">clear</v-btn>
- </v-form>
-  <the-boards></the-boards>
-  <h1>Your posts</h1>
-  <user-card-container
-    :posts="this.posts"
-  ></user-card-container>
-</div>
+<template lang="pug">
+  #profile
+    .new-board
+      h3 Add new board
+      v-form(
+        ref='newboard', 
+        v-model='valid', 
+        lazy-validation=''
+      )
+        v-text-field(
+          v-model='board', 
+          :rules='boardRules', 
+          label='Board Name', 
+          required=''
+        )
+        v-btn(
+          :disabled='!valid', 
+          @click='submit'
+        ) submit
+        v-btn(@click='clear') clear
+    hr
+    .board-section
+      h1.section-text My Boards
+      TheBoards.panel
+    hr
+    .post-section
+      h1.section-text My Posts
+      user-card-container(
+        :posts='this.posts'
+    )
 </template>
 
 <script>
@@ -93,13 +96,48 @@ export default {
 
 </script>
 
-<style scoped>
-#profile {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
-  margin-top: 20px;
-}
+<style scoped lang="stylus">
+  #profile 
+    font-family: 'Avenir', Helvetica, Arial, sans-serif
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    text-align: left
+    color: #2c3e50
+    // margin-top: 20px
+    margin 0 auto 
+    background white
+    max-width: 80vw
+
+    .user-name
+      margin-top: 27px; margin-left: 27px
+      font-weight: bold
+
+    .section-text
+      font-weight: bold
+
+    .new-board
+      margin-left auto; margin-right auto; margin-top 51px; margin-bottom 51px
+      padding 20px
+      background white
+      width: 450px
+      box-shadow 4px 6px 16px -2px rgba(145,145,145,1);
+      
+      h3
+        font-weight bold
+
+      .v-input
+        max-width 68%
+    
+    .board-section, .post-section
+      padding 20px
+
+      h1
+        margin-left initial
+
+      .panel
+  
+        .panel-container
+          justify-content left !important
+          background red
+        
 </style>

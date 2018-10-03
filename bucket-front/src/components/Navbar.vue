@@ -11,11 +11,8 @@
         <div v-if="this.$store.state.user.isLoggedIn" id="user avatar">
           <v-flex xs4 sm2 md1>
             <v-avatar color="grey">
-              <span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span>
+              <router-link to="/profile"><span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span></router-link>
             </v-avatar>
-          </v-flex>
-          <v-flex sm5 md3 hidden-xs-only>
-            <span class="grey--text">{{ this.$store.state.user.username }}</span>
           </v-flex>
         </div>
         <div v-else id="Login">
