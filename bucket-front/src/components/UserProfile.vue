@@ -1,13 +1,17 @@
 <template>
-<div id="profile">
-  <h1>Hi, {{ user.first_name }}!</h1>
-  <h1>Your boards</h1>
-  <TheBoards></TheBoards>
-  <h1>Your posts</h1>
-  <user-card-container
-    :posts="this.posts"
-  ></user-card-container>
-</div>
+  <div id="profile">
+    <h1 class="welcome-back">Welcome back, {{ user.first_name }}!</h1>
+    <div class="board-section">
+      <h1 class="section-text">My Boards</h1>
+      <TheBoards class="panel"></TheBoards>
+    </div>
+    <div class="post-section">
+      <h1 class="section-text">My Posts</h1>
+      <user-card-container
+        :posts="this.posts"
+      ></user-card-container>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,13 +48,27 @@ export default {
 
 </script>
 
-<style scoped>
-#profile {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
-  margin-top: 20px;
-}
+<style scoped lang="stylus">
+  #profile 
+    font-family: 'Avenir', Helvetica, Arial, sans-serif
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    text-align: left
+    color: #2c3e50
+    margin-top: 20px
+
+    .welcome-back
+      margin-top: 27px; margin-left: 20px
+      font-weight: bold
+
+    .section-text
+      text-align: center
+      font-weight: bold
+      margin-top: 60px   
+
+    .panel > a
+      margin 0    
+      background red 
+  
+
 </style>
