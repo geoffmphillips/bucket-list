@@ -13,6 +13,9 @@
           :category="category"
         ></category-tag>
       </div>
+      <p
+        v-if="this.current_user"
+        >You saved this to <board-link v-for="board in this.boards" :key="board.id" :board="board"></board-link></p>
       <p>{{this.post.note}}</p>
     </div>
   </div>
@@ -70,6 +73,7 @@
 <script>
 import axios from 'axios';
 import CategoryTag from './CategoryTag';
+import BoardLink from './BoardLink';
 import CommentsContainer from './CommentsContainer';
 import NewComment from './NewComment';
 
@@ -79,6 +83,7 @@ export default {
     CategoryTag,
     CommentsContainer,
     NewComment,
+    BoardLink,
   },
   methods: {
     toggleComments() {
@@ -100,6 +105,8 @@ export default {
       displayComments: false,
       post: [],
       users: [],
+      boards: [],
+      current_user: {},
       comments: [],
       categories: [],
       markers: [{
@@ -115,12 +122,14 @@ export default {
   created() {
     axios.get(`http://localhost:3000/posts/${this.$route.params.id}`)
       .then((response) => {
-        const { post, categories, location, comments, users, } = response.data;
+        const { post, categories, location, comments, users, boards, current_user, } = response.data;
         this.post = post;
         this.categories = categories;
         this.location = location;
         this.comments = comments;
         this.users = users;
+        this.current_user = current_user;
+        this.boards = boards;
         this.markers[0].position.lat = (this.location.lat * (10 ** -4));
         this.markers[0].position.lng = (this.location.long * (10 ** -4));
       })
