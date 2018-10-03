@@ -16,15 +16,14 @@ import NewPost from './components/NewPost';
 
 Vue.use(VueAxios, axios);
 Vue.use(Autocomplete);
-
+Vue.use(VeeValidate, { errorBagName: 'vErrors' });
+Vue.use(VuetifyGoogleAutocomplete, { apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs' });
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCqC3YhZScKNM541GdXrJ4FXFU0tluWtgQ',
     libraries: 'places,drawing',
   },
 });
-
-Vue.config.productionTip = false;
 Vue.use(Vuetify, {
   theme: {
     primary: '#21CE99',
@@ -32,10 +31,8 @@ Vue.use(Vuetify, {
     accent: '#805441',
   },
 });
-Vue.use(VeeValidate, { errorBagName: 'vErrors' });
-Vue.use(VuetifyGoogleAutocomplete, {
-  apiKey: 'AIzaSyC1I4rc72v5cAK3VPLXYKLnUmISNzM5AYs',
-});
+
+Vue.config.productionTip = false;
 
 // Polyfills
 global.URLSearchParams = URLSearchParams;

@@ -3,26 +3,15 @@ import axios from 'axios';
 export default {
   state: {
     isLoggedIn: false,
-    user: '',
+    token: '',
+    username: '',
     isSessionReady: false,
-  },
-
-  getters: {
-    isLoggedIn: (state) => { 
-      return state.isLoggedIn;
-    },
-    jwt: (state) => { 
-      return state.currentJWT;
-    },
-    user: (state) => { 
-      return state.user;
-    },
   },
 
   mutations: {
     setJWT(state, jwt) {
       // When this updates, the getters and anything bound to them updates as well.
-      state.user = jwt;
+      state.token = jwt;
       state.isLoggedIn = true;
     },
     removeJWT(state) {
@@ -31,14 +20,22 @@ export default {
     },
     sessionReady(state) {
       state.isSessionReady = true;
-    }
+    },
+    setUser(state, user) {
+      state.username = user;
+    },
   },
 
   actions: {
     setupSession({ commit }) {
-      let token = localStorage.getItem('jwt');
+      const token = localStorage.getItem('jwt');
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        commit('setJWT', token);
+        axios.get('http://localhost:3000/users/1')
+          .then((response) => {
+            commit('setUser', response.data.user.first_name);
+          });
       }
       commit('sessionReady');
     },
@@ -47,13 +44,14 @@ export default {
       // Calls the mutation defined to update the state's JWT.
       localStorage.setItem('jwt', token);
       localStorage.signedIn = true;
+      console.log('User state localstorage: ', localStorage);
 
       if (token) {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       }
-
       commit('setJWT', { jwt: token });
     },
+
     logOut({ commit }) {
       localStorage.removeItem('jwt');
       localStorage.signedIn = false;
