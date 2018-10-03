@@ -14,9 +14,6 @@
               <span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span>
             </v-avatar>
           </v-flex>
-          <v-flex sm5 md3 hidden-xs-only>
-            <span class="grey--text">{{ this.$store.state.user.username }}</span>
-          </v-flex>
         </div>
         <div v-else id="Login">
           <v-btn :to="'/login'">Login</v-btn>
