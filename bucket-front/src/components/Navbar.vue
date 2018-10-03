@@ -11,7 +11,7 @@
         <div v-if="this.$store.state.user.isLoggedIn" id="user avatar">
           <v-flex xs4 sm2 md1>
             <v-avatar color="grey">
-              <a href="/profile#/profile"><span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span></a>
+              <router-link to="/profile"><span class="white--text headline">{{ this.$store.state.user.username.charAt(0) }}</span></router-link>
             </v-avatar>
           </v-flex>
         </div>
@@ -71,10 +71,7 @@ import { BasicSelect } from 'vue-search-select'
           text: ''
         },
         posts: [],
-        user: {
-          name: 'Peter',
-          initial: 'P'
-        },
+        user: {},
         items: [
         {
           title: 'Locations',
