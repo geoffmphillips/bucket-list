@@ -188,20 +188,20 @@ import { BasicSelect } from 'vue-search-select'
       .v-avatar a
         text-decoration none
 
-        #show-modal
-          background #0074c6
-          color white
-          padding 7px
-          border 1px solid grey
-          border-radius 9px
-          white-space nowrap
-          overflow hidden
+      #show-modal
+        background #0074c6
+        color white
+        padding 7px
+        border 1px solid grey
+        border-radius 9px
+        white-space nowrap
+        overflow hidden
 
-          &:hover
-            background #979797
+        &:hover
+          background #979797
 
-          &:active
-            background #878787
+        &:active
+          background #878787
 
     &__sidebar-btn
       font-size: 4em
