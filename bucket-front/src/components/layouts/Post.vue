@@ -4,6 +4,9 @@
     <div class="card">
       <div class="header-container">
         <h3><strong>{{this.post.title}}</strong></h3>
+        <p>{{ this.count }}</p>
+        <i style="color: gold;" @click="toggleFavorite" v-if="this.isFavorite" class="fas fa-star"></i>
+        <i style="color: gold;" @click="toggleFavorite" v-if="!this.isFavorite" class="far fa-star"></i>
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
       <div class="categories-container">
@@ -52,7 +55,7 @@
         lat: this.markers[0].position.lat,
         lng: this.markers[0].position.lng,
         }"
-      :zoom="12"
+      :zoom="13"
       :options="{styles: this.$store.state.mapStyle.mapStyle}"
       map-type-id="roadmap"
       style="width: 500px; height: 300px"
@@ -86,6 +89,17 @@ export default {
     BoardLink,
   },
   methods: {
+    toggleFavorite() {
+      axios.put(`http://localhost:3000/board_items/${this.$route.params.id}`)
+        .then((response) => {
+          this.isFavorite = response.data.favorite;
+          this.count = response.data.count;
+          this.boards = response.data.boards;
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
+    },
     toggleComments() {
       this.displayComments = !this.displayComments;
     },
@@ -98,12 +112,25 @@ export default {
         .catch((e) => {
           this.errors.push(e);
         });
-    }
+    },
+    favorites() {
+      axios.get(`http://localhost:3000/board_items/${this.$route.params.id}`)
+      .then((response) => {
+        console.log(response.data);
+        this.count = response.data.count;
+        this.isFavorite = response.data.favorite;
+      })
+      .catch((error) => {
+        this.errors.push(error);
+      });
+    },
   },
   data() {
     return {
       displayComments: false,
       post: [],
+      count: null,
+      isFavorite: false,
       users: [],
       boards: [],
       current_user: {},
@@ -132,6 +159,7 @@ export default {
         this.boards = boards;
         this.markers[0].position.lat = (this.location.lat * (10 ** -4));
         this.markers[0].position.lng = (this.location.long * (10 ** -4));
+        this.favorites();
       })
       .catch((e) => {
         this.errors.push(e);
@@ -141,20 +169,6 @@ export default {
 </script>
 
 <style scoped>
-#fade-in {
-  transition-duration: 0.75s;
-  transition-delay: 0.5s;
-  transition-property: opacity;
-  transition-timing-function: ease-in-out;
-}
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 div.header-container {
   display: flex;
   justify-content: center;
@@ -175,8 +189,7 @@ div.card {
 }
 
 .post-img {
-  max-width: 750px;
-  max-height: 438px;
+  max-width: 800px;
 }
 
 div.card p {
@@ -201,5 +214,4 @@ div.comments-container {
 div.comments-container button {
   margin-bottom: 5px;
 }
-
 </style>
