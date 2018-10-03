@@ -207,6 +207,13 @@ import { BasicSelect } from 'vue-search-select'
       font-size: 4em
       margin-top: .9em
 
+  .v-btn.v-btn--router 
+    margin-right: 35px
+    padding: 4px
+    color: white
+    font-weight: bold
+    background: #0074c6
+    border-radius 8px
 
 .v-list__title
   text-decoration none
