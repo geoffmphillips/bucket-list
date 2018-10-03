@@ -170,6 +170,7 @@ import { BasicSelect } from 'vue-search-select'
     &__list
       float: right
       margin-top: 3%
+      padding-bottom 50px
 
       & > a
         padding-top 10px
@@ -183,6 +184,9 @@ import { BasicSelect } from 'vue-search-select'
         margin-right: 30px
         color #0074c6
         font-weight: bold
+
+      .v-avatar a
+        text-decoration none
 
         #show-modal
           background #0074c6
@@ -202,4 +206,9 @@ import { BasicSelect } from 'vue-search-select'
     &__sidebar-btn
       font-size: 4em
       margin-top: .9em
+
+
+.v-list__title
+  text-decoration none
+  background red !important //why doesn't this work!!??
 </style>
