@@ -84,7 +84,7 @@ export default {
       margin-top: 60px
 
     .new-board
-      margin-left 28px; margin-top 28px
+      margin-left auto; margin-right auto; margin-top 28px
       padding 20px
       background white
       width: 450px
@@ -96,9 +96,16 @@ export default {
       .v-input
         max-width 68%
     
-    .board-section
-      .item
-        .panel
-          margin 0
+    .board-section, .post-section
+      padding 20px
+      background white
+      min-width: 1200px
+      max-width: 1700px
+      box-shadow 4px 6px 16px -2px rgba(145,145,145,1);
+      margin-top 50px
+      margin-left auto; margin-right auto
+
+  a.panel
+    margin 0 !important
 
 </style>
