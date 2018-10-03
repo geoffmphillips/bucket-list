@@ -4,6 +4,9 @@
     <div class="card">
       <div class="header-container">
         <h3><strong>{{this.post.title}}</strong></h3>
+        <p>{{ this.favorites }}</p>
+        <img v-if="isFavorite" src="" alt="">
+        <img v-if="!isFavorite" src="" alt="">
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
       <div class="categories-container">
@@ -99,6 +102,17 @@ export default {
           this.errors.push(e);
         });
     }
+  },
+  computed: {
+    favorites: function() {
+      axios.get(`http://localhost:3000/boarditems/${this.$route.params.id}`)
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        this.errors.push(error);
+      });
+    },
   },
   data() {
     return {
