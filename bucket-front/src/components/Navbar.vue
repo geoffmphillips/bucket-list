@@ -188,6 +188,9 @@ import { BasicSelect } from 'vue-search-select'
       .v-avatar a
         text-decoration none
 
+        span 
+          color #0074c6
+
       #show-modal
         background #0074c6
         color white

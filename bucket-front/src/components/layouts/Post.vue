@@ -20,7 +20,8 @@
       </div>
       <p
         v-if="this.current_user"
-        >You saved this to <board-link v-for="board in this.boards" :key="board.id" :board="board"></board-link></p>
+        >Boards this post appears in: <board-link v-for="board in this.boards" :key="board.id" :board="board"></board-link></p>
+        <hr>
       <p>{{this.post.note}}</p>
     </div>
   </div>
