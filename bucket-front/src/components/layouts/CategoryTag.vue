@@ -23,8 +23,6 @@ a.card {
   border-radius: 1em;
   border: 0px;
   color: black;
-}
-p {
-  margin: 0.5em
+  margin: 5px 2.5px;
 }
 </style>
