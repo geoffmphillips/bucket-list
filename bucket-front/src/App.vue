@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.application--wrap
+.v-menu__content ~ .application--wrap
   margin-top: 70px
   background: #fbfbfb
 

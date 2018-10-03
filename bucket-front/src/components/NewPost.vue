@@ -345,4 +345,7 @@ export default {
 .pointer
   cursor: pointer
 
+.v-menu__content ~ .application--wrap
+    background red
+
 </style>
