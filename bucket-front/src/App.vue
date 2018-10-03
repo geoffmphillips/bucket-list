@@ -37,10 +37,10 @@ export default {
 <style lang="stylus">
 .application--wrap
   margin-top: 70px
-  background: #EEEEEE
+  background: #fbfbfb
 
   body
-    background #fcfcfc
+    background green
 
   div.application
     width 90%

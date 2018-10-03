@@ -21,9 +21,11 @@
           @click='submit'
         ) submit
         v-btn(@click='clear') clear
+    hr
     .board-section
       h1.section-text My Boards
       TheBoards.panel
+    hr
     .post-section
       h1.section-text My Posts
       user-card-container(
@@ -104,19 +106,20 @@ export default {
     -moz-osx-font-smoothing: grayscale
     text-align: left
     color: #2c3e50
-    margin-top: 20px
+    // margin-top: 20px
+    margin 0 auto 
+    background white
+    max-width: 80vw
 
     .user-name
       margin-top: 27px; margin-left: 27px
       font-weight: bold
 
     .section-text
-      text-align: center
       font-weight: bold
-      margin-top: 60px
 
     .new-board
-      margin-left auto; margin-right auto; margin-top 28px
+      margin-left auto; margin-right auto; margin-top 51px; margin-bottom 51px
       padding 20px
       background white
       width: 450px
@@ -130,14 +133,14 @@ export default {
     
     .board-section, .post-section
       padding 20px
-      background white
-      min-width: 1200px
-      max-width: 1700px
-      box-shadow 4px 6px 16px -2px rgba(145,145,145,1);
-      margin-top 50px
-      margin-left auto; margin-right auto
 
-  a.panel
-    margin 0 !important
+      h1
+        margin-left initial
 
+      .panel
+  
+        .panel-container
+          justify-content left !important
+          background red
+        
 </style>
