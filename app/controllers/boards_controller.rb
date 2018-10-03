@@ -23,7 +23,7 @@ class BoardsController < ApplicationController
 
   # POST /boards
   def create
-    @board = Board.new(board_params)
+    @board = Board.new(name: board_params[:name], user_id: board_params[:user_id])
 
     if @board.save
       render json: @board, status: :created, location: @board
@@ -54,6 +54,6 @@ class BoardsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def board_params
-      params.require(:board).permit(:name, :user_id)
+      params.require(:board).permit!
     end
 end
