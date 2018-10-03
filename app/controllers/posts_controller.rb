@@ -17,13 +17,25 @@ class PostsController < ApplicationController
     categories = @post.categories.order(:name)
     location = @post.location
     comments = @post.comments.order(created_at: :desc)
+    @user = current_user
+    if @user
+      boards = @post.boards.where(user_id: @user[:id])
+    end
     users = []
 
     comments.each do |comment|
       users << comment.user
     end
 
-    render json: { post: @post, categories: categories, location: location, comments: comments, users: users }
+    render json: {
+      post: @post,
+      categories: categories,
+      location: location,
+      comments: comments,
+      users: users,
+      boards: boards,
+      current_user: @user
+    }
   end
 
   # POST /posts
