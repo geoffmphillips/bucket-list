@@ -4,9 +4,11 @@
     <div class="card">
       <div class="header-container">
         <h3><strong>{{this.post.title}}</strong></h3>
-        <p>{{ this.count }}</p>
-        <i style="color: gold;" @click="toggleFavorite" v-if="this.isFavorite" class="fas fa-star"></i>
-        <i style="color: gold;" @click="toggleFavorite" v-if="!this.isFavorite" class="far fa-star"></i>
+        <div class="board-count">
+          <p>{{ this.count }}</p>
+          <i style="color: gold;" @click="toggleFavorite" v-if="this.isFavorite" class="fas fa-star"></i>
+          <i style="color: gold;" @click="toggleFavorite" v-if="!this.isFavorite" class="far fa-star"></i>
+        </div>
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
       <div class="categories-container">
@@ -213,4 +215,16 @@ div.comments-container {
 div.comments-container button {
   margin-bottom: 5px;
 }
+.board-count {
+  display: block;
+  margin-left: 18px;
+  width: 51px;
+  margin-top: 7px;
+  font-size: 20px;
+}
+.board-count p {
+  display: inline;
+}
+
+
 </style>
