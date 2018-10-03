@@ -55,7 +55,7 @@
         lat: this.markers[0].position.lat,
         lng: this.markers[0].position.lng,
         }"
-      :zoom="12"
+      :zoom="13"
       :options="{styles: this.$store.state.mapStyle.mapStyle}"
       map-type-id="roadmap"
       style="width: 500px; height: 300px"
@@ -89,6 +89,17 @@ export default {
     BoardLink,
   },
   methods: {
+    toggleFavorite() {
+      axios.put(`http://localhost:3000/board_items/${this.$route.params.id}`)
+        .then((response) => {
+          this.isFavorite = response.data.favorite;
+          this.count = response.data.count;
+          this.boards = response.data.boards;
+        })
+        .catch((e) => {
+          this.errors.push(e);
+        });
+    },
     toggleComments() {
       this.displayComments = !this.displayComments;
     },
@@ -158,20 +169,6 @@ export default {
 </script>
 
 <style scoped>
-#fade-in {
-  transition-duration: 0.75s;
-  transition-delay: 0.5s;
-  transition-property: opacity;
-  transition-timing-function: ease-in-out;
-}
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 div.header-container {
   display: flex;
   justify-content: center;
@@ -192,8 +189,7 @@ div.card {
 }
 
 .post-img {
-  max-width: 750px;
-  max-height: 438px;
+  max-width: 800px;
 }
 
 div.card p {
@@ -218,5 +214,4 @@ div.comments-container {
 div.comments-container button {
   margin-bottom: 5px;
 }
-
 </style>

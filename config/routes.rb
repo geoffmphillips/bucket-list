@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   resources :categories
   resources :locations, only: [:index, :show]
   resources :comments
-  resources :board_items, only: [:show]
+  resources :board_items, only: [:show, :update]
 end
