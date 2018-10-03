@@ -1,18 +1,18 @@
 export default {
   state: {
     mapStyle: [
-      { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
-      { elementType: 'labels.text.stroke', stylers: [{ color: '#242f3e' }] },
-      { elementType: 'labels.text.fill', stylers: [{ color: '#746855' }] },
+      { elementType: 'geometry', stylers: [{ color: '#0074C6' }] },
+      { elementType: 'labels.text.stroke', stylers: [{ color: '#242F3E' }] },
+      { elementType: 'labels.text.fill', stylers: [{ color: '#FFD700' }] },
       {
         featureType: 'administrative.locality',
         elementType: 'labels.text.fill',
-        stylers: [{ color: '#d59563' }],
+        stylers: [{ color: '#FFD700' }],
       },
       {
         featureType: 'poi',
         elementType: 'labels.text.fill',
-        stylers: [{ color: '#d59563' }],
+        stylers: [{ color: '#FFD700' }],
       },
       {
         featureType: 'poi.park',
