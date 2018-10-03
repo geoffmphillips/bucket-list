@@ -5,7 +5,7 @@
       <div class="header-container">
         <h3><strong>{{this.post.title}}</strong></h3>
       </div>
-      <img :src="this.post.photo_url" :alt="this.post.note">
+      <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
       <div class="categories-container">
         <category-tag
           v-for="category in categories"
@@ -164,6 +164,12 @@ div.card {
   border-radius: 0.75em;
   margin-bottom: 10px;
 }
+
+.post-img {
+  max-width: 750px;
+  max-height: 438px;
+}
+
 div.card p {
   margin-left: 10px;
 }
