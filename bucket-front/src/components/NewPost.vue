@@ -349,6 +349,11 @@ export default {
   .layout
     margin-top 22px; margin-bottom 28px
     .v-card
-      width 24vw
+      width 35vw
+
+      .d-flex
+        filter brightness(70%)
+        &:hover
+          filter brightness(100%)
 
 </style>
