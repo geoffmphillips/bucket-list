@@ -1,18 +1,25 @@
 class BoardItemsController < ApplicationController
-  def index
+  def show
     @user = current_user
     post = Post.find(board_items_params[:id])
-    @boardItems = post.board_items.count
-    @favorites_board = @user.boards.find_by(name: "Favorites")
+    count = post.board_items.count
+    favorite = false
 
-    favorite = is_favorite?
+    if @user
+      @favorites_board = @user.boards.find_by(name: "Favorites")
+      favorite = is_favorite?
+    end
 
-    render json: { board_items: @boardItems, favorite: favorite }
+    render json: { count: count, favorite: favorite }
+  end
+
+  def create
+    @user = current_user
   end
 
   private
     def board_items_params
-      params.require(:board_items).permit!
+      params.permit!
     end
 
     def is_favorite?

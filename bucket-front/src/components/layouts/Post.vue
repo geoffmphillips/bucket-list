@@ -4,9 +4,9 @@
     <div class="card">
       <div class="header-container">
         <h3><strong>{{this.post.title}}</strong></h3>
-        <p>{{ this.favorites }}</p>
-        <img v-if="isFavorite" src="" alt="">
-        <img v-if="!isFavorite" src="" alt="">
+        <p>{{ this.count }}</p>
+        <i style="color: gold;" @click="toggleFavorite" v-if="this.isFavorite" class="fas fa-star"></i>
+        <i style="color: gold;" @click="toggleFavorite" v-if="!this.isFavorite" class="far fa-star"></i>
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
       <div class="categories-container">
@@ -101,13 +101,13 @@ export default {
         .catch((e) => {
           this.errors.push(e);
         });
-    }
-  },
-  computed: {
-    favorites: function() {
-      axios.get(`http://localhost:3000/boarditems/${this.$route.params.id}`)
+    },
+    favorites() {
+      axios.get(`http://localhost:3000/board_items/${this.$route.params.id}`)
       .then((response) => {
-
+        console.log(response.data);
+        this.count = response.data.count;
+        this.isFavorite = response.data.favorite;
       })
       .catch((error) => {
         this.errors.push(error);
@@ -118,6 +118,8 @@ export default {
     return {
       displayComments: false,
       post: [],
+      count: null,
+      isFavorite: false,
       users: [],
       boards: [],
       current_user: {},
@@ -146,6 +148,7 @@ export default {
         this.boards = boards;
         this.markers[0].position.lat = (this.location.lat * (10 ** -4));
         this.markers[0].position.lng = (this.location.long * (10 ** -4));
+        this.favorites();
       })
       .catch((e) => {
         this.errors.push(e);
