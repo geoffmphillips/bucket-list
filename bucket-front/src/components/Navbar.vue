@@ -4,7 +4,7 @@
     <basic-select :options="options" :selected-option="item" placeholder="select item" @select="onSelect"></basic-select>
     <v-spacer></v-spacer>
     <v-toolbar-items class="navbar__list">
-        <div class="modal-button navbar__list-item">
+        <div v-if="this.$store.state.user.isLoggedIn" class="modal-button navbar__list-item">
           <button id="show-modal" @click="showModal = true">NEW POST</button>
           <new-post v-if="showModal" @close="showModal = false"></new-post>
         </div>
