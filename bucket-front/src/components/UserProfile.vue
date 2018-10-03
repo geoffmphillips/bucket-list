@@ -19,7 +19,7 @@
    </v-btn>
    <v-btn @click="clear">clear</v-btn>
  </v-form>
-  <TheBoards></TheBoards>
+  <the-boards></the-boards>
   <h1>Your posts</h1>
   <user-card-container
     :posts="this.posts"
@@ -33,30 +33,24 @@ import TheBoards from './layouts/TheBoards';
 import UserCardContainer from './cards/UserCardContainer';
 
 export default {
+
   components: {
     TheBoards,
     UserCardContainer,
   },
+
   data() {
     return {
       valid: true,
       board: '',
       boardRules: [
         v => !!v || ' Board Name is required',
-        v => (v && v.length <= 5) || 'Board Name must be more than 5 characters'
+        v => (v && v.length >= 5) || 'Board Name must be more than 5 characters'
       ],
       user: {},
       posts: [],
       errors: [],
     };
-  },
-
-  methods: {
-    checkSignedIn() {
-      if (!this.$store.state.user.isLoggedIn) {
-        this.$router.replace('/login');
-      }
-    },
   },
 
   created() {
@@ -71,22 +65,30 @@ export default {
         this.errors.push(e);
       });
   },
+
   methods: {
-    submit () {
-      if (this.$refs.newboard.validate()) {
-        // Native form submission is not yet supported
-        axios.post('http://localhost:3000/boards/', {
-          name: this.board,
-          user_id: this.user.id
-        })
+    checkSignedIn() {
+      if (!this.$store.state.user.isLoggedIn) {
+        this.$router.replace('/login');
       }
     },
-    clear () {
+    submit() {
+      if (this.$refs.newboard.validate()) {
+        axios.post('http://localhost:3000/boards/', {
+          name: this.board,
+          user_id: this.user.id,
+        }).then(response => {
+          this.board = '';
+          this.$router.replace({ path: '/profile' });
+        }).catch(error => {
+
+        });
+      }
+    },
+    clear() {
       this.$refs.newboard.reset()
     }
   },
-
-
 };
 
 </script>

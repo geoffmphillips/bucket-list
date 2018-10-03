@@ -74,10 +74,7 @@ import { BasicSelect } from 'vue-search-select'
           text: ''
         },
         posts: [],
-        user: {
-          name: 'Peter',
-          initial: 'P'
-        },
+        user: {},
         items: [
         {
           title: 'Locations',
@@ -196,7 +193,7 @@ import { BasicSelect } from 'vue-search-select'
           padding 7px
           border 1px solid grey
           border-radius 9px
-          white-space nowrap 
+          white-space nowrap
           overflow hidden
 
           &:hover

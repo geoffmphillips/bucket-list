@@ -123,7 +123,7 @@
                           <v-combobox
                             v-model="newpost.boards"
                             :items="boards"
-                            item-text="name"
+
                             :search-input.sync="search"
                             v-validate="'required'"
                             data-vv-name="boards" required data-vv-scope="form3"
@@ -195,7 +195,7 @@ export default {
         location: null,
         photo_url: null,
         city: null,
-        board: null,
+        boards: null,
         categories: null,
       },
       search: null,
@@ -220,8 +220,11 @@ export default {
       .then((response) => {
         this.categories = response.data.categories;
         this.user = response.data.user;
-        this.boards = response.data.boards.filter(obj => {
+        let boards = response.data.boards.filter(obj => {
           return obj.user_id === this.user.id
+        });
+        boards.forEach(board => {
+          this.boards.push(board.name);
         });
       })
       .catch((e) => {
