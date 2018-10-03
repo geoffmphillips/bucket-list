@@ -184,6 +184,9 @@ import { BasicSelect } from 'vue-search-select'
         color #0074c6
         font-weight: bold
 
+      .v-avatar a
+        text-decoration none
+
         #show-modal
           background #0074c6
           color white
@@ -202,4 +205,9 @@ import { BasicSelect } from 'vue-search-select'
     &__sidebar-btn
       font-size: 4em
       margin-top: .9em
+
+
+.v-list__title
+  text-decoration none
+  background red !important //why doesn't this work!!??
 </style>
