@@ -3,14 +3,15 @@ import axios from 'axios';
 export default {
   state: {
     isLoggedIn: false,
-    user: '',
+    token: '',
+    username: '',
     isSessionReady: false,
   },
 
   mutations: {
     setJWT(state, jwt) {
       // When this updates, the getters and anything bound to them updates as well.
-      state.user = jwt;
+      state.token = jwt;
       state.isLoggedIn = true;
     },
     removeJWT(state) {
@@ -20,6 +21,9 @@ export default {
     sessionReady(state) {
       state.isSessionReady = true;
     },
+    setUser(state, user) {
+      state.username = user;
+    },
   },
 
   actions: {
@@ -28,6 +32,10 @@ export default {
       if (token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         commit('setJWT', token);
+        axios.get('http://localhost:3000/users/1')
+          .then((response) => {
+            commit('setUser', response.data.user.first_name);
+          });
       }
       commit('sessionReady');
     },
