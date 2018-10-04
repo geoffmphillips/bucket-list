@@ -192,7 +192,7 @@ h3 {
   margin-top: 45px;
 }
 div.card {
-  width: max-content;
+  width: 800px;
   height: auto;
   border-radius: 0.75em;
   margin-bottom: 10px;
@@ -204,6 +204,7 @@ div.card {
 
 div.card p {
   margin-left: 10px;
+  word-wrap: break-word;
 }
 div.categories-container {
   display:flex;
