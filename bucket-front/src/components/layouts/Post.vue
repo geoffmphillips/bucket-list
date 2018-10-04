@@ -192,7 +192,7 @@ h3 {
   margin-top: 45px;
 }
 div.card {
-  width: 800px;
+  max-width: 800px;
   height: auto;
   border-radius: 0.75em;
   margin-bottom: 10px;
@@ -200,6 +200,8 @@ div.card {
 
 .post-img {
   max-width: 800px;
+  min-height: 400px;
+  max-height: 600px;
 }
 
 div.card p {
