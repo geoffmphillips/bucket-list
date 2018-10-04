@@ -150,18 +150,22 @@ import { BasicSelect } from 'vue-search-select'
     background white
     height: 90px
     display: block
-    top: 0
+    // top: 0
+    padding-top: 1em
+    padding-bottom: 1em
+
+    .v-toolbar__content
+      height initial
 
     &__logo
       height: 70px
       float: left
-      margin-top: 30px; margin-right: 10px; margin-left: 10px
+      margin-right: 30px; margin-left: 10px
       cursor: pointer
-      margin-right 30px
 
     .selection
       width 38em
-      margin-top: 30px
+      // margin-top: 30px
       background #f7f7f7
 
       .dropdown
@@ -169,8 +173,8 @@ import { BasicSelect } from 'vue-search-select'
 
     &__list
       float: right
-      margin-top: 3%
-      padding-bottom 50px
+      // margin-top: 3%
+      // padding-bottom 50px
 
       & > a
         padding-top 10px
@@ -208,11 +212,11 @@ import { BasicSelect } from 'vue-search-select'
 
     &__sidebar-btn
       font-size: 4em
-      margin-top: .9em
+      // margin-top: .9em
 
   .v-btn.v-btn--router 
     margin-right: 35px
-    padding: 4px
+    padding-left: 4px; padding-right: 4px
     color: white
     font-weight: bold
     background: #0074c6
