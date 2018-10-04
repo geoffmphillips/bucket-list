@@ -1,6 +1,6 @@
 <template>
   <router-link :to="'/categories/' + category.id" class="card">
-    <button class="btn btn-primary">{{category.name}}</button>
+    <button class="btn btn-outline-primary">{{category.name}}</button>
   </router-link>
 </template>
 
@@ -19,7 +19,6 @@ a.card {
   text-decoration: none;
   display: flex;
   align-items: center;
-  background-color: #8BD6FD;
   border-radius: 1em;
   border: 0px;
   color: black;
