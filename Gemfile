@@ -16,8 +16,10 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'seed_dump'
+
 # Knock is an authentication solution for Rails API-only application
-# based on JSON Web Tokens. 
+# based on JSON Web Tokens.
 gem 'knock'
 gem 'jwt'
 
