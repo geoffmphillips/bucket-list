@@ -201,7 +201,6 @@ div.card {
 .post-img {
   max-width: 800px;
   min-height: 600px;
-  max-height: 700px;
 }
 
 div.card p {
