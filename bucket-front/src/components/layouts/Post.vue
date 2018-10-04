@@ -200,8 +200,8 @@ div.card {
 
 .post-img {
   max-width: 800px;
-  min-height: 400px;
-  max-height: 600px;
+  min-height: 600px;
+  max-height: 700px;
 }
 
 div.card p {
@@ -245,7 +245,7 @@ div.comments-container button {
   background: white;
 }
 .card > p {
-  min-height: 70px;
+  min-height: 36px;
   padding: 9px;
   font-size: 1.3em;
 }
@@ -258,5 +258,6 @@ div.comments-container button {
   margin-top: 18px;
   margin-bottom: 50px;
 }
+
 
 </style>

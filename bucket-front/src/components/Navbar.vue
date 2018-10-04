@@ -148,7 +148,7 @@ import { BasicSelect } from 'vue-search-select'
 
   .navbar
     background white
-    height: 90px
+    // height: 90px
     display: block
     // top: 0
     padding-top: 1em
