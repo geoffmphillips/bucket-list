@@ -1,5 +1,6 @@
 <template>
 <div>
+
   <div class="post-container">
     <div class="card">
       <div class="header-container">
@@ -11,19 +12,27 @@
         </div>
       </div>
       <img :src="this.post.photo_url" :alt="this.post.note" class="post-img">
-      <div class="categories-container">
-        <category-tag
-          v-for="category in categories"
-          :key="category.id"
-          :category="category"
-        ></category-tag>
-      </div>
-      <p
-        v-if="this.current_user"
-        >You saved this to <board-link v-for="board in this.boards" :key="board.id" :board="board"></board-link></p>
       <p>{{this.post.note}}</p>
     </div>
   </div>
+    
+
+  <div class="categorization-container">
+    <p>Categories:</p>
+    <div class="categories-container">
+      <category-tag
+        v-for="category in categories"
+        :key="category.id"
+        :category="category"
+      ></category-tag>
+    </div>
+    <hr>
+    <p
+      v-if="this.current_user"
+    >Boards this post appears in: <board-link v-for="board in this.boards" :key="board.id" :board="board"></board-link></p>
+        
+  </div>
+
   <div class="comments-container">
     <button
       @click="this.toggleComments"
@@ -214,7 +223,7 @@ div.comments-container {
   justify-content: center;
 }
 div.comments-container button {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 .board-count {
   display: block;
@@ -226,6 +235,26 @@ div.comments-container button {
 .board-count p {
   display: inline;
 }
-
+.categorization-container {
+  border: 1px solid lightgrey;
+  width: 800px;
+  border-radius: 10px;
+  margin: 14px auto;
+  background: white;
+}
+.card > p {
+  min-height: 70px;
+  padding: 9px;
+  font-size: 1.3em;
+}
+.categorization-container > p {
+  padding: 9px;
+  font-size: 1.2em;
+}
+.btn-outline-primary {
+  font-size: 1.5em;
+  margin-top: 18px;
+  margin-bottom: 50px;
+}
 
 </style>
