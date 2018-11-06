@@ -6,15 +6,15 @@ Posts have public categories, locations, and can be saved to board(s) each user 
 
 ## Final Product
 
-![Home page](https://github.com/da-morgan/to-do-midterm/blob/master/img/todos.png)
+![Home page](https://github.com/geoffmphillips/bucket-list/blob/master/public/home.png)
 
 Home page with all posts. Browse through posts for inspiration for your next tripe. Seed images of kittens were used.
 
-![Create a post](https://github.com/da-morgan/to-do-midterm/blob/master/img/mobile.png)
+![Create a post](https://github.com/geoffmphillips/bucket-list/blob/master/public/create-post.png)
 
 Create a post with help from the Google Places API. Type in where you want to go and information about that location will automatically be pulled in.
 
-![Create a post](https://github.com/da-morgan/to-do-midterm/blob/master/img/mobile.png)
+![Create a post](https://github.com/geoffmphillips/bucket-list/blob/master/public/post.png)
 
 A post after creation. View the posts' title, how many likes the post has, the categories and boards it has, and the location on a Google map. Browse all posts in a category or saved to a specific board by clicking on the button.
 
