@@ -1,24 +1,37 @@
-# README
+# Bucket List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Save and share your bucket list with the world. Just type in where you want to go and Bucket List does the rest. Location data including coordinates and images are pulled from the Google Places API. Browse all posts if you're looking for inspiration.
 
-Things you may want to cover:
+## Final Product
 
-* Ruby version
+![Home page](https://github.com/da-morgan/to-do-midterm/blob/master/img/todos.png)
 
-* System dependencies
+Home page with all tasks. The category of the todos can be changed via a dropdown menu. The todos can also be deleted. Any task that is uncategorized will be put into the generic "To Do" list.
 
-* Configuration
+![Mobile version](https://github.com/da-morgan/to-do-midterm/blob/master/img/mobile.png)
 
-* Database creation
+Flexbox css was used to create the responsive design. This allows for the web app to be used as a mobile web app.
 
-* Database initialization
+## Getting Started
 
-* How to run the test suite
+NOTE: Google Places API credentials are required to pull in data from Google. These credentials must be saved in a .env file as follows: ```GOOGLE_API_TOKEN='TOKEN'```
 
-* Services (job queues, cache servers, search engines, etc.)
+1. Clone this repo!
+1. Install back-end dependencies with ```bundle```
+1. Navigate to front-end directory and install front-end dependencies with ```npm i```
+1. (OPTIONAL) Set up Google credentials as mentioned above.
 
-* Deployment instructions
+## Dependencies (Vue Front-end)
 
-* ...
+* Google Places API
+* Vue
+* Vuex
+* Vue Router
+* Axios
+
+## Dependencies (Rails API Back-end)
+
+* bcrypt
+* Knock
+* JWT
+* Rack-CORS
